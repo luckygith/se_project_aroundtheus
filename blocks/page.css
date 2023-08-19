@@ -18,3 +18,14 @@
   flex-direction: column;
   min-height: 100vh;
 }
+
+.page__footer {
+  font-family: "inter", serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  color: #545454;
+  height: 18px;
+  max-width: 318px;
+  margin-top: 20px;
+}

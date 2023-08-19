@@ -14,7 +14,7 @@ The skills displayed in this project is to excercise the understanding and disti
 
 **Figma**
 
-- [Link to the project on Figma](https://github.com/luckygith/se_project_aroundtheus)
+- [Link to the project on Figma](https://luckygith.github.io/se_project_aroundtheus/)
 
 **Images**
 
