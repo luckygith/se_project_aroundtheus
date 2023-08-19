@@ -46,7 +46,6 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-
   font-size: 24px;
   font-weight: 900;
 }
@@ -56,4 +55,8 @@
   border: none;
   width: 23px;
   height: 18px;
+}
+
+.card__like-button:hover {
+  opacity: 50%;
 }
