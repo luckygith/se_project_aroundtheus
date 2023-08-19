@@ -1,5 +1,8 @@
 .cards {
-  /*fonts*/
+  font-family: "inter" serif;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
   margin-top: 30px;
 }
 
@@ -43,10 +46,14 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+
+  font-size: 24px;
+  font-weight: 900;
 }
 
 .card__like-button {
-  background: transparent url(../images/like-inactive.svg) center;
-  width: 21px;
+  background: transparent url(../images/like-inactive.svg) center no-repeat;
+  border: none;
+  width: 23px;
   height: 18px;
 }
