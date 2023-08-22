@@ -66,3 +66,30 @@
   background-position: center;
   margin-right: 24px;
 }
+
+@media screen and (max-width: 480px) {
+  .profile {
+    flex-direction: column;
+    max-width: calc (100vw - 30px);
+  }
+
+  .profile__info {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .profile__title {
+    text-align: center;
+  }
+
+  .profile__description {
+    width: 100%;
+    text-align: center;
+  }
+
+  .profile__add-button {
+    margin: 0;
+    width: 100%;
+  }
+}
