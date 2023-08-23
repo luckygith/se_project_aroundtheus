@@ -60,9 +60,3 @@
     text-align: inherit;
   }
 }
-
-@media screen and (max-width: 620px) {
-  .page__section {
-    max-width: calc(100vw - 30px);
-  }
-}
