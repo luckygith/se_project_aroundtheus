@@ -1,7 +1,10 @@
 .profile {
   display: flex;
+  justify-content: center;
   padding-top: 40px;
   align-items: center;
+  max-width: 880px;
+
 }
 
 .profile__info {
@@ -12,22 +15,28 @@
   grid-template-columns: minmax(auto, 373px) auto;
   align-items: center;
   width: 100%;
+  grid-template-columns: max-content min-content;
+  margin: auto;
+  padding: 0;
 }
 .profile__title {
   font-family: "inter", serif;
-  font-size: 42px;
+  font-size: 22px;
   line-height: 48px;
   font-weight: 500;
   grid-area: title;
   margin: 0;
+  padding: 0;
+  min-width: ;
 }
 
 .profile__edit-button {
   background: transparent url(../images/edit.svg) center no-repeat;
-  height: 24px;
-  width: 24px;
+  height: 18px;
+  width: 18px;
   grid-area: button;
   border-color: white;
+  margin-left: 5px;
 }
 
 .profile__edit-button:hover {
@@ -41,6 +50,7 @@
   margin: 0;
   width: 100%;
   border-color: white;
+
 }
 
 .profile__add-button:hover {
@@ -53,7 +63,7 @@
   line-height: 22px;
   font-weight: 400;
   grid-area: description;
-  margin: 0;
+  margin-bottom: 45px;
   width: 100%;
   text-align: inherit;
 }
@@ -67,20 +77,48 @@
   margin-right: 24px;
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 320px) {
+  .profile__image {
+    margin: 0;
+  }
+
+  .profile__title {
+    text-align: center;
+    max-width: 100%;
+  }
+  .profile__info {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 100%;
+    justify-content: center;
+  }
+
+  .profile__add-button {
+    margin: 0;
+    max-width: 100%;s
+  }
+}
+
+@media screen and (max-width: 620px) {
   .profile {
+    display: flex;
     flex-direction: column;
-    max-width: calc (100vw - 30px);
   }
 
   .profile__info {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
+    flex-direction: row;
+    justify-content: center;
   }
 
   .profile__title {
     text-align: center;
+  }
+
+  .profile__edit-button {
+    display: flex;
   }
 
   .profile__description {
@@ -90,6 +128,8 @@
 
   .profile__add-button {
     margin: 0;
-    width: 100%;
+    max-width: 90%;
   }
 }
+
+
