@@ -11,6 +11,8 @@
   width: 100%;
   margin: 0 auto;
   position: relative;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .page__content {
@@ -34,7 +36,6 @@
 @media screen and (max-width: 320px) {
   .page__section {
     margin: 0;
-    max-width: calc(100vw - 30px);
   }
 
   .page__content {
@@ -49,7 +50,6 @@
 @media screen and (max-width: 480px) {
   .page__section {
     margin: 0 10px;
-    max-width: calc(100vw + 30px);
   }
 
   .page__content {
