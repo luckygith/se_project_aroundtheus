@@ -31,6 +31,8 @@
   height: 18px;
   max-width: 318px;
   margin-top: 20px;
+  text-align: inherit;
+  left: 50%;
 }
 
 @media screen and (max-width: 320px) {
@@ -58,5 +60,28 @@
 
   .page__footer {
     text-align: inherit;
+    left: 50%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .page__section {
+    margin: 0 10px;
+  }
+
+  .page__content {
+    align-items: center;
+  }
+
+  .page__footer {
+    text-align: inherit;
+    left: 50%;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .page__footer {
+    text-align: inherit;
+    left: 50%;
   }
 }
