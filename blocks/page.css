@@ -2,17 +2,13 @@
   font-family: "Inter", Arial, Helvetica, sans-serif;
   background-color: black;
   color: white;
-  margin-top: 45px;
-  margin-bottom: 45px;
 }
 
 .page__section {
-  max-width: 880px;
-  width: 100%;
+  max-width: 100%;
   margin: 0 auto;
   position: relative;
-  padding-left: 10px;
-  padding-right: 10px;
+  max-width: 880px;
 }
 
 .page__content {
@@ -31,8 +27,10 @@
   height: 18px;
   max-width: 318px;
   margin-top: 20px;
-  text-align: inherit;
+
   left: 50%;
+  margin-bottom: 50px;
+  margin-top: 48px;
 }
 
 @media screen and (max-width: 320px) {
@@ -40,22 +38,16 @@
     margin: 0;
   }
 
-  .page__content {
-    align-items: center;
-  }
-
   .page__footer {
-    text-align: inherit;
+    display: flex;
+    justify-content: left;
+    font-size: 14px;
   }
 }
 
 @media screen and (max-width: 480px) {
   .page__section {
     margin: 0 10px;
-  }
-
-  .page__content {
-    align-items: center;
   }
 
   .page__footer {
@@ -65,12 +57,12 @@
 }
 
 @media screen and (max-width: 768px) {
-  .page__section {
-    margin: 0 10px;
+  .page {
+    align-items: center;
   }
 
-  .page__content {
-    align-items: center;
+  .page__section {
+    max-width: calc(100% - 20px);
   }
 
   .page__footer {

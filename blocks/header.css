@@ -1,8 +1,35 @@
 .header {
   margin-top: 45px;
-  margin-bottom: 126px;
+  max-width: 880px;
+  
+ 
 }
 
 @media screen and (max-width: 320px) {
-  margin-bottom: 98px;
+  .header{
+  
+    height: 56px;
+  }
+  
+  .header__logo {
+    width: 126px;
+    height: 24px;
+    margin: 0;
+    margin-left: 27px;
+  
+    
+    
+  
+}
+
+@media screen and (max-width: 768px) {
+  .header{
+  margin-top: 45px;
+  margin-bottom: 32px;
+  max-width: 880px;
+  
+}
+
+.header__logo {
+  align-items: inherit;}
 }

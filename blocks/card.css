@@ -28,7 +28,7 @@
 }
 
 .card__image {
-  width: 282px;
+  max-width: 282px;
   height: 282px;
   border-radius: 10px 10px 0 0;
 }
@@ -66,4 +66,13 @@
 .card__like-button:hover {
   opacity: 50%;
   cursor: pointer;
+}
+
+@media screen and (max-width: 320px) {
+  .card__list {
+    margin: 0;
+    max-width: 100%;
+
+    align-items: center;
+  }
 }
