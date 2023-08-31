@@ -1,9 +1,5 @@
-.card {
-  margin-top: 45px;
-}
-
 .cards {
-  font-family: "inter" serif;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
   font-weight: 900;
   font-size: 24px;
   line-height: 29px;
@@ -44,8 +40,6 @@
   align-items: center;
   justify-content: space-between;
   border-radius: 0 0 10px 10px;
-  white-space: nowrap;
-  overflow: hidden;
 }
 
 .card__title {
@@ -54,6 +48,7 @@
   overflow: hidden;
   font-size: 24px;
   font-weight: 900;
+  line-height: 1.2;
 }
 
 .card__like-button {
@@ -70,9 +65,7 @@
 
 @media screen and (max-width: 320px) {
   .card__list {
-    margin: 0;
+    margin: 0 auto;
     max-width: 100%;
-
-    align-items: center;
   }
 }

@@ -19,37 +19,19 @@
 }
 
 .page__footer {
-  font-family: "inter", serif;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
   font-weight: 400;
   font-size: 18px;
   line-height: 22px;
   color: #545454;
-  height: 18px;
   max-width: 318px;
   margin-top: 20px;
-
   left: 50%;
   margin-bottom: 50px;
   margin-top: 48px;
 }
 
-@media screen and (max-width: 320px) {
-  .page__section {
-    margin: 0;
-  }
-
-  .page__footer {
-    display: flex;
-    justify-content: left;
-    font-size: 14px;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .page__section {
-    margin: 0 10px;
-  }
-
+@media screen and (min-width: 1280px) {
   .page__footer {
     text-align: inherit;
     left: 50%;
@@ -57,10 +39,6 @@
 }
 
 @media screen and (max-width: 768px) {
-  .page {
-    align-items: center;
-  }
-
   .page__section {
     max-width: calc(100% - 20px);
   }
@@ -71,9 +49,21 @@
   }
 }
 
-@media screen and (min-width: 1280px) {
+@media screen and (max-width: 480px) {
   .page__footer {
     text-align: inherit;
     left: 50%;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .page__section {
+    margin: 0 auto;
+  }
+
+  .page__footer {
+    display: flex;
+    justify-content: left;
+    font-size: 14px;
   }
 }
