@@ -1,32 +1,28 @@
 .header {
   padding-top: 45px;
-  padding-bottom: 41px; 
+  padding-bottom: 41px;
   max-width: 880px;
   border-bottom: 2px #545454 solid;
 }
 
-
 @media screen and (max-width: 745px) {
-  .header{
-  max-width: 880px;
-}
+  .header {
+    max-width: 880px;
+  }
 
-.header__logo {
-  align-items: inherit;}
+  .header__logo {
+    align-items: inherit;
+  }
 }
 @media screen and (max-width: 320px) {
-  .header{
+  .header {
     margin: 0;
-
   }
-  
+
   .header__logo {
     width: 126px;
     height: 24px;
     margin: 0;
     margin-left: 27px;
-  
-    
-    
-  
+  }
 }
