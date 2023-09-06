@@ -47,7 +47,7 @@
   font-weight: 900;
   line-height: 1.2;
   margin: 25px 0 25px 20px;
-  padding: 0;
+  padding-right: 5px;
 }
 
 .cards__like-button {
@@ -56,6 +56,7 @@
   width: 21px;
   height: 18px;
   margin-right: 20px;
+  padding: 0 10px 0 10px;
 }
 
 .cards__like-button:hover {
