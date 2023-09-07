@@ -52,10 +52,6 @@
   .page {
     max-width: 480px;
   }
-
-  .page__footer {
-    left: 50%;
-  }
 }
 
 @media screen and (max-width: 320px) {
