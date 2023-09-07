@@ -19,21 +19,24 @@
 }
 
 .page__footer {
+  max-width: 318px;
+  margin-top: 20px;
+  margin: 67px 0 60px;
+}
+
+.page__footer-note {
+  margin: 0;
+  padding: 0;
   font-family: "Inter", sans-serif;
   font-weight: 400;
   font-size: 18px;
-  line-height: 22px;
+  line-height: 1.2;
   color: #545454;
-  max-width: 318px;
-  margin-top: 20px;
-  left: 50%;
-  margin: 67px 0 60px;
 }
 
 @media screen and (min-width: 1280px) {
   .page__footer {
     text-align: inherit;
-    left: 50%;
   }
 }
 
@@ -44,7 +47,6 @@
 
   .page__footer {
     text-align: inherit;
-    left: 50%;
   }
 }
 
@@ -63,7 +65,10 @@
   .page__footer {
     display: flex;
     justify-content: left;
-    font-size: 14px;
     margin: 48px 20px 36px;
+  }
+
+  .page__footer-note {
+    font-size: 14px;
   }
 }
