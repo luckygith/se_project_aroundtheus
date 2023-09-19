@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <script src="./scripts/index.js"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Around The U.S.A.</title>
@@ -105,5 +104,27 @@
         </section>
       </main>
     </div>
+    <div class="modal">
+      <div class="modal__container">
+        <button class="modal__close"></button>
+        <p class="modal__heading">Edit Profile</p>
+        <form class="modal__form">
+          <input
+            type="text"
+            name="title"
+            class="modal__form_input"
+            value="Jacques Cousteau"
+          />
+          <input
+            type="text"
+            name="description"
+            class="modal__form_input"
+            value="Explorer"
+          />
+          <button class="modal__button">Save</button>
+        </form>
+      </div>
+    </div>
+    <script src="./scripts/index.js"></script>
   </body>
 </html>
