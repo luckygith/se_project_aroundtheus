@@ -57,7 +57,7 @@
   display: flex;
 }
 
-.modal__form_input {
+.modal__input {
   width: 358px;
   height: 27px;
   border: none;
@@ -65,7 +65,7 @@
   margin-bottom: 30px;
 }
 
-.modal__form_input:last-of-type {
+.modal__input:last-of-type {
   margin-bottom: 48px;
 }
 
@@ -81,8 +81,6 @@
   height: 50px;
 }
 
-.modal__button {
-}
 
 @media screen and (max-width: 745px) {
   .modal__container {
@@ -95,11 +93,11 @@
     height: 46px;
   }
 
-  .modal__form_input {
+  .modal__input {
     width: 238px;
   }
 
-  .modal__form_input:last-of-type {
+  .modal__input:last-of-type {
     margin-bottom: 45px;
   }
 
