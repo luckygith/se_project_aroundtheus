@@ -30,14 +30,46 @@ const profileEditButton = document.querySelector("#profile-edit-button"); //stor
 const profileEditModal = document.querySelector("#profile-edit-modal"); //instead of using identical yet confusing paired class names we create an id
 //console.log(profileEditButton);
 
-profileEditButton.addEventListener("click", () => {
-  profileEditModal.classList.add("modal__opened");
-});
+const profileTitle = document.querySelector(".profile__title "); //target id on HTML and create variable on JS
+const profileDescription = document.querySelector(".profile__description");
+const profileTitleInput = document.querySelector("#profile-title-input");
+const profileDescriptionInput = document.querySelector(
+  "#profile-description-input"
+);
+
+const profileEditForm = profileEditModal.querySelector(".modal__form");
 
 const profileCloseModalButton = document.querySelector(
   "#profile-close-modalButton"
 );
 
-profileCloseModalButton.addEventListener("click", () => {
+//functions
+function closePopup() {
   profileEditModal.classList.remove("modal__opened");
+}
+
+//event handlers
+function handleProfileEditSubmit(e) {
+  e.preventDefault();
+  //console.log("form submitted");
+  profileTitle.textContent = profileTitleInput.value; //setting text to exactly what is already preset
+  profileDescription.textContent = profileDescriptionInput.value;
+  closePopup();
+}
+
+//event listeners
+profileEditButton.addEventListener("click", () => {
+  profileTitleInput.value = profileTitle.textContent;
+  profileDescriptionInput.value = profileDescription.textContent; //preset value input to what is already occupying input value
+  profileEditModal.classList.add("modal__opened");
 });
+
+profileCloseModalButton.addEventListener("click", () => {
+  closePopup();
+});
+
+console.log(profileDescription.textContent);
+
+console.log(profileDescription.textContent);
+
+profileEditForm.addEventListener("submit", handleProfileEditSubmit);
