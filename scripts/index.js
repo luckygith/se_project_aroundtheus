@@ -43,50 +43,42 @@ const profileCloseModalButton = document.querySelector(
   "#profile-close-modalButton"
 );
 
+/*
 const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
 
 const cardListEl = document.querySelector(".card__list");
+*/
 
 //functions
 function closePopup() {
   profileEditModal.classList.remove("modal__opened");
 }
 
-function getCardElment(cardData);{
-  const cardElement = cardTemplate.cloneNode(true);
-  const cardImageEl = cardElement.querySelector(".card__image");
-  const cardTitleEl = cardElement.querySelector(".card__title");
-
-  cardTitleEl.testContent = cardData.name;
-  return cardElement;
-}
-
 //event handlers
+
 function handleProfileEditSubmit(e) {
   e.preventDefault();
-  //console.log("form submitted");
-  profileTitle.textContent = profileTitleInput.value; //setting text to exactly what is already preset
+  profileTitle.textContent = profileTitleInput.value;
   profileDescription.textContent = profileDescriptionInput.value;
   closePopup();
 }
 
-event //eventlisteners
-
-
+//event listeners
 profileEditButton.addEventListener("click", () => {
   profileTitleInput.value = profileTitle.textContent;
   profileDescriptionInput.value = profileDescription.textContent; //preset value input to what is already occupying input value
   profileEditModal.classList.add("modal__opened");
 });
 
-profileCloseModalButton.addEventListener("click", () => {
-  closePopup();
-});
+profileCloseModalButton.addEventListener("click", closePopup);
 
-console.log(profileDescription.textContent);
-
-console.log(profileDescription.textContent);
+//clone the template element with all its content and store it in a cardElement variable
+//access the card title and image and store them in variables
+//set the path to the image to the link field of the object
+//set the image alt text to the name field of the object
+//set the card title to the name field of the object, too
+//return the ready HTML element with the filled-in data
 
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 
@@ -94,9 +86,15 @@ profileEditForm.addEventListener("submit", handleProfileEditSubmit);
   const card = initialCards[i];
 }*/
 
+/*
 initialCards.forEach((cardData) => {
+  console.log(cardData.name);
+  const cardElement = cardTemplate.cloneNode(true);
+  const cardImageEl = cardElement.querySelector(".cards__image");
+  const cardTitleEl = cardElement.querySelector(".cards__title");
 
-  const cardElement = getCardElement(cardData);
-  cardListEl.prepend(cardElement);
-
+  cardTitleEl.testContent = cardData.name;
+  //return cardElement;
+  // cardListEl.append(cardElement);
 });
+*/
