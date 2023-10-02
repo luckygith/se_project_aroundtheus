@@ -50,7 +50,7 @@ function closePopup() {
 }
 
 //event handlers
-function getCardFunction(cardData) {
+function getCardElement(cardData) {
   //clone the template element with all its content and store it in a cardElement variable
   const cardElement = cardTemplate.cloneNode(true);
   console.log(cardData.name);
