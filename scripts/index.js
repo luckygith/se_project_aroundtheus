@@ -28,8 +28,6 @@ const initialCards = [
 //elements
 const profileEditButton = document.querySelector("#profile-edit-button"); //storing edit button inside this variable
 const profileEditModal = document.querySelector("#profile-edit-modal"); //instead of using identical yet confusing paired class names we create an id
-//console.log(profileEditButton);
-
 const profileTitle = document.querySelector(".profile__title "); //target id on HTML and create variable on JS
 const profileDescription = document.querySelector(".profile__description");
 const profileTitleInput = document.querySelector("#profile-title-input");
@@ -38,17 +36,13 @@ const profileDescriptionInput = document.querySelector(
 );
 
 const profileEditForm = profileEditModal.querySelector(".modal__form");
-
 const profileCloseModalButton = document.querySelector(
   "#profile-close-modalButton"
 );
-
-/*
 const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
 
-const cardListEl = document.querySelector(".card__list");
-*/
+const cardListElement = document.querySelector(".cards__list");
 
 //functions
 function closePopup() {
@@ -56,6 +50,24 @@ function closePopup() {
 }
 
 //event handlers
+function getCardFunction(cardData) {
+  //clone the template element with all its content and store it in a cardElement variable
+  const cardElement = cardTemplate.cloneNode(true);
+  console.log(cardData.name);
+  //access the card title and image and store them in variables
+  const cardImageElement = cardElement.querySelector(".cards__image");
+  const cardTitleElement = cardElement.querySelector(".cards__title");
+  console.log(cardImageElement);
+  //set the path to the image to the link field of the object
+  cardImageElement.src = cardData.link;
+  //set the image alt text to the name field of the object
+  cardImageElement.alt = cardData.name;
+  //set the card title to the name field of the object, too
+  cardTitleElement.textContent = cardData.name;
+
+  //return the ready HTML element with the filled-in data
+  return cardElement;
+}
 
 function handleProfileEditSubmit(e) {
   e.preventDefault();
@@ -73,28 +85,13 @@ profileEditButton.addEventListener("click", () => {
 
 profileCloseModalButton.addEventListener("click", closePopup);
 
-//clone the template element with all its content and store it in a cardElement variable
-//access the card title and image and store them in variables
-//set the path to the image to the link field of the object
-//set the image alt text to the name field of the object
-//set the card title to the name field of the object, too
-//return the ready HTML element with the filled-in data
-
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 
 /*for (let i = 0; i < initialCards.length; i++) {
   const card = initialCards[i];
 }*/
 
-/*
 initialCards.forEach((cardData) => {
-  console.log(cardData.name);
-  const cardElement = cardTemplate.cloneNode(true);
-  const cardImageEl = cardElement.querySelector(".cards__image");
-  const cardTitleEl = cardElement.querySelector(".cards__title");
-
-  cardTitleEl.testContent = cardData.name;
-  //return cardElement;
-  // cardListEl.append(cardElement);
+  const cardElement = getCardElement(cardData);
+  cardListElement.prepend(cardElement);
 });
-*/
