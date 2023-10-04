@@ -46,7 +46,7 @@ const cardListElement = document.querySelector(".cards__list");
 
 //functions
 function closePopup() {
-  profileEditModal.classList.remove("modal__opened");
+  profileEditModal.classList.remove("modal_opened");
 }
 
 //event handlers
@@ -80,7 +80,7 @@ function handleProfileEditSubmit(e) {
 profileEditButton.addEventListener("click", () => {
   profileTitleInput.value = profileTitle.textContent;
   profileDescriptionInput.value = profileDescription.textContent; //preset value input to what is already occupying input value
-  profileEditModal.classList.add("modal__opened");
+  profileEditModal.classList.add("modal_opened");
 });
 
 profileCloseModalButton.addEventListener("click", closePopup);

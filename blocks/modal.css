@@ -6,22 +6,23 @@
   right: 0;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 999;
-  padding: 19px;
-  display: flex;
+  padding: 0 19px 0 19px;
   display: none;
 }
 
-.modal__opened {
+.modal_opened {
   display: flex;
 }
 
 .modal__container {
-  position: relative; /*for modal__close to be contained within  */
+  position: relative; /*for modal__close x to be contained within  */
+  box-sizing: border-box;
   background-color: white;
   margin: auto;
   padding: 36px;
   border-radius: 10px;
   max-width: 430px;
+  width: 100%;
   max-height: 330px;
   color: #000000;
 }
@@ -31,14 +32,14 @@
   width: 40px;
   height: 40px;
   position: absolute;
-  right: -40px;
-  top: -40px;
   background-image: url(../images/Close\ Icon.svg);
   border: none;
   background-color: transparent;
   outline: none;
   background-repeat: no-repeat;
   background-size: contain;
+  bottom: calc(100% + 5px);
+  left: calc(100% + 5px);
 }
 
 .modal__heading {
@@ -48,6 +49,8 @@
   line-height: 29px;
   padding-bottom: 54px;
   margin: 0;
+  width: 100%;
+  max-width: 330px;
 }
 
 .modal__form {
@@ -55,10 +58,12 @@
   top: 111px;
   max-width: 358px;
   display: flex;
+  margin: 0;
 }
 
 .modal__input {
-  width: 358px;
+  max-width: 100%;
+  max-width: 358px;
   height: 27px;
   border: none;
   border-bottom: 1px rgba(0, 0, 0, 0.2) solid;
@@ -77,23 +82,15 @@
   font-size: 18px;
   line-height: 22px;
   color: white;
-  width: 358px;
+  max-width: 358px;
   height: 50px;
 }
 
-@media screen and (max-width: 745px) {
+@media screen and (max-width: 630px) {
   .modal__container {
     max-width: 282px;
-    max-height: 382px;
-  }
-
-  .modal__button {
-    width: 238px;
-    height: 46px;
-  }
-
-  .modal__input {
-    width: 238px;
+    max-height: 322px;
+    padding: 22px;
   }
 
   .modal__input:last-of-type {
@@ -103,6 +100,17 @@
   .modal__close {
     height: 26px;
     width: 26px;
-    right: -2px;
+    left: calc(100% - 30px);
+    top: -40px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .modal__button {
+    max-width: 238px;
+    height: 46px;
+  }
+
+  .modal__heading {
   }
 }
