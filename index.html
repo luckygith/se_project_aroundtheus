@@ -41,6 +41,7 @@
         </section>
       </main>
     </div>
+    <!-- Edit Modal -->
     <div class="modal modal_opened" id="profile-edit-modal">
       <div class="modal__container">
         <button class="modal__close" id="profile-close-modalButton"></button>
@@ -59,6 +60,33 @@
             id="profile-description-input"
             class="modal__input"
             value="Explorer"
+          />
+          <button class="modal__button">Save</button>
+        </form>
+      </div>
+    </div>
+
+    <!--Add modal-->
+    <div class="modal modal_opened" id="profile-edit-modal">
+      <div class="modal__container">
+        <button class="modal__close" id="profile-close-modalButton"></button>
+        <p class="modal__heading">New Place</p>
+        <form class="modal__form">
+          <input
+            type="text"
+            name="title"
+            id="profile-title-input"
+            class="modal__input modal__input_type_title"
+            value="Jacques Cousteau"
+            placeholder="Title"
+          />
+          <input
+            type="text"
+            name="URL"
+            id="profile-description-input"
+            class="modal__input modal__input_type_URL"
+            value="Explorer"
+            placeholder="Image URL"
           />
           <button class="modal__button">Save</button>
         </form>

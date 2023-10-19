@@ -92,6 +92,7 @@ profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 }*/
 
 initialCards.forEach((cardData) => {
-  const cardElement = getCardElement(cardData);
-  cardListElement.prepend(cardElement);
+  //forEach
+  const cardElement = getCardElement(cardData); //create variable the includes function and item cardData
+  cardListElement.prepend(cardElement); //add to DOM
 });
