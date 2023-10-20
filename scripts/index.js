@@ -56,7 +56,7 @@ const addCardEditForm = addNewCardModal.querySelector(".modal__form_card");
 const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
 
-const cardListElement = document.querySelector(".cards__list");
+const cardsListElement = document.querySelector(".cards__list");
 
 //functions
 function openModal(modal) {
@@ -112,9 +112,9 @@ function getCardElement(cardData) {
     likeButton.classList.toggle("cards__like-button_active");
   });
 
-  //deleteButton.addEventListener("click", (cardElement) => {
-  //deleteButton.classlist.remove(cardElement);
-  //});
+  deleteButton.addEventListener("click", () => {
+    cardElement.remove();
+  });
 
   cardImageElement.src = cardData.link;
   //set the image alt text to the name field of the object
@@ -145,7 +145,7 @@ function handleAddCardFormSubmit(e) {
 initialCards.forEach((cardData) => {
   //forEach
   const cardElement = getCardElement(cardData); //create variable the includes function and item cardData
-  cardListElement.prepend(cardElement); //add to DOM
+  cardsListElement.prepend(cardElement); //add to DOM
 });
 
 //const cardsList = document.querySelector("#cards__list");
