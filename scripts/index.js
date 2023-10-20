@@ -169,3 +169,6 @@ likeButtons.forEach((likeButton) => {});
 likeButton.addEventListener("click", () => {
   likeButton.classList.toggle("cards__like-button_active");
 });*/
+initialCards.forEach((cardData) => {
+  cardsWrap.prepend(getCardElement(cardData));
+});
