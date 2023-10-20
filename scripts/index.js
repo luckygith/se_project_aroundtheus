@@ -25,6 +25,7 @@ const initialCards = [
   },
 ];
 
+const cardsWrap = documen.querySelector("#cards__list");
 const modal = document.querySelector(".modal");
 
 //buttons
