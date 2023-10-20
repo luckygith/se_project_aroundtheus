@@ -90,6 +90,19 @@
   cursor: pointer;
 }
 
+.modal__image-container {
+  position: relative; /*for modal__close x to be contained within  */
+  margin: auto;
+  padding: 0;
+  color: #000000;
+}
+
+.modal__image {
+  max-width: 74vw;
+  max-width: 100%;
+  max-height: 75vh;
+}
+
 @media screen and (max-width: 630px) {
   .modal__container {
     max-width: 282px;

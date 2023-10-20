@@ -99,6 +99,22 @@ function getCardElement(cardData) {
 
   const cardImageElement = cardElement.querySelector(".cards__image");
   const cardTitleElement = cardElement.querySelector(".cards__title");
+  const previewImageModal = document.querySelector("#preview-image-modal");
+  const previewImageCloseButton = document.querySelector(
+    ".modal__close-preview"
+  );
+
+  previewImageCloseButton.addEventListener("click", () => {
+    closeModal(previewImageModal);
+  });
+
+  cardImageElement.addEventListener("click", () => {
+    openModal(previewImageModal);
+    modalImage.alt = cardData.name;
+    modalImage.src = cardData.link;
+    modalText.textContent = cardData.name;
+    console.log("open image modal");
+  });
 
   const likeButton = cardElement.querySelector(".cards__like-button");
   const deleteButton = cardElement.querySelector(".cards__delete-button");

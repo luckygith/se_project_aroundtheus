@@ -72,6 +72,8 @@
   position: absolute;
   width: 18px;
   height: 19px;
+  border: none;
+  padding: 0;
   cursor: pointer;
   margin-top: 18px;
   margin-left: 249px;
@@ -79,6 +81,7 @@
 
 .cards__delete-button {
   opacity: 50%;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 320px) {

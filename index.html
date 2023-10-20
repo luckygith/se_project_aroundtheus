@@ -99,9 +99,26 @@
       </div>
     </div>
 
+    <div class="modal" id="preview-image-modal">
+      <div class="modal__image-container">
+        <img
+          class="modal__image"
+          id="modalImage"
+          alt="card image preview"
+          src="#"
+        />
+        <p class="modal__text" id="modalText"></p>
+        <button
+          class="modal__close modal__close-preview"
+          id="previewImageCloseButton"
+          type="button"
+        ></button>
+      </div>
+    </div>
+
     <template id="card-template">
       <li class="cards__list-item" id="cards__list">
-        <img src="" class="cards__image" alt="" />
+        <img src="" class="cards__image" id="cards-image-open" alt="" />
         <button type="button" class="cards__delete-button"></button>
         <div class="cards__description">
           <h2 class="cards__title"></h2>
