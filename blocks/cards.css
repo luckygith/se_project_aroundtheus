@@ -67,6 +67,16 @@
   cursor: pointer;
 }
 
+.cards__delete-button {
+  background: transparent url(../images/Trash.svg) center no-repeat;
+  position: absolute;
+  width: 18px;
+  height: 19px;
+  top: 18px;
+  left: 249px;
+  cursor: pointer;
+}
+
 @media screen and (max-width: 320px) {
   .cards__list {
     margin: 0 auto;

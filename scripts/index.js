@@ -69,7 +69,7 @@ function closeModal(modal) {
 
 function renderCard(cardData) {
   const cardElement = getCardElement(cardData);
-  //cardsList.prepend(cardElement);
+  cardsListElement.prepend(cardElement);
 }
 /*function ProfileEditButtonOpen() {
   profileTitleInput.value = profileTitle.textContent;
@@ -101,7 +101,7 @@ function getCardElement(cardData) {
   const cardTitleElement = cardElement.querySelector(".cards__title");
 
   const likeButton = cardElement.querySelector(".cards__like-button");
-
+  const deleteButton = cardElement.querySelector(".cards__delete-button");
   //find delete button
   //add event listener to delet button
   //card element.remove();
@@ -111,6 +111,10 @@ function getCardElement(cardData) {
   likeButton.addEventListener("click", () => {
     likeButton.classList.toggle("cards__like-button_active");
   });
+
+  //deleteButton.addEventListener("click", (cardElement) => {
+  //deleteButton.classlist.remove(cardElement);
+  //});
 
   cardImageElement.src = cardData.link;
   //set the image alt text to the name field of the object
@@ -134,12 +138,7 @@ function handleAddCardFormSubmit(e) {
 
   const name = cardTitleInput.value;
   const link = cardUrlInput.value;
-  const cardElement = getCardElement({
-    name,
-    link,
-  });
-  //renderCard({ name, link }, cardsList);
-  cardsList.prepend(cardElement);
+  renderCard({ name, link }, cardsListElement);
   closeModal(addNewCardModal);
 }
 
@@ -149,9 +148,9 @@ initialCards.forEach((cardData) => {
   cardListElement.prepend(cardElement); //add to DOM
 });
 
-const cardsList = document.querySelector("#cards__list");
+//const cardsList = document.querySelector("#cards__list");
 
-initialCards.forEach((cardData) => renderCard(cardData, cardsList));
+initialCards.forEach((cardData) => renderCard(cardData, cardsListElement));
 
 /*for (let i = 0; i < initialCards.length; i++) {
   const card = initialCards[i];
