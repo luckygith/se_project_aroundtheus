@@ -25,7 +25,6 @@ const initialCards = [
   },
 ];
 
-const cardsWrap = documen.querySelector("#cards__list");
 const modal = document.querySelector(".modal");
 
 //buttons
@@ -68,6 +67,10 @@ function closeModal(modal) {
   modal.classList.remove("modal_opened");
 }
 
+function renderCard(cardData) {
+  const cardElement = getCardElement(cardData);
+  //cardsList.prepend(cardElement);
+}
 /*function ProfileEditButtonOpen() {
   profileTitleInput.value = profileTitle.textContent;
   profileDescriptionInput.value = profileDescription.textContent; //preset value input to what is already occupying input value
@@ -128,11 +131,15 @@ function handleProfileEditSubmit(e) {
 
 function handleAddCardFormSubmit(e) {
   e.preventDefault();
-  const cardElement = getCardElement;
+
   const name = cardTitleInput.value;
   const link = cardUrlInput.value;
-  ({ name, link });
-  return console.log(cardElement);
+  const cardElement = getCardElement({
+    name,
+    link,
+  });
+  //renderCard({ name, link }, cardsList);
+  cardsList.prepend(cardElement);
   closeModal(addNewCardModal);
 }
 
@@ -141,6 +148,11 @@ initialCards.forEach((cardData) => {
   const cardElement = getCardElement(cardData); //create variable the includes function and item cardData
   cardListElement.prepend(cardElement); //add to DOM
 });
+
+const cardsList = document.querySelector("#cards__list");
+
+initialCards.forEach((cardData) => renderCard(cardData, cardsList));
+
 /*for (let i = 0; i < initialCards.length; i++) {
   const card = initialCards[i];
   forLoop version
@@ -169,6 +181,3 @@ likeButtons.forEach((likeButton) => {});
 likeButton.addEventListener("click", () => {
   likeButton.classList.toggle("cards__like-button_active");
 });*/
-initialCards.forEach((cardData) => {
-  cardsWrap.prepend(getCardElement(cardData));
-});
