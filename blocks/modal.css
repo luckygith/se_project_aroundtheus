@@ -9,13 +9,15 @@
   padding: 0 19px 0 19px;
   visibility: hidden;
   opacity: 0;
-  transition: background-color 0.5s, opacity 0.5s;
+  transition: visibility 0.2s, opacity 0.2s linear;
+  display: flex;
+  visibility: hidden;
 }
 
 .modal_opened {
   visibility: visible;
-  display: flex;
   opacity: 1;
+  transition: visibility 0.2s, opacity 0.2s linear;
 }
 
 .modal__container {
@@ -46,15 +48,7 @@
   background-size: contain;
   bottom: calc(100% + 5px);
   left: calc(100% + 5px);
-  transition: transform 0.5s;
-}
-
-.modal_opened .modal__container {
-  transform: scale(1);
-}
-
-.modal_opened .modal__close {
-  transform: scale(1);
+  transition: opacity 0.2s linear;
 }
 
 .modal__heading {
