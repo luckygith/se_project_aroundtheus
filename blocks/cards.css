@@ -49,6 +49,10 @@
   padding-right: 5px;
 }
 
+.cards__title {
+  cursor: default;
+}
+
 .cards__like-button {
   background: transparent url(../images/like-inactive.svg) center no-repeat;
   border: none;

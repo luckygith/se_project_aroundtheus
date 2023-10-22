@@ -31,6 +31,10 @@
   max-width: 373px;
 }
 
+.profile__title:hover {
+  cursor: default;
+}
+
 .profile__description {
   font-family: "Inter", sans-serif;
   font-size: 18px;
@@ -45,6 +49,10 @@
   white-space: nowrap;
   overflow: hidden;
   align-self: self-start;
+}
+
+.profile__description {
+  cursor: default;
 }
 
 .profile__image {

@@ -33,6 +33,10 @@
   color: #545454;
 }
 
+.page__footer-note {
+  cursor: default;
+}
+
 @media screen and (min-width: 1280px) {
   .page__footer {
     text-align: inherit;

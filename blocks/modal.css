@@ -60,6 +60,10 @@
   max-width: 330px;
 }
 
+.modal__heading:hover {
+  cursor: default;
+}
+
 .modal__form {
   flex-direction: column;
   top: 111px;
