@@ -49,7 +49,7 @@
   padding-right: 5px;
 }
 
-.cards__title {
+.cards__title:hover {
   cursor: default;
 }
 

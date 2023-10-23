@@ -51,7 +51,7 @@
   align-self: self-start;
 }
 
-.profile__description {
+.profile__description:hover {
   cursor: default;
 }
 

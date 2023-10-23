@@ -33,7 +33,7 @@
   color: #545454;
 }
 
-.page__footer-note {
+.page__footer-note:hover {
   cursor: default;
 }
 
