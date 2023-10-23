@@ -58,6 +58,8 @@ const cardTemplate =
 
 const cardsListElement = document.querySelector(".cards__list");
 
+const previewImageModal = document.querySelector("#preview-image-modal");
+
 //functions
 function openModal(modal) {
   modal.classList.add("modal_opened");
@@ -80,14 +82,10 @@ function getCardElement(cardData) {
 
   const cardImageElement = cardElement.querySelector(".cards__image");
   const cardTitleElement = cardElement.querySelector(".cards__title");
-  const previewImageModal = document.querySelector("#preview-image-modal");
+
   const previewImageCloseButton = document.querySelector(
     ".modal__close-preview"
   );
-
-  previewImageCloseButton.addEventListener("click", () => {
-    closeModal(previewImageModal);
-  });
 
   cardImageElement.addEventListener("click", () => {
     openModal(previewImageModal);
@@ -135,11 +133,19 @@ function handleAddCardFormSubmit(e) {
   closeModal(addNewCardModal);
 }
 
+function handleCloseModal(modal) {
+  closeModal(modal);
+}
+
 initialCards.forEach((cardData) => renderCard(cardData, cardsListElement));
 
 profileCloseModalButton.addEventListener("click", () =>
-  closeModal(profileEditModal)
+  handleCloseModal(profileEditModal)
 );
+previewImageCloseButton.addEventListener("click", () =>
+  handleCloseModal(previewImageModal)
+);
+
 profileEditButton.addEventListener("click", () => {
   profileTitleInput.value = profileTitle.textContent;
   profileDescriptionInput.value = profileDescription.textContent; //preset value input to what is already occupying input value
