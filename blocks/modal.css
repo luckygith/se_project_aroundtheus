@@ -49,6 +49,10 @@
   transition: opacity 0.2s linear;
 }
 
+.modal__close:hover {
+  cursor: pointer;
+}
+
 .modal__heading {
   font-family: "Inter", sans-serif;
   font-weight: 900;
@@ -97,6 +101,9 @@
   height: 50px;
   border-radius: 2px;
   padding: 0;
+}
+
+.modal__button:hover {
   cursor: pointer;
 }
 

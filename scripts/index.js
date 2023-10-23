@@ -85,6 +85,10 @@ function getCardElement(cardData) {
     ".modal__close-preview"
   );
 
+  previewImageCloseButton.addEventListener("click", () => {
+    closeModal(previewImageModal);
+  });
+
   cardImageElement.addEventListener("click", () => {
     openModal(previewImageModal);
     modalImage.alt = cardData.name;
@@ -113,10 +117,6 @@ function getCardElement(cardData) {
   //return the ready HTML element with the filled-in data
   return cardElement;
 }
-
-previewImageCloseButton.addEventListener("click", () => {
-  closeModal(previewImageModal);
-});
 
 function handleProfileEditSubmit(e) {
   e.preventDefault(); //prevent from reloading the entire page
