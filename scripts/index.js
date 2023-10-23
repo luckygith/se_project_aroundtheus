@@ -85,10 +85,6 @@ function getCardElement(cardData) {
     ".modal__close-preview"
   );
 
-  previewImageCloseButton.addEventListener("click", () => {
-    closeModal(previewImageModal);
-  });
-
   cardImageElement.addEventListener("click", () => {
     openModal(previewImageModal);
     modalImage.alt = cardData.name;
@@ -118,6 +114,10 @@ function getCardElement(cardData) {
   return cardElement;
 }
 
+previewImageCloseButton.addEventListener("click", () => {
+  closeModal(previewImageModal);
+});
+
 function handleProfileEditSubmit(e) {
   e.preventDefault(); //prevent from reloading the entire page
   profileTitle.textContent = profileTitleInput.value;
@@ -131,6 +131,7 @@ function handleAddCardFormSubmit(e) {
   const name = cardTitleInput.value;
   const link = cardUrlInput.value;
   renderCard({ name, link }, cardsListElement);
+  e.target.reset();
   closeModal(addNewCardModal);
 }
 
