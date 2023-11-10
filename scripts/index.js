@@ -139,9 +139,58 @@ function handleCloseModal(modal) {
 
 initialCards.forEach((cardData) => renderCard(cardData, cardsListElement));
 
-profileCloseModalButton.addEventListener("click", () =>
-  handleCloseModal(profileEditModal)
-);
+profileCloseModalButton.addEventListener("click", (e) => {
+  closeProfileEditModal();
+});
+
+function closeProfileEditModal() {
+  handleCloseModal(profileEditModal);
+}
+
+function closeAddNewCardModal() {
+  handleCloseModal(addNewCardModal);
+}
+
+function closePreviewImageModal() {
+  handleCloseModal(previewImageModal);
+}
+
+previewImageModal.addEventListener("keydown", (evt) => {
+  if (evt.key === "Escape") {
+    closePreviewImageModal();
+  }
+});
+
+previewImageModal.addEventListener("click", (evt) => {
+  if (evt.target.classList.contains("modal")) {
+    closePreviewImageModal();
+  }
+});
+
+profileEditModal.addEventListener("keydown", (evt) => {
+  if (evt.key === "Escape") {
+    closeProfileEditModal();
+  }
+});
+
+profileEditModal.addEventListener("click", (evt) => {
+  if (evt.target.classList.contains("modal")) {
+    closeProfileEditModal();
+  }
+});
+
+addNewCardModal.addEventListener("keydown", (evt) => {
+  if (evt.key === "Escape") {
+    closeAddNewCardModal();
+  }
+});
+
+addNewCardModal.addEventListener("click", (evt) => {
+  if (evt.target.classList.contains("modal")) {
+    closeAddNewCardModal();
+  }
+});
+
 previewImageCloseButton.addEventListener("click", () =>
   handleCloseModal(previewImageModal)
 );
