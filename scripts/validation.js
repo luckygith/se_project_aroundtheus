@@ -1,5 +1,3 @@
-console.log("hello from validation .js");
-
 // enabling validation by calling enableValidation()
 // pass all the settings on call
 
@@ -43,12 +41,12 @@ function hasInvalidInput(inputList) {
 }
 
 function disableButton(submitButton) {
-  submitButton.classList.add(".modal__button_disabled");
+  submitButton.classList.add("modal__button_disabled");
   submitButton.disabled = true;
 }
 
 function enableButton(submitButton) {
-  submitButton.classList.remove(".modal__button_disabled");
+  submitButton.classList.remove("modal__button_disabled");
   submitButton.disabled = false;
 }
 
@@ -56,7 +54,7 @@ function toggleButtonState(inputElements, submitButton) {
   if (hasInvalidInput(inputElements)) {
     disableButton(submitButton);
   } else {
-    disableButton(submitButton);
+    enableButton(submitButton);
   }
 }
 
@@ -86,10 +84,19 @@ function enableValidation(options) {
   });
 }
 
+const config = {
+  formSelector: ".modal__form",
+  inputSelector: ".modal__input",
+  submitButtonSelector: ".modal__button",
+  inactiveButtonClass: ".modal__button_disabled",
+  inputErrorClass: "modal__input_type_error",
+  errorClass: "modal__error_visible",
+};
+
 enableValidation({
   formSelector: ".modal__form",
   inputSelector: ".modal__input",
-  submitButtonSelector: ".modal__button modal__button_disabled",
+  submitButtonSelector: ".modal__button",
   inactiveButtonClass: ".modal__button_disabled",
   inputErrorClass: "modal__input_type_error",
   errorClass: ".modal__error_visible",

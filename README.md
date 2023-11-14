@@ -21,6 +21,14 @@ The skills displayed in this project is to excercise the understanding and disti
 
 **Figma**
 
+In learning the basics of working with designers and possible future prospects in the field, it is important to learn how to be able to translate a design into code. This phase furthered my understanding of the importance of being detail oriented and where the responsibilities of the sofware engineer lie in understanding and communicating amongst possible peers in the future.
+
+**phase II**
+
+**Javascript**
+
+Learning Javascript in a series of functions and learning to condense and refactor functions was a challenging yet exhilarating part of this phase. A lot of experimenting, exploring and excercise with multiple variables and functions were done on my own time o be able to understand this. I learned a lo of useful and common functions that are used in todays everyday code and although what was asked of this project was achieved, a lot of improvement in refactoring the events of this code can still be possible and will be worked on.
+
 - [Link to the project on Github]
   (https://luckygith.github.io/se_project_aroundtheus/)
 
@@ -30,11 +38,4 @@ The skills displayed in this project is to excercise the understanding and disti
 ![mobile layout](MOBILE.png)
 ![ui kit](<UI KIT.png>)
 
-The project's name.
-A description of the project. Write about its features and functionality, why you made it, and what problem it addresses. If you practiced using a new framework or made any animations with it, include that information. You can also specify the stack here if you used many technologies at once.
-Pictures, gifs, or screenshots that detail the project features.
-Link to a project page if it's working.
-A demo video of the project (optional).
-An instruction on deployment and system requirements (what versions of which languages, and plugins are essential for it to work), so one could use the code and make sure it actually works.
-Plans to improve the project, if you have any. Not just "Refactor code," but "Fix X using Y to achieve Z." The more detail, the better.
-Some other things you can add: extensive project documentation, setting up CLI to run the project, and for larger projects, a list of people who worked on it.
+This project is exemplify an understanding of basic concepts that underwent and will undergo a series of improvements based on the ongoing level of skills learned throughout the journey of evolving my skills in HTML, CSS and Javascript!
