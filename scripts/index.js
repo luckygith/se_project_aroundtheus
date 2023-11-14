@@ -155,21 +155,15 @@ function closePreviewImageModal() {
   handleCloseModal(previewImageModal);
 }
 
-previewImageModal.addEventListener("keydown", (evt) => {
-  if (evt.key === "Escape") {
-    closePreviewImageModal();
-  }
-});
-
 previewImageModal.addEventListener("click", (evt) => {
   if (evt.target.classList.contains("modal")) {
     closePreviewImageModal();
   }
 });
 
-profileEditModal.addEventListener("keydown", (evt) => {
+document.addEventListener("keydown", (evt) => {
   if (evt.key === "Escape") {
-    closeProfileEditModal();
+    closePreviewImageModal();
   }
 });
 
@@ -179,14 +173,20 @@ profileEditModal.addEventListener("click", (evt) => {
   }
 });
 
-addNewCardModal.addEventListener("keydown", (evt) => {
+document.addEventListener("keydown", (evt) => {
   if (evt.key === "Escape") {
-    closeAddNewCardModal();
+    closeProfileEditModal();
   }
 });
 
 addNewCardModal.addEventListener("click", (evt) => {
   if (evt.target.classList.contains("modal")) {
+    closeAddNewCardModal();
+  }
+});
+
+document.addEventListener("keydown", (evt) => {
+  if (evt.key === "Escape") {
     closeAddNewCardModal();
   }
 });
