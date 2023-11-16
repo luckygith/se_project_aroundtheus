@@ -155,14 +155,34 @@ function closePreviewImageModal() {
   handleCloseModal(previewImageModal);
 }
 
+//handle escape key
+
+function handleEscapeKey(
+  closePreviewImageModal,
+  closeProfileEditModal,
+  closeAddNewCardModal
+) {
+  /* document.addEventListener("keydown", (evt) => {
+    if (evt.key === "Escape") {
+      closePreviewImageModal();
+    }
+  });
+
+  document.addEventListener("keydown", (evt) => {
+    if (evt.key === "Escape") {
+      closeProfileEditModal();
+    }
+  });
+
+  document.addEventListener("keydown", (evt) => {
+    if (evt.key === "Escape") {
+      closeAddNewCardModal();
+    }
+  });*/
+}
+
 previewImageModal.addEventListener("click", (evt) => {
   if (evt.target.classList.contains("modal")) {
-    closePreviewImageModal();
-  }
-});
-
-document.addEventListener("keydown", (evt) => {
-  if (evt.key === "Escape") {
     closePreviewImageModal();
   }
 });
@@ -173,20 +193,8 @@ profileEditModal.addEventListener("click", (evt) => {
   }
 });
 
-document.addEventListener("keydown", (evt) => {
-  if (evt.key === "Escape") {
-    closeProfileEditModal();
-  }
-});
-
 addNewCardModal.addEventListener("click", (evt) => {
   if (evt.target.classList.contains("modal")) {
-    closeAddNewCardModal();
-  }
-});
-
-document.addEventListener("keydown", (evt) => {
-  if (evt.key === "Escape") {
     closeAddNewCardModal();
   }
 });
