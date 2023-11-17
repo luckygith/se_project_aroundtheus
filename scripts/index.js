@@ -25,8 +25,6 @@ const initialCards = [
   },
 ];
 
-const modal = document.querySelector(".modal");
-
 //buttons
 const profileEditButton = document.querySelector("#profile-edit-button"); //storing edit button inside this variable
 const profileCloseModalButton = document.querySelector(
@@ -57,8 +55,13 @@ const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
 
 const cardsListElement = document.querySelector(".cards__list");
+previewImageCloseButton;
 
 const previewImageModal = document.querySelector("#preview-image-modal");
+
+const modalImage = previewImageModal.querySelector("#modalImage");
+
+const modalText = previewImageModal.querySelector("#modalText");
 
 //functions
 function openModal(modal) {
@@ -84,10 +87,6 @@ function getCardElement(cardData) {
 
   const cardImageElement = cardElement.querySelector(".cards__image");
   const cardTitleElement = cardElement.querySelector(".cards__title");
-
-  const previewImageCloseButton = document.querySelector(
-    ".modal__close-preview"
-  );
 
   cardImageElement.addEventListener("click", () => {
     openModal(previewImageModal);
@@ -136,42 +135,17 @@ function handleAddCardFormSubmit(e) {
   closeAddNewCardModal();
 }
 
-function handleCloseModal(modal) {
-  closeModal(modal);
-  removeEscapeKeyListener();
-}
-
 initialCards.forEach((cardData) => renderCard(cardData, cardsListElement));
 
 profileCloseModalButton.addEventListener("click", (e) => {
   closeProfileEditModal();
 });
 
-function closeProfileEditModal() {
-  removeEscapeKeyListener();
-  handleCloseModal(profileEditModal);
-}
-
-function closeAddNewCardModal() {
-  removeEscapeKeyListener();
-  handleCloseModal(addNewCardModal);
-}
-
-function closePreviewImageModal() {
-  removeEscapeKeyListener();
-  handleCloseModal(previewImageModal);
-}
-
 //MODAL Close functions
 
-function handleEscapeKey(
-  evt,
-  closeProfileEditModal,
-  closePreviewImageModal,
-  closeAddNewCardModal
-) {
+function handleEscapeKey(evt) {
   if (evt.key === "Escape") {
-    handleCloseModal();
+    closeModal(profileEditModal, previewImageModal, addNewCardModal);
   }
 }
 
@@ -183,6 +157,8 @@ function removeEscapeKeyListener() {
   document.removeEventListener("keydown", handleEscapeKey);
 }
 
+addEscapeKeyListener(profileEditModal, previewImageModal, addNewCardModal);
+
 function closeModalOnClick(modal, closeFunction) {
   modal.addEventListener("click", (evt) => {
     if (evt.target.classList.contains("modal")) {
@@ -191,12 +167,12 @@ function closeModalOnClick(modal, closeFunction) {
   });
 }
 
-closeModalOnClick(previewImageModal, closePreviewImageModal);
-closeModalOnClick(profileEditModal, closeProfileEditModal);
-closeModalOnClick(addNewCardModal, closeAddNewCardModal);
+closeModalOnClick(previewImageModal, PreviewImageModal);
+closeModalOnClick(profileEditModal, ProfileEditModal);
+closeModalOnClick(addNewCardModal, AddNewCardModal);
 
 previewImageCloseButton.addEventListener("click", () =>
-  handleCloseModal(previewImageModal)
+  closeModal(previewImageModal)
 );
 
 profileEditButton.addEventListener("click", () => {
