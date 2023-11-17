@@ -29,11 +29,18 @@ function hideInputError(
   errorMessageElement.classList.add(errorClass); //fade in
 }
 
-function checkInputValidity(formElement, inputElement, options) {
+function checkInputValidity(
+  formElement,
+  inputElement,
+  { inputErrorClass, errorClass }
+) {
   if (!inputElement.validity.valid) {
-    return showInputError(formElement, inputElement, options);
+    return showInputError(formElement, inputElement, {
+      inputErrorClass,
+      errorClass,
+    });
   }
-  hideInputError(formElement, inputElement, options);
+  hideInputError(formElement, inputElement, { inputErrorClass, errorClass });
 }
 
 function hasInvalidInput(inputList) {
@@ -65,14 +72,20 @@ function setEventListeners(formElement, options) {
   inputElements.forEach((inputElement) => {
     inputElement.addEventListener("input", (e) => {
       // add event listener for each input key to be listened to for validation
-      checkInputValidity(formElement, inputElement, options); //shows details such as true or false validity// add event listener for each input key to be listened to for validation
-      toggleButtonState(inputElements, submitButton, options);
+      checkInputValidity(formElement, inputElement, {
+        inputErrorClass,
+        errorClass,
+      }); //shows details such as true or false validity// add event listener for each input key to be listened to for validation
+      toggleButtonState(inputElements, submitButton, {
+        inputErrorClass,
+        errorClass,
+      });
     });
   });
 }
 
-function enableValidation(options) {
-  const formElements = [...document.querySelectorAll(options.formSelector)]; //select and create new shallow copied array from an array-like or iterable object
+function enableValidation({ formSelector, inputErrorClass, errorClass }) {
+  const formElements = [...document.querySelectorAll(formSelector)]; //select and create new shallow copied array from an array-like or iterable object
   formElements.forEach((formElement) => {
     //anonymous function
     //loop through each form element and add event listeners to them
@@ -80,11 +93,13 @@ function enableValidation(options) {
       e.preventDefault();
     });
 
-    setEventListeners(formElement, options);
+    setEventListeners(formElement, {
+      formSelector,
+      inputErrorClass,
+      errorClass,
+    });
   });
 }
-
-function enableValidation(config)
 
 const config = {
   formSelector: ".modal__form",
