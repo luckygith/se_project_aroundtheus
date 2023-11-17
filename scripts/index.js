@@ -25,18 +25,14 @@ const initialCards = [
   },
 ];
 
-//buttons
-const profileEditButton = document.querySelector("#profile-edit-button"); //storing edit button inside this variable
-const profileCloseModalButton = document.querySelector(
-  "#profile-close-modalButton"
-);
-
-const addNewCardButton = document.querySelector("#profile-add-button"); //new modal
-const addNewCardClose = document.querySelector("#card-close-modal-button");
-
 //elements
-const addNewCardModal = document.querySelector("#add-card-modal");
+
 const profileEditModal = document.querySelector("#profile-edit-modal"); //instead of using identical yet confusing paired class names we create an id
+const previewImageModal = document.querySelector("#preview-image-modal");
+const addNewCardModal = document.querySelector("#add-card-modal");
+
+const modals = [profileEditModal, previewImageModal, addNewCardModal];
+
 const profileTitle = document.querySelector(".profile__title "); //target id on HTML and create variable on JS
 const profileDescription = document.querySelector(".profile__description");
 
@@ -55,13 +51,41 @@ const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
 
 const cardsListElement = document.querySelector(".cards__list");
-previewImageCloseButton;
-
-const previewImageModal = document.querySelector("#preview-image-modal");
 
 const modalImage = previewImageModal.querySelector("#modalImage");
 
 const modalText = previewImageModal.querySelector("#modalText");
+
+//buttons
+const profileEditButton = document.querySelector("#profile-edit-button"); //storing edit button inside this variable
+const profileCloseModalButton = document.querySelector(
+  "#profile-close-modalButton"
+);
+
+const addNewCardButton = document.querySelector("#profile-add-button"); //new modal
+const addNewCardClose = document.querySelector("#card-close-modal-button");
+
+profileCloseModalButton.addEventListener("click", (e) => {
+  closeModal(profileEditModal);
+});
+
+previewImageCloseButton.addEventListener("click", (e) => {
+  closeModal(previewImageModal);
+});
+addNewCardClose.addEventListener("click", (e) => {
+  closeModal(addNewCardModal);
+});
+
+profileEditButton.addEventListener("click", (e) => {
+  profileTitleInput.value = profileTitle.textContent;
+  profileDescriptionInput.value = profileDescription.textContent; //preset value input to what is already occupying input value
+  openModal(profileEditModal);
+});
+
+profileEditForm.addEventListener("submit", handleProfileEditSubmit);
+addCardEditForm.addEventListener("submit", handleAddCardFormSubmit);
+//add new card
+addNewCardButton.addEventListener("click", () => openModal(addNewCardModal));
 
 //functions
 function openModal(modal) {
@@ -122,7 +146,7 @@ function handleProfileEditSubmit(e) {
   e.preventDefault(); //prevent from reloading the entire page
   profileTitle.textContent = profileTitleInput.value;
   profileDescription.textContent = profileDescriptionInput.value;
-  closeProfileEditModal();
+  closeModal(ProfileEditModal);
 }
 
 function handleAddCardFormSubmit(e) {
@@ -132,22 +156,17 @@ function handleAddCardFormSubmit(e) {
   const link = cardUrlInput.value;
   renderCard({ name, link }, cardsListElement);
   e.target.reset();
-  closeAddNewCardModal();
+  closeModal(addNewCardModal);
 }
 
 initialCards.forEach((cardData) => renderCard(cardData, cardsListElement));
 
-profileCloseModalButton.addEventListener("click", (e) => {
-  closeProfileEditModal();
-});
+//closeModalButton.addEventListener("click", (e) => {
+//console.log("pressed ex button");
+//closeModal(profileEditModal);
+//});
 
 //MODAL Close functions
-
-function handleEscapeKey(evt) {
-  if (evt.key === "Escape") {
-    closeModal(profileEditModal, previewImageModal, addNewCardModal);
-  }
-}
 
 function addEscapeKeyListener() {
   document.addEventListener("keydown", handleEscapeKey);
@@ -157,35 +176,24 @@ function removeEscapeKeyListener() {
   document.removeEventListener("keydown", handleEscapeKey);
 }
 
-addEscapeKeyListener(profileEditModal, previewImageModal, addNewCardModal);
+function handleEscapeKey(evt) {
+  if (evt.key === "Escape") {
+    console.log("escape key pressed");
+    modals.forEach((modal) => closeModal(modal));
+  }
+}
 
-function closeModalOnClick(modal, closeFunction) {
+function closeModalOnClick(modal, closeModal) {
   modal.addEventListener("click", (evt) => {
     if (evt.target.classList.contains("modal")) {
-      closeFunction();
+      closeModal(modal);
     }
   });
 }
 
-closeModalOnClick(previewImageModal, PreviewImageModal);
-closeModalOnClick(profileEditModal, ProfileEditModal);
-closeModalOnClick(addNewCardModal, AddNewCardModal);
-
-previewImageCloseButton.addEventListener("click", () =>
-  closeModal(previewImageModal)
-);
-
-profileEditButton.addEventListener("click", () => {
-  profileTitleInput.value = profileTitle.textContent;
-  profileDescriptionInput.value = profileDescription.textContent; //preset value input to what is already occupying input value
-  openModal(profileEditModal);
-});
-
-profileEditForm.addEventListener("submit", handleProfileEditSubmit);
-addCardEditForm.addEventListener("submit", handleAddCardFormSubmit);
-//add new card
-addNewCardButton.addEventListener("click", () => openModal(addNewCardModal));
-addNewCardClose.addEventListener("click", () => closeModal(addNewCardModal));
+closeModalOnClick(previewImageModal, closeModal);
+closeModalOnClick(profileEditModal, closeModal);
+closeModalOnClick(addNewCardModal, closeModal);
 
 /*const likeButtons = document.querySelectorAll(".cards__like-button");
 likeButtons.forEach((likeButton) => {});
