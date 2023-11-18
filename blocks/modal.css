@@ -58,7 +58,7 @@
   font-weight: 900;
   font-size: 24px;
   line-height: 29px;
-  padding-bottom: 54px;
+  padding-bottom: 30px;
   margin: 0;
   width: 100%;
   max-width: 330px;
@@ -89,15 +89,24 @@
   margin-top: 13px;
 }
 .modal__error {
+  color: #ff0000;
+}
+
+.modal__input_type_error {
   font-family: "Inter", sans-serif;
   font-size: 12px;
   font-weight: 400;
   line-height: 14.5px;
   color: #ff0000;
+  border-bottom: 1px #ff0000 solid;
+  margin-top: 10px;
 }
 
-.modal__input_type_error {
-  border-bottom: 1px #ff0000 solid;
+#profile-title-input-error,
+#profile-description-input-error,
+#card-title-input-error,
+#card-url-input-error {
+  color: #ff0000;
 }
 
 .modal__button {
@@ -160,4 +169,5 @@
   background-color: #ffffff;
   color: #000000;
   border: 1px #000000 solid;
+  margin-top: 10px;
 }

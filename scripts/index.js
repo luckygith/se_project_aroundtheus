@@ -146,7 +146,7 @@ function handleProfileEditSubmit(e) {
   e.preventDefault(); //prevent from reloading the entire page
   profileTitle.textContent = profileTitleInput.value;
   profileDescription.textContent = profileDescriptionInput.value;
-  closeModal(ProfileEditModal);
+  closeModal(profileEditModal);
 }
 
 function handleAddCardFormSubmit(e) {
@@ -160,11 +160,6 @@ function handleAddCardFormSubmit(e) {
 }
 
 initialCards.forEach((cardData) => renderCard(cardData, cardsListElement));
-
-//closeModalButton.addEventListener("click", (e) => {
-//console.log("pressed ex button");
-//closeModal(profileEditModal);
-//});
 
 //MODAL Close functions
 
