@@ -58,25 +58,18 @@ const modalText = previewImageModal.querySelector("#modalText");
 
 //buttons
 const profileEditButton = document.querySelector("#profile-edit-button"); //storing edit button inside this variable
-const profileCloseModalButton = document.querySelector(
-  "#profile-close-modalButton"
-);
 
 const addNewCardButton = document.querySelector("#profile-add-button"); //new modal
-const addNewCardClose = document.querySelector("#card-close-modal-button");
 
-profileCloseModalButton.addEventListener("click", (e) => {
-  closeModal(profileEditModal);
-});
+const closeButtons = document.querySelectorAll(".modal__close");
 
-previewImageCloseButton.addEventListener("click", (e) => {
-  closeModal(previewImageModal);
-});
-addNewCardClose.addEventListener("click", (e) => {
-  closeModal(addNewCardModal);
+closeButtons.forEach((button) => {
+  const modal = button.closest(".modal");
+  button.addEventListener("click", () => closeModal(modal));
 });
 
 profileEditButton.addEventListener("click", (e) => {
+  e.preventDefault();
   profileTitleInput.value = profileTitle.textContent;
   profileDescriptionInput.value = profileDescription.textContent; //preset value input to what is already occupying input value
   openModal(profileEditModal);
@@ -174,21 +167,31 @@ function removeEscapeKeyListener() {
 function handleEscapeKey(evt) {
   if (evt.key === "Escape") {
     console.log("escape key pressed");
-    modals.forEach((modal) => closeModal(modal));
+    modals.forEach(closeModal);
   }
 }
 
 function closeModalOnClick(modal, closeModal) {
-  modal.addEventListener("click", (evt) => {
-    if (evt.target.classList.contains("modal")) {
-      closeModal(modal);
-    }
-  });
+  if (modal.classList.contains("modal_opened")) {
+    closeModal(modal);
+  }
 }
 
-closeModalOnClick(previewImageModal, closeModal);
-closeModalOnClick(profileEditModal, closeModal);
-closeModalOnClick(addNewCardModal, closeModal);
+modals.forEach((modal) => {
+  modal.addEventListener("click", () => {
+    closeModalOnClick(modal, closeModal);
+  });
+  const inputs = modal.querySelectorAll("input");
+  inputs.forEach((input) => {
+    input.addEventListener("click", (e) => {
+      e.stopPropagation();
+    });
+  });
+});
+
+//closeModalOnClick(previewImageModal, closeModal);
+//closeModalOnClick(profileEditModal, closeModal);
+//closeModalOnClick(addNewCardModal, closeModal);
 
 /*const likeButtons = document.querySelectorAll(".cards__like-button");
 likeButtons.forEach((likeButton) => {});
