@@ -43,26 +43,26 @@ function hasInvalidInput(inputList) {
   return !inputList.every((inputElement) => inputElement.validity.valid);
 }
 
-function disableButton(submitButton) {
-  submitButton.classList.add(inactiveButtonClass);
+function disableButton(submitButton, options) {
+  submitButton.classList.add(options.inactiveButtonClass);
   submitButton.disabled = true;
 }
 
-function enableButton(submitButton) {
-  submitButton.classList.remove(inactiveButtonClass);
+function enableButton(submitButton, options) {
+  submitButton.classList.remove(options.inactiveButtonClass);
   submitButton.disabled = false;
 }
 
-function toggleButtonState(inputElements, submitButton) {
+function toggleButtonState(inputElements, submitButton, options) {
   if (hasInvalidInput(inputElements)) {
-    disableButton(submitButton);
+    disableButton(submitButton, options);
   } else {
-    enableButton(submitButton);
+    enableButton(submitButton, options);
   }
 }
 
 function setEventListeners(formElement, options) {
-  const { inputSelector } = options; //const inputSelector = options.inputSelector  OBJECT DESTRUCTURING; sets value to the property
+  const { inputSelector, submitButtonSelector } = options; //const inputSelector = options.inputSelector  OBJECT DESTRUCTURING; sets value to the property
   const submitButton = formElement.querySelector(submitButtonSelector);
   const inputElements = [...formElement.querySelectorAll(inputSelector)];
   inputElements.forEach((inputElement) => {
@@ -83,16 +83,15 @@ function enableValidation(options) {
     formElement.addEventListener("submit", (e) => {
       e.preventDefault();
     });
-
     setEventListeners(formElement, options);
   });
 }
 
 const config = {
   formSelector: ".modal__form",
-  inputSelector: "modal__input",
-  submitButtonSelector: "modal__button",
-  inactiveButtonClass: "modal__button_disabled",
+  inputSelector: ".modal__input",
+  submitButtonSelector: ".modal__button",
+  inactiveButtonClass: ".modal__button_disabled",
   inputErrorClass: "modal__input_type_error",
   errorClass: "modal__error",
 };
