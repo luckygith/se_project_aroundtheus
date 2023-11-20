@@ -129,6 +129,13 @@
   opacity: 0.8;
 }
 
+.modal__button_disabled {
+  background-color: #00000032;
+  color: #000000;
+  border: 1px #000000 solid;
+  margin-top: 10px;
+}
+
 .modal__image-container {
   position: relative; /*for modal__close x to be contained within  */
   margin: auto;
@@ -163,11 +170,4 @@
     left: calc(100% - 30px);
     top: -40px;
   }
-}
-
-.modal__button_disabled {
-  background-color: #ffffff;
-  color: #000000;
-  border: 1px #000000 solid;
-  margin-top: 10px;
 }
