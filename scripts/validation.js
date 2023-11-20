@@ -65,6 +65,7 @@ function setEventListeners(formElement, options) {
   const { inputSelector, submitButtonSelector } = options; //const inputSelector = options.inputSelector  OBJECT DESTRUCTURING; sets value to the property
   const submitButton = formElement.querySelector(submitButtonSelector);
   const inputElements = [...formElement.querySelectorAll(inputSelector)];
+  toggleButtonState(inputElements, submitButton, options);
   inputElements.forEach((inputElement) => {
     inputElement.addEventListener("input", (e) => {
       e.preventDefault();

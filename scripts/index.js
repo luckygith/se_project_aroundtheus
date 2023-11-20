@@ -171,22 +171,14 @@ function handleEscapeKey(evt) {
   }
 }
 
-function closeModalOnClick(modal, closeModal) {
-  if (modal.classList.contains("modal_opened")) {
-    closeModal(modal);
+function closeModalOnClick(evt) {
+  if (evt.target.classList.contains("modal_opened")) {
+    closeModal(evt.target);
   }
 }
 
 modals.forEach((modal) => {
-  modal.addEventListener("click", () => {
-    closeModalOnClick(modal, closeModal);
-  });
-  const inputs = modal.querySelectorAll("input");
-  inputs.forEach((input) => {
-    input.addEventListener("click", (e) => {
-      e.stopPropagation();
-    });
-  });
+  modal.addEventListener("click", closeModalOnClick);
 });
 
 //closeModalOnClick(previewImageModal, closeModal);
