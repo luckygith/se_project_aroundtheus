@@ -1,3 +1,5 @@
+import Card from "./Card.js";
+
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -24,6 +26,14 @@ const initialCards = [
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg ",
   },
 ];
+
+const cardData = {
+  name: "Yosemite Valley",
+  link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
+};
+
+const card = new Card(cardData, "#card-template");
+card.getView();
 
 //elements
 
@@ -68,6 +78,10 @@ closeButtons.forEach((button) => {
   button.addEventListener("click", () => closeModal(modal));
 });
 
+const handleLikeIcon = (evt) => {
+  evt.target.classList.toggle("cards__like-button_active");
+};
+
 profileEditButton.addEventListener("click", (e) => {
   e.preventDefault();
   profileTitleInput.value = profileTitle.textContent;
@@ -96,14 +110,27 @@ function renderCard(cardData) {
   cardsListElement.prepend(cardElement);
 }
 
+function handleDeleteCard() {
+  cardElement.remove();
+}
+
+//deleteButton.addEventListener("click", handleDeleteCard);
+
 //event handlers
+
 function getCardElement(cardData) {
   //clone the template element with all its content and store it in a cardElement variable
   const cardElement = cardTemplate.cloneNode(true);
-  console.log(cardData.name);
 
   const cardImageElement = cardElement.querySelector(".cards__image");
   const cardTitleElement = cardElement.querySelector(".cards__title");
+
+  const likeButton = cardElement.querySelector(".cards__like-button");
+  const deleteButton = cardElement.querySelector(".cards__delete-button");
+
+  likeButton.addEventListener("click", handleLikeIcon);
+
+  deleteButton.addEventListener("click", handleDeleteCard);
 
   cardImageElement.addEventListener("click", () => {
     openModal(previewImageModal);
@@ -112,17 +139,6 @@ function getCardElement(cardData) {
     modalImage.src = cardData.link;
     modalText.textContent = cardData.name;
     console.log("open image modal");
-  });
-
-  const likeButton = cardElement.querySelector(".cards__like-button");
-  const deleteButton = cardElement.querySelector(".cards__delete-button");
-
-  likeButton.addEventListener("click", () => {
-    likeButton.classList.toggle("cards__like-button_active");
-  });
-
-  deleteButton.addEventListener("click", () => {
-    cardElement.remove();
   });
 
   cardImageElement.src = cardData.link;
