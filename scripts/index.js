@@ -32,8 +32,15 @@ const cardData = {
   link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
 };
 
-const card = new Card(cardData, "#card-template");
-card.getView();
+//const card = new Card(cardData, "#card-template");
+//card.getView();
+
+initialCards.forEach((cardData) => {
+  const card = new Card(cardData, cardSelector);
+  const cardElement = card.getView();
+  // Append the card element to your card container (replace '.your-card-container' with your actual container selector)
+  document.querySelector(".cards__list-item").appendChild(cardElement);
+});
 
 //elements
 
@@ -110,9 +117,9 @@ function renderCard(cardData) {
   cardsListElement.prepend(cardElement);
 }
 
-function handleDeleteCard() {
-  cardElement.remove();
-}
+//function handleDeleteCard() {
+//cardElement.remove();
+//
 
 //deleteButton.addEventListener("click", handleDeleteCard);
 
@@ -128,9 +135,9 @@ function getCardElement(cardData) {
   const likeButton = cardElement.querySelector(".cards__like-button");
   const deleteButton = cardElement.querySelector(".cards__delete-button");
 
-  likeButton.addEventListener("click", handleLikeIcon);
+  //likeButton.addEventListener("click", handleLikeIcon);
 
-  deleteButton.addEventListener("click", handleDeleteCard);
+  //deleteButton.addEventListener("click", handleDeleteCard);
 
   cardImageElement.addEventListener("click", () => {
     openModal(previewImageModal);
@@ -196,10 +203,6 @@ function closeModalOnClick(evt) {
 modals.forEach((modal) => {
   modal.addEventListener("click", closeModalOnClick);
 });
-
-//closeModalOnClick(previewImageModal, closeModal);
-//closeModalOnClick(profileEditModal, closeModal);
-//closeModalOnClick(addNewCardModal, closeModal);
 
 /*const likeButtons = document.querySelectorAll(".cards__like-button");
 likeButtons.forEach((likeButton) => {});

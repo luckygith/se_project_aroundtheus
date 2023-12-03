@@ -1,9 +1,11 @@
 export default class Card {
   //instantiating / make copy of card class to inner index.js
-  constructor({ name, link }, cardSelector) {
-    this._name = name;
-    this._link = link;
+  constructor(cardData, cardSelector, handleImageClick) {
+    this._cardData = cardData;
+    this._name = cardData.name;
+    this._link = cardData.link;
     this._cardSelector = cardSelector;
+    this._handleImageClick = handleImageClick;
   }
 
   _setEventListeners() {
