@@ -38,12 +38,12 @@ const previewImageModal = document.querySelector("#preview-image-modal");
 const modalImage = previewImageModal.querySelector("#modalImage");
 const modalText = previewImageModal.querySelector("#modalText");
 
-function handleImageClick(cardData) {
+function handleImageClick({ name, link }) {
   openModal(previewImageModal);
-  modalImage.alt = cardData.name;
-  modalImage.src = cardData.link;
-  modalText.textContent = cardData.name;
-  console.log("open image modal THIS FUNCTION");
+  modalImage.alt = name;
+  modalImage.src = link;
+  modalText.textContent = name;
+  console.log("open image modal THIS");
 }
 
 initialCards.forEach((cardData) => {
