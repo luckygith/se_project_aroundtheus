@@ -10,9 +10,7 @@ function showInputError(
   const errorMessageElement = formElement.querySelector(
     `#${inputElement.id}-error`
   ); //"#" + inputElement.id + "-error"
-  console.log("formElement:", formElement);
-  console.log("inputElement:", inputElement);
-  console.log("errorMessageElement:", errorMessageElement);
+
   inputElement.classList.add(inputErrorClass); // class added that makes it red - OBJECT DESTRUCTURING (options.inputErrorClass)
   errorMessageElement.textContent = inputElement.validationMessage;
   errorMessageElement.classList.remove(errorClass); //fade in
