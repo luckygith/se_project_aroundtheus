@@ -33,40 +33,54 @@ const cardData = {
   link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
 };
 
-const cardSelector = "#card-template";
 const previewImageModal = document.querySelector("#preview-image-modal");
 const modalImage = previewImageModal.querySelector("#modalImage");
 const modalText = previewImageModal.querySelector("#modalText");
+const cardsListElement = document.querySelector(".cards__list");
 
-function handleImageClick({ name, link }) {
+const cardTemplate =
+  document.querySelector("#card-template").content.firstElementChild;
+
+const cardElement = cardTemplate.cloneNode(true);
+
+//const cardImageElement = cardElement.querySelector(".cards__image");
+
+function handleImageClick() {
   openModal(previewImageModal);
-  modalImage.alt = name;
-  modalImage.src = link;
-  modalText.textContent = name;
-  console.log("open image modal THIS");
+
+  modalImage.alt = cardData.name;
+  modalImage.src = cardData.link;
+  modalText.textContent = cardData.name;
+  console.log("open image modal INDEX ON");
 }
+
+/** set event listener for the fcard elements should be inside the Card<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+ *
+ * const handleImageClick = () => {
+ *  console.log(12312312)
+ * }
+ */
 
 initialCards.forEach((cardData) => {
   const card = new Card(cardData, "#card-template", handleImageClick);
-  card.getView();
-  console.log(`Card Name: ${cardData.name}, Card Link: ${cardData.link}`);
+  // below we need to create a variable wwith the card.getView result. This variable will have a DOM node
+  let cardNewElement = card.getView();
+
+  // next step is to render your card using the append or prepend<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+  cardsListElement.prepend(cardNewElement);
 });
 
-/*initialCards.forEach((cardData) => {
-  const card = new Card(cardData, "#card-template", handleImageClick);
-  card.getView();
-  const cardElement = document
-    .querySelector(".cards__list-item")
-    .append(cardElement);
-  cardsListElement.prepend(cardElement);
-});*/
+// function renderCard(cardData) {
+//   const newCardElement = getCardElement(cardData);
+//   cardsListElement.prepend(newCardElement);
+// }
 
 //elements
 
 //moved variables from getCard local to global for acccesibiility?
 
-//const likeButton = cardElement.querySelector(".cards__like-button");
-//const deleteButton = cardElement.querySelector(".cards__delete-button");
+// const likeButton = cardElement.querySelector(".cards__like-button");
+// const deleteButton = cardElement.querySelector(".cards__delete-button");
 
 const profileEditModal = document.querySelector("#profile-edit-modal"); //instead of using identical yet confusing paired class names we create an id
 
@@ -87,8 +101,6 @@ const cardUrlInput = document.querySelector("#card-url-input");
 
 const profileEditForm = profileEditModal.querySelector(".modal__form_profile");
 const addCardEditForm = addNewCardModal.querySelector(".modal__form_card");
-
-const cardsListElement = document.querySelector(".cards__list");
 
 //buttons
 const profileEditButton = document.querySelector("#profile-edit-button"); //storing edit button inside this variable
@@ -129,10 +141,10 @@ function closeModal(modal) {
   modal.classList.remove("modal_opened");
 }
 
-function renderCard(cardData) {
-  const cardElement = getCardElement(cardData);
-  cardsListElement.prepend(cardElement);
-}
+// function renderCard(cardData) {
+//   const cardElement = getCardElement(cardData);
+//   cardsListElement.prepend(cardElement);
+// }
 
 function handleDeleteCard() {
   cardElement.remove();
@@ -144,40 +156,24 @@ function handleDeleteCard() {
 
 function getCardElement(cardData) {
   //clone the template element with all its content and store it in a cardElement variable
-  const cardTemplate =
-    document.querySelector("#card-template").content.firstElementChild;
+  // const cardTemplate =
+  // document.querySelector("#card-template").content.firstElementChild;
   const cardElement = cardTemplate.cloneNode(true);
 
   const cardImageElement = cardElement.querySelector(".cards__image");
   const cardTitleElement = cardElement.querySelector(".cards__title");
 
-  /*const likeButton = cardElement.querySelector(".cards__like-button");
-  const deleteButton = cardElement.querySelector(".cards__delete-button");
+  // const likeButton = cardElement.querySelector(".cards__like-button");
+  // const deleteButton = cardElement.querySelector(".cards__delete-button");
 
-  likeButton.addEventListener("click", handleLikeIcon);
+  // likeButton.addEventListener("click", handleLikeIcon);
+  // deleteButton.addEventListener("click", handleDeleteCard);
 
-  function handleLikeIcon() {
-    console.log("CLICKING");
-    cardElement
-      .querySelector(".cards__like-button")
-      .classList.toggle(".cards__like-button_active");
-  }*/
-  //deleteButton.addEventListener("click", handleDeleteCard);
-
-  cardImageElement.addEventListener("click", () => {
-    openModal(previewImageModal);
-
-    modalImage.alt = cardData.name;
-    modalImage.src = cardData.link;
-    modalText.textContent = cardData.name;
-    console.log("open image modal INDEX");
-  });
-
-  cardImageElement.src = cardData.link;
-  //set the image alt text to the name field of the object
-  cardImageElement.alt = cardData.name;
-  //set the card title to the name field of the object, too
-  cardTitleElement.textContent = cardData.name;
+  // cardImageElement.src = cardData.link;
+  // //set the image alt text to the name field of the object
+  // cardImageElement.alt = cardData.name;
+  // //set the card title to the name field of the object, too
+  // cardTitleElement.textContent = cardData.name;
 
   //return the ready HTML element with the filled-in data
   return cardElement;
@@ -200,7 +196,7 @@ function handleAddCardFormSubmit(e) {
   closeModal(addNewCardModal);
 }
 
-initialCards.forEach((cardData) => renderCard(cardData));
+// initialCards.forEach((cardData) => renderCard(cardData));
 
 //MODAL Close functions
 

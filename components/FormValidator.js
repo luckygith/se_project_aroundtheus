@@ -1,4 +1,4 @@
-/*class FormValidator {
+class FormValidator {
   constructor(config, formElement) {
     this._inputSelector = config.inputSelector;
     this._submitButtonSelector = config.submitButtonSelector;
@@ -81,6 +81,6 @@ setEventListeners(formElement, options) {
           });
           setEventListeners(formElement, options);
         });
+      }
 
-
-        export default formValidator; */
+        

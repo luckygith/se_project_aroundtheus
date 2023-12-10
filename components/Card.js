@@ -1,33 +1,23 @@
 //this._cardElement = document.querySelector(".cards__list-item");
 
-export default class Card {
+// const cardTemplate =
+//   document.querySelector("#card-template").content.firstElementChild;
+// const cardElement = cardTemplate.cloneNode(true);
+
+class Card {
   constructor({ name, link }, cardSelector, handleImageClick) {
     this._name = name;
     this._link = link;
     this._cardSelector = cardSelector;
+    //this._cardElement = this._getCardElement();
     this._handleImageClick = handleImageClick;
   }
 
-  getView() {
-    console.log("GET VIEW IS BEING CALLED");
-    //getcard
-    this._element = document
-      .querySelector(this._cardSelector)
-      .content.querySelector(".cards__list-item")
-      .cloneNode(true);
-
-    //set eventlistener
-    this._setEventListeners();
-    //return card
-    return this._element;
-  }
-
   _setEventListeners() {
-    console.log("SETTING EVENT LISTENERS");
+    console.log("TEST SETTING EVENT LISTENERS ON");
     this._element
       .querySelector(".cards__like-button")
       .addEventListener("click", () => {
-        console.log("HIT LIKE");
         this._handleLikeIcon();
       });
 
@@ -37,11 +27,9 @@ export default class Card {
         this._handleDeleteCard();
       });
 
-    this._element
-      .querySelector(".cards__image")
-      .addEventListener("click", () => {
-        this.handleImageClick();
-      });
+    this._cardImageElement.addEventListener("click", () => {
+      this._handleImageClick();
+    });
   }
 
   _handleLikeIcon() {
@@ -54,4 +42,25 @@ export default class Card {
     this._element.remove();
     this._element = null;
   }
+
+  getView() {
+    this._element = document
+      .querySelector(this._cardSelector)
+      .content.querySelector(".cards__list-item")
+      .cloneNode(true);
+
+    this._cardTitleElement = this._element.querySelector(".cards__title");
+    this._cardImageElement = this._element.querySelector(".cards__image");
+
+    this._cardTitleElement.textContent = this._name;
+    this._cardImageElement.src = this._link;
+    this._cardImageElement.alt = this._name;
+    // fill this._element with the data: name, link<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+    //set eventlistene
+    this._setEventListeners();
+    //return card
+    return this._element;
+  }
 }
+export default Card;
