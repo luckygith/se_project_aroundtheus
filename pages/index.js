@@ -33,6 +33,11 @@ const cardData = {
   link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
 };
 
+// const formValidation = new FormValidator(config);
+
+// // Enable validation for the form
+// formValidation.enableValidation();
+
 const previewImageModal = document.querySelector("#preview-image-modal");
 const modalImage = previewImageModal.querySelector("#modalImage");
 const modalText = previewImageModal.querySelector("#modalText");
@@ -160,8 +165,8 @@ function getCardElement(cardData) {
   // document.querySelector("#card-template").content.firstElementChild;
   const cardElement = cardTemplate.cloneNode(true);
 
-  const cardImageElement = cardElement.querySelector(".cards__image");
-  const cardTitleElement = cardElement.querySelector(".cards__title");
+  // const cardImageElement = cardElement.querySelector(".cards__image");
+  // const cardTitleElement = cardElement.querySelector(".cards__title");
 
   // const likeButton = cardElement.querySelector(".cards__like-button");
   // const deleteButton = cardElement.querySelector(".cards__delete-button");
@@ -230,3 +235,27 @@ likeButtons.forEach((likeButton) => {});
 likeButton.addEventListener("click", () => {
   likeButton.classList.toggle("cards__like-button_active");
 });*/
+const defaultFormConfig = {
+  formSelector: ".modal__form",
+  inputSelector: ".modal__input",
+  submitButtonSelector: ".modal__button",
+  inactiveButtonClass: "modal__button_disabled",
+  inputErrorClass: "modal__input_type_error",
+  errorClass: "modal__error",
+};
+
+const editProfileFormModalWindow = document.querySelector(
+  ".modal__form_profile"
+);
+const addNewCardFormModalWindow = document.querySelector(".modal__form_card");
+const editProfileFormValidator = new FormValidator(
+  defaultFormConfig,
+  editProfileFormModalWindow
+);
+const addNewCardFormValidator = new FormValidator(
+  defaultFormConfig,
+  addNewCardFormModalWindow
+);
+
+editProfileFormValidator.enableValidation();
+addNewCardFormValidator.enableValidation();

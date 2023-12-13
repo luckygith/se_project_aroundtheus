@@ -37,8 +37,8 @@ function checkInputValidity(formElement, inputElement, options) {
   hideInputError(formElement, inputElement, options);
 }
 
-function hasInvalidInput(inputList) {
-  return !inputList.every((inputElement) => inputElement.validity.valid);
+function hasInvalidInput() {
+  return !inputElements.every((inputElement) => inputElement.validity.valid);
 }
 
 function disableButton(submitButton, options) {
@@ -85,14 +85,3 @@ function enableValidation(options) {
     setEventListeners(formElement, options);
   });
 }
-
-const config = {
-  formSelector: ".modal__form",
-  inputSelector: ".modal__input",
-  submitButtonSelector: ".modal__button",
-  inactiveButtonClass: "modal__button_disabled",
-  inputErrorClass: "modal__input_type_error",
-  errorClass: "modal__error",
-};
-
-enableValidation(config);
