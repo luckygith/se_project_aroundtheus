@@ -56,7 +56,6 @@ function handleImageClick() {
   modalImage.alt = cardData.name;
   modalImage.src = cardData.link;
   modalText.textContent = cardData.name;
-  console.log("open image modal INDEX ON");
 }
 
 /** set event listener for the fcard elements should be inside the Card<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -66,19 +65,46 @@ function handleImageClick() {
  * }
  */
 
-initialCards.forEach((cardData) => {
+// function createCard(cardData) {
+//   const card = new Card(cardData, "#card-template", handleImageClick);
+//   return card.getView();
+//   cardsListElement.prepend(cardElement);
+// }
+
+// function renderCard(cardElement) {
+//   cardsListElement.prepend(cardElement);
+// }
+
+// initialCards.forEach((cardData) => {
+//   const newCardElement = createCard(cardData);
+//   cardsListElement.append(newCardElement);
+// });
+function createCard(cardData) {
   const card = new Card(cardData, "#card-template", handleImageClick);
   // below we need to create a variable wwith the card.getView result. This variable will have a DOM node
-  let cardNewElement = card.getView();
+  return card.getView();
+}
 
-  // next step is to render your card using the append or prepend<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-  cardsListElement.prepend(cardNewElement);
+// let cardNewElement = card.getView();
+
+// initialCards.forEach((cardData) => {
+//   const cardElement = createCard(cardData);
+//   cardsListElement.prepend(cardElement);
+// });
+
+function renderCard(cardData) {
+  const cardElement = createCard(cardData);
+  cardsListElement.prepend(cardElement);
+}
+
+initialCards.forEach((cardData) => {
+  renderCard(cardData);
 });
 
-// function renderCard(cardData) {
-//   const newCardElement = getCardElement(cardData);
-//   cardsListElement.prepend(newCardElement);
-// }
+// cardsListElement.prepend(cardNewElement);
+
+// below we need to create a variable wwith the card.getView result. This variable will have a DOM node
+// next step is to render your card using the append or prepend<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 //elements
 
@@ -160,44 +186,45 @@ function handleDeleteCard() {
 //event handlers
 
 function getCardElement(cardData) {
-  //clone the template element with all its content and store it in a cardElement variable
-  // const cardTemplate =
-  // document.querySelector("#card-template").content.firstElementChild;
+  //   //clone the template element with all its content and store it in a cardElement variable
+  //   // const cardTemplate =
+  //   // document.querySelector("#card-template").content.firstElementChild;
   const cardElement = cardTemplate.cloneNode(true);
 
-  // const cardImageElement = cardElement.querySelector(".cards__image");
-  // const cardTitleElement = cardElement.querySelector(".cards__title");
+  //   // const cardImageElement = cardElement.querySelector(".cards__image");
+  //   // const cardTitleElement = cardElement.querySelector(".cards__title");
 
-  // const likeButton = cardElement.querySelector(".cards__like-button");
-  // const deleteButton = cardElement.querySelector(".cards__delete-button");
+  //   // const likeButton = cardElement.querySelector(".cards__like-button");
+  //   // const deleteButton = cardElement.querySelector(".cards__delete-button");
 
-  // likeButton.addEventListener("click", handleLikeIcon);
-  // deleteButton.addEventListener("click", handleDeleteCard);
+  //   // likeButton.addEventListener("click", handleLikeIcon);
+  //   // deleteButton.addEventListener("click", handleDeleteCard);
 
-  // cardImageElement.src = cardData.link;
-  // //set the image alt text to the name field of the object
-  // cardImageElement.alt = cardData.name;
-  // //set the card title to the name field of the object, too
-  // cardTitleElement.textContent = cardData.name;
+  //   // cardImageElement.src = cardData.link;
+  //   // //set the image alt text to the name field of the object
+  //   // cardImageElement.alt = cardData.name;
+  //   // //set the card title to the name field of the object, too
+  //   // cardTitleElement.textContent = cardData.name;
 
-  //return the ready HTML element with the filled-in data
+  //   //return the ready HTML element with the filled-in data
   return cardElement;
 }
 
-function handleProfileEditSubmit(e) {
-  e.preventDefault(); //prevent from reloading the entire page
+function handleProfileEditSubmit(event) {
+  event.preventDefault(); //prevent from reloading the entire page
   profileTitle.textContent = profileTitleInput.value;
   profileDescription.textContent = profileDescriptionInput.value;
   closeModal(profileEditModal);
 }
 
-function handleAddCardFormSubmit(e) {
-  e.preventDefault();
-
+function handleAddCardFormSubmit(event) {
+  event.preventDefault();
   const name = cardTitleInput.value;
   const link = cardUrlInput.value;
+  // const cardElement = createCard({ name, link });
+  // cardsListElement.prepend(cardElement);
   renderCard({ name, link }, cardsListElement);
-  e.target.reset();
+  event.target.reset();
   closeModal(addNewCardModal);
 }
 
@@ -213,16 +240,15 @@ function removeEscapeKeyListener() {
   document.removeEventListener("keydown", handleEscapeKey);
 }
 
-function handleEscapeKey(evt) {
-  if (evt.key === "Escape") {
-    console.log("escape key pressed");
+function handleEscapeKey(event) {
+  if (event.key === "Escape") {
     modals.forEach(closeModal);
   }
 }
 
-function closeModalOnClick(evt) {
-  if (evt.target.classList.contains("modal_opened")) {
-    closeModal(evt.target);
+function closeModalOnClick(event) {
+  if (event.target.classList.contains("modal_opened")) {
+    closeModal(event.target);
   }
 }
 
@@ -237,7 +263,7 @@ likeButton.addEventListener("click", () => {
 });*/
 const defaultFormConfig = {
   formSelector: ".modal__form",
-  inputSelector: "modal__input",
+  inputSelector: ".modal__input",
   submitButtonSelector: ".modal__button",
   inactiveButtonClass: "modal__button_disabled",
   inputErrorClass: "modal__input_type_error",

@@ -1,5 +1,3 @@
-//this._cardElement = document.querySelector(".cards__list-item");
-
 // const cardTemplate =
 //   document.querySelector("#card-template").content.firstElementChild;
 // const cardElement = cardTemplate.cloneNode(true);
@@ -14,40 +12,47 @@ class Card {
   }
 
   _setEventListeners() {
-    console.log("TEST SETTING EVENT LISTENERS ON");
-    this._element
-      .querySelector(".cards__like-button")
-      .addEventListener("click", () => {
-        this._handleLikeIcon();
-      });
+    // this._likeButton.addEventListener("click", () => {
+    //   this._handleLikeIcon();
+    // });
 
-    this._element
-      .querySelector(".cards__delete-button")
-      .addEventListener("click", () => {
-        this._handleDeleteCard();
-      });
+    // this._deleteButton.addEventListener("click", () => {
+    //   this._handleDeleteCard();
+    // });
 
-    this._cardImageElement.addEventListener("click", () => {
-      this._handleImageClick();
-    });
+    this._likeButton.addEventListener("click", this._handleLikeIcon);
+
+    this._deleteButton.addEventListener("click", this._handleDeleteCard);
+
+    this._cardImageElement.addEventListener("click", this._handleImageClick);
   }
 
-  _handleLikeIcon() {
-    this._element
-      .querySelector(".cards__like-button")
-      .classList.toggle(".cards__like-button_active");
-  }
+  // _handleLikeIcon() {
+  //   this._likeButton.classList.toggle(".cards__like-button_active");
+  // }
 
-  _handleDeleteCard() {
+  // _handleDeleteCard() {
+  //   this._element.remove();
+  //   this._element = null;
+  // }
+
+  _handleLikeIcon = () => {
+    this._likeButton.classList.toggle(".cards__like-button_active");
+  };
+
+  _handleDeleteCard = () => {
     this._element.remove();
     this._element = null;
-  }
+  };
 
   getView() {
     this._element = document
       .querySelector(this._cardSelector)
       .content.querySelector(".cards__list-item")
       .cloneNode(true);
+
+    this._likeButton = this._element.querySelector(".cards__like-button");
+    this._deleteButton = this._element.querySelector(".cards__delete-button");
 
     this._cardTitleElement = this._element.querySelector(".cards__title");
     this._cardImageElement = this._element.querySelector(".cards__image");

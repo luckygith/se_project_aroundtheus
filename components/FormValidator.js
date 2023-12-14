@@ -10,13 +10,12 @@ class FormValidator {
   } //excluding formselector since it will be a second argument
 
   _setEventListeners() {
-    // const { inputSelector, submitButtonSelector } = options;
     const submitButton = this._element.querySelector(".modal__button");
-    const inputElements = [...this._element.querySelectorAll(".modal__input")];
+    const inputElements = [
+      ...this._element.querySelectorAll(this._inputSelector),
+    ];
     this._submitButton = submitButton;
     this._inputElements = inputElements;
-
-    // toggleButtonState(inputElements, submitButton, options);
 
     this._inputElements.forEach((inputElement) => {
       inputElement.addEventListener("input", (event) => {
@@ -28,8 +27,7 @@ class FormValidator {
   }
 
   _showInputError() {
-    console.log("showinput Error is on");
-    const inputElement = this._element.querySelector(".modal__input");
+    const inputElement = this._element.querySelector(this._inputSelector);
     const errorMessageElement = this._element.querySelector(
       `#${inputElement.id}-error`
     );
@@ -39,8 +37,7 @@ class FormValidator {
   }
 
   _hideInputError() {
-    console.log("hide Input error activated");
-    const inputElement = this._element.querySelector(".modal__input");
+    const inputElement = this._element.querySelector(this._inputSelector);
     const errorMessageElement = this._element.querySelector(
       `#${inputElement.id}-error`
     );
@@ -50,7 +47,7 @@ class FormValidator {
   }
 
   _checkInputValidity() {
-    const inputElement = this._element.querySelector(".modal__input");
+    const inputElement = this._element.querySelector(this._inputSelector);
     if (!inputElement.validity.valid) {
       return this._showInputError();
     } else {
@@ -64,7 +61,7 @@ class FormValidator {
     return !inputList.every((inputElement) => inputElement.validity.valid);
   }
 
-  _disableButton(submitButton) {
+  _disableButton() {
     this._submitButton.classList.add(this._inactiveButtonClass);
     this._submitButton.disabled = true;
   }
@@ -82,9 +79,7 @@ class FormValidator {
     }
   }
 
-  enableValidation(options) {
-    // const formElements = [...document.querySelectorAll(options.formSelector)];
-    // formElements.forEach((formElement) => {
+  enableValidation() {
     this._element.addEventListener("submit", (event) => {
       event.preventDefault();
     });
