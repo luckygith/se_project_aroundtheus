@@ -185,30 +185,30 @@ function handleDeleteCard() {
 
 //event handlers
 
-function getCardElement(cardData) {
-  //   //clone the template element with all its content and store it in a cardElement variable
-  //   // const cardTemplate =
-  //   // document.querySelector("#card-template").content.firstElementChild;
-  const cardElement = cardTemplate.cloneNode(true);
+// function getCardElement(cardData) {
+//   //   //clone the template element with all its content and store it in a cardElement variable
+//   //   // const cardTemplate =
+//   //   // document.querySelector("#card-template").content.firstElementChild;
+//   const cardElement = cardTemplate.cloneNode(true);
 
-  //   // const cardImageElement = cardElement.querySelector(".cards__image");
-  //   // const cardTitleElement = cardElement.querySelector(".cards__title");
+//   //   // const cardImageElement = cardElement.querySelector(".cards__image");
+//   //   // const cardTitleElement = cardElement.querySelector(".cards__title");
 
-  //   // const likeButton = cardElement.querySelector(".cards__like-button");
-  //   // const deleteButton = cardElement.querySelector(".cards__delete-button");
+//   //   // const likeButton = cardElement.querySelector(".cards__like-button");
+//   //   // const deleteButton = cardElement.querySelector(".cards__delete-button");
 
-  //   // likeButton.addEventListener("click", handleLikeIcon);
-  //   // deleteButton.addEventListener("click", handleDeleteCard);
+//   //   // likeButton.addEventListener("click", handleLikeIcon);
+//   //   // deleteButton.addEventListener("click", handleDeleteCard);
 
-  //   // cardImageElement.src = cardData.link;
-  //   // //set the image alt text to the name field of the object
-  //   // cardImageElement.alt = cardData.name;
-  //   // //set the card title to the name field of the object, too
-  //   // cardTitleElement.textContent = cardData.name;
+//   //   // cardImageElement.src = cardData.link;
+//   //   // //set the image alt text to the name field of the object
+//   //   // cardImageElement.alt = cardData.name;
+//   //   // //set the card title to the name field of the object, too
+//   //   // cardTitleElement.textContent = cardData.name;
 
-  //   //return the ready HTML element with the filled-in data
-  return cardElement;
-}
+//   //   //return the ready HTML element with the filled-in data
+//   return cardElement;
+// }
 
 function handleProfileEditSubmit(event) {
   event.preventDefault(); //prevent from reloading the entire page
