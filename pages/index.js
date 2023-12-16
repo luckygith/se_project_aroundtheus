@@ -29,8 +29,8 @@ const initialCards = [
 ];
 
 const cardData = {
-  name: "Yosemite Valley",
-  link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
+  name: "Lago di Braies",
+  link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg ",
 };
 
 // const formValidation = new FormValidator(config);
@@ -39,8 +39,8 @@ const cardData = {
 // formValidation.enableValidation();
 
 const previewImageModal = document.querySelector("#preview-image-modal");
-const modalImage = previewImageModal.querySelector("#modalImage");
-const modalText = previewImageModal.querySelector("#modalText");
+const modalImage = previewImageModal.querySelector(".modal__image");
+const modalText = previewImageModal.querySelector(".modal__text");
 const cardsListElement = document.querySelector(".cards__list");
 
 const cardTemplate =

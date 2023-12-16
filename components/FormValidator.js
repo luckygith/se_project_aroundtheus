@@ -33,7 +33,7 @@ class FormValidator {
     );
     inputElement.classList.add(this._inputErrorClass);
     errorMessageElement.textContent = inputElement.validationMessage;
-    errorMessageElement.classList.remove(this._errorClass);
+    errorMessageElement.classList.add(this._errorClass);
   }
 
   _hideInputError() {
@@ -43,7 +43,7 @@ class FormValidator {
     );
     inputElement.classList.remove(this._inputErrorClass);
     errorMessageElement.textContent = "";
-    errorMessageElement.classList.add(this._errorClass);
+    errorMessageElement.classList.remove(this._errorClass);
   }
 
   _checkInputValidity() {
