@@ -11,33 +11,35 @@ class FormValidator {
 
   _setEventListeners() {
     const submitButton = this._element.querySelector(".modal__button");
-    const inputElements = [
-      ...this._element.querySelectorAll(this._inputSelector),
-    ];
+    const inputElements = Array.from(
+      this._element.querySelectorAll(this._inputSelector)
+    );
     this._submitButton = submitButton;
     this._inputElements = inputElements;
 
     this._inputElements.forEach((inputElement) => {
       inputElement.addEventListener("input", (event) => {
         event.preventDefault();
-        this._checkInputValidity();
+        this._checkInputValidity(inputElement);
         this._toggleButtonState();
       });
     });
   }
 
-  _showInputError() {
-    const inputElement = this._element.querySelector(this._inputSelector);
+  _showInputError(inputElement, errorMessage) {
+    // const inputElement = this._element.querySelector(this._inputSelector);
     const errorMessageElement = this._element.querySelector(
       `#${inputElement.id}-error`
     );
+    // const errorMessage = inputElement.validationMessage;
     inputElement.classList.add(this._inputErrorClass);
-    errorMessageElement.textContent = inputElement.validationMessage;
+    errorMessageElement.textContent = errorMessage;
     errorMessageElement.classList.add(this._errorClass);
+    // return this._showInputError(inputElement, errorMessage);
   }
 
-  _hideInputError() {
-    const inputElement = this._element.querySelector(this._inputSelector);
+  _hideInputError(inputElement) {
+    // const inputElement = this._element.querySelector(this._inputSelector);
     const errorMessageElement = this._element.querySelector(
       `#${inputElement.id}-error`
     );
@@ -46,12 +48,12 @@ class FormValidator {
     errorMessageElement.classList.remove(this._errorClass);
   }
 
-  _checkInputValidity() {
-    const inputElement = this._element.querySelector(this._inputSelector);
+  _checkInputValidity(inputElement) {
+    // const inputElement = this._element.querySelector(this._inputSelector);
     if (!inputElement.validity.valid) {
-      return this._showInputError();
+      return this._showInputError(inputElement, inputElement.validationMessage);
     } else {
-      this._hideInputError();
+      this._hideInputError(inputElement);
     }
   }
 
