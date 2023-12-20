@@ -37,7 +37,8 @@ class Card {
   // }
 
   _handleLikeIcon = () => {
-    this._likeButton.classList.toggle(".cards__like-button_active");
+    console.log("handle like icon function on");
+    this._likeButton.classList.toggle("cards__like-button_active");
   };
 
   _handleDeleteCard = () => {

@@ -10,16 +10,17 @@ class FormValidator {
   } //excluding formselector since it will be a second argument
 
   _setEventListeners() {
-    const submitButton = this._element.querySelector(".modal__button");
-    const inputElements = Array.from(
+    this._submitButton = this._element.querySelector(".modal__button");
+    this._inputElements = Array.from(
       this._element.querySelectorAll(this._inputSelector)
     );
-    this._submitButton = submitButton;
-    this._inputElements = inputElements;
+    // this._submitButton = submitButton;
+    // this._inputElements = inputElements;
+
+    this._disableButton();
 
     this._inputElements.forEach((inputElement) => {
-      inputElement.addEventListener("input", (event) => {
-        event.preventDefault();
+      inputElement.addEventListener("input", () => {
         this._checkInputValidity(inputElement);
         this._toggleButtonState();
       });
