@@ -136,6 +136,11 @@
   margin-top: 10px;
 }
 
+.modal__button_disabled:hover {
+  opacity: 1;
+  cursor: default;
+}
+
 .modal__image-container {
   position: relative; /*for modal__close x to be contained within  */
   margin: auto;
