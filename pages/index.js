@@ -226,7 +226,7 @@ function handleAddCardFormSubmit(event) {
   renderCard({ name, link }, cardsListElement);
   event.target.reset();
   closeModal(addNewCardModal);
-  addNewCardFormValidator._toggleButtonState();
+  addNewCardFormValidator.toggleButtonState();
 }
 
 // initialCards.forEach((cardData) => renderCard(cardData));
