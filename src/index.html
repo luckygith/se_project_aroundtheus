@@ -4,14 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Around The U.S.A.</title>
-    <link href="./pages/index.css" rel="stylesheet" />
   </head>
   <body class="page">
     <div class="page__content page__section">
       <header class="header">
         <img
           class="header__logo"
-          src="./images/Logo.svg"
+          src="<%=require('./images/logo.svg')%>"
           alt="Around the U.S. Logo"
         />
       </header>
@@ -19,7 +18,7 @@
         <section class="profile page__section">
           <img
             class="profile__image"
-            src="./images/jacques-cousteau.png"
+            src="<%=require('./images/jacques-cousteau.png')%>"
             alt="avatar"
           />
           <div class="profile__info">
@@ -54,7 +53,7 @@
           type="button"
         ></button>
         <h3 class="modal__heading">Edit Profile</h3>
-        <form class="modal__form modal__form_profile">
+        <form class="modal__form modal__form_profile" id="edit">
           <input
             type="text"
             name="title"
@@ -95,7 +94,7 @@
           type="button"
         ></button>
         <h3 class="modal__heading">New Place</h3>
-        <form class="modal__form modal__form_card">
+        <form class="modal__form modal__form_card" id="add-card-form">
           <input
             type="text"
             name="title"
@@ -123,8 +122,8 @@
         </form>
       </div>
     </div>
-
-    //preview card image modal
+    <!--  -->
+    <!-- preview card image modal -->
     <div class="modal" id="preview-image-modal">
       <div class="modal__image-container">
         <img
@@ -142,7 +141,7 @@
       </div>
     </div>
 
-    //card template
+    <!-- card template -->
     <template class="card-template" id="card-template">
       <li class="cards__list-item" id="cards__list">
         <img src="" class="cards__image" id="cards-image-open" alt="" />
@@ -153,7 +152,5 @@
         </div>
       </li>
     </template>
-
-    <script defer src="./pages/index.js" type="module"></script>
   </body>
 </html>

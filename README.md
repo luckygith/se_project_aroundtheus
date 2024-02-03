@@ -35,7 +35,7 @@ Learning Javascript in a series of functions and learning to condense and refact
 **Images**
 
 ![main page layout](image.png)
-![mobile layout](MOBILE.png)
+![mobile layout](src/images/MOBILE.png)
 ![ui kit](<UI KIT.png>)
 
 This project is exemplify an understanding of basic concepts that underwent and will undergo a series of improvements based on the ongoing level of skills learned throughout the journey of evolving my skills in HTML, CSS and Javascript!

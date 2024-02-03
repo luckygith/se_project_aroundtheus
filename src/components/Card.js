@@ -2,7 +2,7 @@
 //   document.querySelector("#card-template").content.firstElementChild;
 // const cardElement = cardTemplate.cloneNode(true);
 
-class Card {
+export default class Card {
   constructor({ name, link }, cardSelector, handleImageClick) {
     this._name = name;
     this._link = link;
@@ -23,8 +23,12 @@ class Card {
     this._likeButton.addEventListener("click", this._handleLikeIcon);
 
     this._deleteButton.addEventListener("click", this._handleDeleteCard);
+    console.log(this._cardImageElement);
 
-    this._cardImageElement.addEventListener("click", this._handleImageClick);
+    this._cardImageElement.addEventListener("click", () =>
+      //********
+      this._handleImageClick({ name: this._name, link: this._link })
+    );
   }
 
   // _handleLikeIcon() {
@@ -37,7 +41,6 @@ class Card {
   // }
 
   _handleLikeIcon = () => {
-    console.log("handle like icon function on");
     this._likeButton.classList.toggle("cards__like-button_active");
   };
 
@@ -69,4 +72,3 @@ class Card {
     return this._element;
   }
 }
-export default Card;
