@@ -74,7 +74,6 @@ addNewCardFormValidator.enableValidation();
 // FUNCTIONS
 
 function handleImageClick(cardData) {
-  console.log("handle Image click function workinig");
   modalImage.alt = cardData.name;
   modalImage.src = cardData.link;
   modalText.textContent = cardData.name;
@@ -82,7 +81,6 @@ function handleImageClick(cardData) {
 }
 
 function createCard(cardData) {
-  console.log("createdcard");
   const card = new Card(cardData, "#card-template", handleImageClick);
 
   return card.getView();
@@ -99,20 +97,15 @@ function handleAddCardFormSubmit(event) {
   //cardElement.getView(modalImage);
   cardsListElement.prepend(cardElement);
   addNewCardPopup.close();
-  addNewCardFormValidator.resetValidation(); // Reset validation state
-
-  // event.target.reset();
 }
 
-function handleEditProfileFormSubmit(event) {
+function handleEditProfileFormSubmit() {
   const name = profileTitleInput.value;
   const description = profileDescription.value;
 
   editUserInfo.setUserInfo({ name, description });
   // editUserInfo.setUserInfo({ name, description });
   editProfilePopup.close();
-
-  event.target.reset();
 }
 
 //   cardData.name = cardTitleInput.value;
@@ -130,13 +123,14 @@ profileEditButton.addEventListener("click", () => {
   profileDescriptionInput.value = description;
 
   editProfilePopup.open();
+  addNewCardFormValidator.resetValidation();
 });
 
 addNewCardPopup.setEventListeners();
 
 addNewCardButton.addEventListener("click", () => {
-  console.log("BUTTON IS QUERY RIGHT");
   addNewCardPopup.open();
+  addNewCardFormValidator.resetValidation();
 });
 
 //ALL THE REST
