@@ -16,12 +16,12 @@ export default class PopupWithImage extends Popup {
     this._modalText.textContent = name;
     super.open();
   }
-
-  setEventListeners() {
-    this._popupElement
-      .querySelector(".modal__close")
-      .addEventListener("click", () => {
-        this.close();
-      });
-  }
 }
+
+// setEventListeners() {
+//   this._popupElement
+//     .querySelector(".modal__close")
+//     .addEventListener("click", () => {
+//       this.close();
+//     });
+// }

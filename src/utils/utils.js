@@ -31,7 +31,7 @@ export const selectors = {
   cardSections: ".places__list",
   cardTemplate: ".card-template",
   previewImage: "#preview-image-modal",
-  addCardModal: "#add-card-modal",
+  addNewCardModal: "#add-card-modal",
   editProfileModal: "#profile-edit-modal",
   profileTitle: ".profile__title",
   profileTitleInput: "#profile-title-input",
@@ -44,7 +44,7 @@ export const selectors = {
 export const config = {
   formSelector: ".modal__form",
   inputSelector: ".modal__input",
-  submitButtonSelector: ".modal__button",
+  submitButtonSelector: "modal__button",
   inactiveButtonClass: "modal__button_disabled",
   inputErrorClass: "modal__input_type_error",
   errorClass: "modal__error",

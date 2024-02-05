@@ -3,22 +3,23 @@ export default class Popup {
   constructor(popupSelector) {
     this._popupElement = document.querySelector(popupSelector);
     this._handleEscapeClose = this._handleEscapeClose.bind(this); //ASK
-    this._closeButton = document.querySelector(".modal__close");
+    this._closeButton = this._popupElement.querySelector(".modal__close");
+    this._closeModalOnClick = this._closeModalOnClick.bind(this);
+    this._handleModalBackgroundClick =
+      this._handleModalBackgroundClick.bind(this);
   }
 
   open() {
-    //opens popup
-    document.addEventListener("keydown", this._handleEscapeClose);
     this._popupElement.classList.add("modal_opened");
-    this._closeButton.addEventListener("click", () => this.close());
-    this._popupElement.addEventListener("click", (event) =>
-      this.closeModalOnClick(event)
-    );
+    document.addEventListener("keydown", this._handleEscapeClose);
+    document.addEventListener("click", this._handleModalBackgroundClick);
+    this._closeButton.addEventListener("click", this._closeModalOnClick);
   }
 
   close() {
-    //closes popup
     document.removeEventListener("keydown", this._handleEscapeClose);
+    document.removeEventListener("click", this._handleModalBackgroundClick);
+    this._closeButton.removeEventListener("click", this._closeModalOnClick);
     this._popupElement.classList.remove("modal_opened");
   }
 
@@ -28,11 +29,16 @@ export default class Popup {
     }
   }
 
-  closeModalOnClick(event) {
-    //CLOSES MODAL VIA MODAL BACKGROUND
-
+  _handleModalBackgroundClick(event) {
     if (event.target === this._popupElement) {
       this.close();
     }
   }
+
+  _closeModalOnClick() {
+    this.close();
+  }
 }
+// console.log("Background listener on");
+// console.log("Event target:", event.target);
+// console.log("this._popupElement:", this._popupElement);
