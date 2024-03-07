@@ -10,6 +10,7 @@ import UserInfo from "../components/userInfo.js";
 import "../pages/index.css";
 
 // CONSTANT
+
 const addNewCardButton = document.querySelector("#profile-add-button");
 
 const profileEditButton = document.querySelector("#profile-edit-button"); //storing edit button inside this variable
@@ -95,7 +96,6 @@ function handleAddCardFormSubmit(event) {
   //modalText.textContent = cardData.name;
 
   const cardElement = createCard({ name, link }, modalImage);
-  //cardElement.getView(modalImage);
   cardSection.addItem(cardElement);
   addNewCardPopup.close();
 }
@@ -130,17 +130,7 @@ profileEditButton.addEventListener("click", () => {
   editProfilePopup.open();
 });
 
-//addNewCardPopup.setEventListeners();
-
 addNewCardButton.addEventListener("click", () => {
   addNewCardPopup.open();
   addNewCardFormValidator.resetValidation();
 });
-
-//ALL THE REST
-
-//function handleAddCardFormSubmit({ title: name, subtitle: link })
-
-// editUserInfo.setUserInfo(inputValues);
-
-// editProfilePopup.close();
