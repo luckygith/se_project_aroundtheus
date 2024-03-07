@@ -17,7 +17,6 @@ export default class PopupWithForm extends Popup {
   }
 
   close() {
-    console.log("FOCUSED CLOSE ON");
     super.close();
     this._popupForm.removeEventListener("submit", this._handleFormSubmit);
     this._popupForm.reset();
