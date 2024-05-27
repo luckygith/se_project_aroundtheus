@@ -78,7 +78,7 @@ export default class Card {
     this._deleteButton.addEventListener("click", () => {
       console.log("delete button on card class was clicked");
 
-      this._handleDeleteSubmit({ name: this._name, link: this._link });
+      this._handleDeleteSubmit(this._id);
     });
 
     // this._confirmDeleteButton.addEventListener(

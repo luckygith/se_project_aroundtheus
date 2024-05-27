@@ -166,6 +166,17 @@ api
     console.error(error);
   });
 
+api
+  .deleteCard(Id)
+  .then((result) => {
+    console.log(result.message);
+    // Remove the card element from the DOM
+    document.querySelector(`.cards__list-item[data-id="${cardId}"]`).remove();
+  })
+  .catch((err) => {
+    console.error(`Error: ${err}`);
+  });
+
 // fetch("https://jsonplaceholder.typicode.com/todos/1")
 //   .then((response) => response.json())
 //   .then((json) => console.log(json));
