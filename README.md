@@ -38,4 +38,11 @@ Learning Javascript in a series of functions and learning to condense and refact
 ![mobile layout](src/images/MOBILE.png)
 ![ui kit](<UI KIT.png>)
 
-This project is exemplify an understanding of basic concepts that underwent and will undergo a series of improvements based on the ongoing level of skills learned throughout the journey of evolving my skills in HTML, CSS and Javascript!
+This project is exemplify an understanding of basic concepts that underwent and will undergo a series of improvements based on the ongoing
+level of skills learned throughout the journey of evolving my skills in HTML, CSS and Javascript!
+
+**Sprint 9**
+API
+Node Javascript
+Asynchronous Javascript
+Working with API

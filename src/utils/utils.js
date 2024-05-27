@@ -33,6 +33,7 @@ export const selectors = {
   previewImage: "#preview-image-modal",
   addNewCardModal: "#add-card-modal",
   editProfileModal: "#profile-edit-modal",
+  deleteCardModal: "#delete-card-modal",
   profileTitle: ".profile__title",
   profileTitleInput: "#profile-title-input",
   profileDescription: ".profile__description",
