@@ -120,6 +120,8 @@ const api = new Api({
 
 let userInfo;
 
+//API instances
+
 api
   .getUserInfo()
   .then((result) => {
@@ -166,16 +168,31 @@ api
     console.error(error);
   });
 
-api
-  .deleteCard(Id)
-  .then((result) => {
-    console.log(result.message);
-    // Remove the card element from the DOM
-    document.querySelector(`.cards__list-item[data-id="${cardId}"]`).remove();
-  })
-  .catch((err) => {
-    console.error(`Error: ${err}`);
-  });
+// api
+//   .deleteCard()
+//   .then((result) => {
+//     console.log(result.message);
+//     // Remove the card element from the DOM
+//     document.querySelector(`.cards__list-item[data-id="${cardId}"]`).remove();
+//   })
+//   .catch((err) => {
+//     console.error(`Error: ${err}`);
+//   });
+
+// // Method to like a card
+// likeCard(cardId) {
+//   // Implement the logic to like a card on the server
+// }
+
+// // Method to remove a like from a card
+// unlikeCard(cardId) {
+//   // Implement the logic to remove a like from a card on the server
+// }
+
+// // Method to update profile picture
+// updateProfilePicture(avatarUrl) {
+//   // Implement the logic to update profile picture on the server
+// }
 
 // fetch("https://jsonplaceholder.typicode.com/todos/1")
 //   .then((response) => response.json())
@@ -306,8 +323,12 @@ function createCard(cardData) {
     handleDeleteSubmit,
     handleConfirmDeleteSubmit
   );
+
   return card.getView();
 }
+
+//console.log(card.getId());
+//console.log(._id);
 
 function handleAddCardFormSubmit(event) {
   const name = cardTitleInput.value;
@@ -345,6 +366,8 @@ function handleDeleteSubmit(cardElement) {
   //handleConfirmDeleteSubmit(cardData);
   console.log("JUMPJUMP");
 }
+
+//console.log(cardElement.id);
 
 // function handleConfirmDeleteSubmit(event) {
 //   event.preventDefault();

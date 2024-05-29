@@ -4,12 +4,13 @@
 
 export default class Card {
   constructor(
-    { name, link },
+    { name, link, _id },
     cardSelector,
     handleImageClick,
     handleDeleteSubmit,
     handleConfirmDeleteSubmit
   ) {
+    this._id = _id;
     this._name = name;
     this._link = link;
     this._cardSelector = cardSelector;
@@ -20,6 +21,10 @@ export default class Card {
     // this._confirmDeleteButton = this._popupElement.querySelector(
     //   "#confirm-delete-button"
     // );
+  }
+
+  getId() {
+    return this._id;
   }
 
   _handleDeleteCard() {
@@ -67,12 +72,16 @@ export default class Card {
     this._cardImageElement.src = this._link;
     this._cardImageElement.alt = this._name;
     // fill this._element with the data: name, link<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-
+    //const cardElement = this._element
     //set eventlistene
     this._setEventListeners();
     //return card
     return this._element;
   }
+
+  // getID() {
+  //   return this.cardData._id;
+  // }
 
   _setEventListeners() {
     this._deleteButton.addEventListener("click", () => {
