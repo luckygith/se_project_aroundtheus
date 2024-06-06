@@ -3,20 +3,19 @@
 // const cardElement = cardTemplate.cloneNode(true);
 
 export default class Card {
-  constructor(
-    { name, link, _id },
+  constructor(cardData,
     cardSelector,
     handleImageClick,
     handleDeleteSubmit,
-    handleConfirmDeleteSubmit
   ) {
-    this._id = _id;
-    this._name = name;
-    this._link = link;
+    this._cardData = cardData;
+    
+    this._name = cardData.name;
+    this._link = cardData.link;
+    this._id = cardData._id;
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
     this._handleDeleteSubmit = handleDeleteSubmit;
-    this._handleConfirmDeleteSubmit = handleConfirmDeleteSubmit;
 
     // this._confirmDeleteButton = this._popupElement.querySelector(
     //   "#confirm-delete-button"
@@ -27,14 +26,24 @@ export default class Card {
     return this._id;
   }
 
-  _handleDeleteCard() {
-    this._element.remove();
-    this._element = null;
-  }
+  // _handleDeleteCard() {
+  //   this._element.remove();
+  //   this._element = null;
+  // }
 
   _handleLikeIcon = () => {
     this._likeButton.classList.toggle("cards__like-button_active");
   };
+
+  handleConfirmDeleteSubmit() {
+    //cardSection.removeItem(cardElement);
+    this._element.remove();
+    this._element = null;
+    console.log("handleConfirmDelete accessed");
+    console.log(cardData);
+    //deleteCardPopup.close();
+  }
+
 
   // _handleDeleteCardConfirm(event) {
   //   event.preventDefault();
@@ -71,41 +80,22 @@ export default class Card {
     this._cardTitleElement.textContent = this._name;
     this._cardImageElement.src = this._link;
     this._cardImageElement.alt = this._name;
-    // fill this._element with the data: name, link<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-    //const cardElement = this._element
-    //set eventlistene
+
     this._setEventListeners();
-    //return card
+
     return this._element;
   }
 
-  // getID() {
-  //   return this.cardData._id;
-  // }
-
   _setEventListeners() {
     this._deleteButton.addEventListener("click", () => {
+      this._handleDeleteSubmit(this.getId(), this._element);
       console.log("delete button on card class was clicked");
-
-      this._handleDeleteSubmit(this._id);
     });
-
-    // this._confirmDeleteButton.addEventListener(
-    //   "click",
-    //   this._handleConfirmDeleteSubmit(this._cardImageElement)
-    // );
-
-    // this._confirmDeleteButton.addEventListener("click", () => {
-    //   this._handleConfirmDeleteSubmit();
-    // });
-
+  
     this._likeButton.addEventListener("click", this._handleLikeIcon);
 
-    //this._deleteButton.addEventListener("click", this._handleD;
-    //console.log(this._cardImageElement);
-
     this._cardImageElement.addEventListener("click", () =>
-      //********
+   
       this._handleImageClick({ name: this._name, link: this._link })
     );
   }

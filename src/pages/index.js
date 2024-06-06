@@ -24,7 +24,7 @@ const profileTitleInput = document.querySelector("#profile-title-input");
 const profileDescriptionInput = document.querySelector(
   "#profile-description-input"
 );
-//const modal = document.querySelector(".modal");
+
 
 const cardsListItem = document.querySelector(".cards__list-item");
 const modalImage = document.querySelector(".modal__image");
@@ -41,12 +41,20 @@ const addCardForm = document.querySelector("#add-card-form");
 
 //CREATE NEW INSTANCES OF ALL CLASSES // INITIALIZE
 
-// deleteCardButton.addEventListener("click", () => {
-//   console.log("card delete button pressed");
-// });
-// deleteCardButton.addEventListener("click", () => {
-//   console.log("PROFILE EDIT PRESSED");
-// });
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "872104b8-5f7e-4344-99c5-6089723feaef",
+    "Content-Type": "application/json",
+  },
+});
+
+const deleteCardPopup = new PopupWithDeleteConfirmation(
+  "#delete-card-modal",
+  handleDeleteSubmit
+);
+
+
 
 profileEditButton.addEventListener("click", () => {
   console.log("PROFILE EDIT PRESSED");
@@ -90,13 +98,7 @@ addNewCardButton.addEventListener("click", () => {
 //     console.error("Error fetching data:", error);
 //   });
 
-const api = new Api({
-  baseUrl: "https://around-api.en.tripleten-services.com/v1",
-  headers: {
-    authorization: "872104b8-5f7e-4344-99c5-6089723feaef",
-    "Content-Type": "application/json",
-  },
-});
+
 
 // api
 //   .getInitialCards()
@@ -131,6 +133,8 @@ api
   .catch((err) => {
     console.err(err);
   });
+
+  
 
 const updateName = "Marie Skłodowska Curie";
 const updateAbout = "Physicist and Chemist";
@@ -168,16 +172,6 @@ api
     console.error(error);
   });
 
-// api
-//   .deleteCard()
-//   .then((result) => {
-//     console.log(result.message);
-//     // Remove the card element from the DOM
-//     document.querySelector(`.cards__list-item[data-id="${cardId}"]`).remove();
-//   })
-//   .catch((err) => {
-//     console.error(`Error: ${err}`);
-//   });
 
 // // Method to like a card
 // likeCard(cardId) {
@@ -261,8 +255,6 @@ const editProfilePopup = new PopupWithForm(
 );
 //editProfilePopup.setEventListeners();
 
-//console.log(editProfileModal);
-
 const editUserInfo = new UserInfo({
   titleSelector: ".profile__title",
   occupationSelector: ".profile__description",
@@ -272,39 +264,12 @@ const addNewCardPopup = new PopupWithForm(
   selectors.addNewCardModal,
   handleAddCardFormSubmit
 );
-//console.log(addNewCardModal);
 
 const addNewCardFormValidator = new FormValidator(config, addCardForm);
 addNewCardFormValidator.enableValidation();
 
 // FUNCTIONS
 
-// function handleDeleteCardSubmit(cardElement) {
-//   this._element.remove();
-//   this._element = null;
-//   deleteCardPopup.close();
-// }
-
-// _handleDeleteCard() {
-//   this._element.remove();
-//   this._element = null;
-// }
-
-//deleteCardPopup.open();
-
-// deleteCardButton.addEventListener("click", () => {
-//   console.log("delete card button clicked");
-//   deleteCardPopup.open(); // Open the delete card modal
-// });
-
-// deleteCardButton.addEventListener(
-//   "click",
-//   console.log("THIS IS THE ONE THAT IS WORKING TODAY")
-// );
-
-// deleteCardButton.addEventListener("click", () => {
-//   console.log("Delete card button working"); // Open the delete card popup
-// });
 
 function handleImageClick(cardData) {
   modalImage.alt = cardData.name;
@@ -313,6 +278,41 @@ function handleImageClick(cardData) {
   cardPreviewPopup.open(cardData);
 }
 
+
+// if (!deleteCardPopup) {
+//   console.error('Delete Card Popup not initialized');
+// }
+
+
+
+
+function handleDeleteSubmit(card, cardData) {
+
+deleteCardPopup.open();
+ 
+  console.log("JUMP JUMP");
+
+  api
+  .deleteCard(cardData._id)
+  .then((result) => {
+    card.handleConfirmDeleteSubmit();
+    console.log(result);   
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+}
+
+
+// api.deleteCard(card.id)
+//     .then(() => {
+//       card.remove();
+//       deleteCardPopup.close();
+//     })
+//     .catch((err) => {
+//       console.error(err);
+//     });
+
 function createCard(cardData) {
   // currentCardData = cardData;
 
@@ -320,15 +320,12 @@ function createCard(cardData) {
     cardData,
     "#card-template",
     handleImageClick,
-    handleDeleteSubmit,
-    handleConfirmDeleteSubmit
+    handleDeleteSubmit
   );
 
   return card.getView();
 }
 
-//console.log(card.getId());
-//console.log(._id);
 
 function handleAddCardFormSubmit(event) {
   const name = cardTitleInput.value;
@@ -354,38 +351,18 @@ function handleEditProfileFormSubmit() {
 
 editProfileFormValidator.enableValidation();
 
-const deleteCardPopup = new PopupWithDeleteConfirmation(
-  "#delete-card-modal",
-  handleConfirmDeleteSubmit
-);
-
-function handleDeleteSubmit(cardElement) {
-  //currentCardData = cardData;
-
-  deleteCardPopup.open(cardElement);
-  //handleConfirmDeleteSubmit(cardData);
-  console.log("JUMPJUMP");
-}
 
 //console.log(cardElement.id);
 
-// function handleConfirmDeleteSubmit(event) {
-//   event.preventDefault();
-//   //cardSection.removeItem(cardElement);
-//   cardElement.remove();
-//   // cardElement = null;
-//   console.log("handleConfirmDelete accessed");
-//   deleteCardPopup.close();
-// }
 
-function handleConfirmDeleteSubmit(event, cardData) {
-  event.preventDefault();
-  // Handle confirm delete logic here
-  cardData.element.remove();
-  cardData.element = null;
-  deleteCardPopup.close();
-  console.log("Card deleted successfully");
-}
+// function handleConfirmDeleteSubmit(event, card) {
+//   event.preventDefault();
+//   // Handle confirm delete logic here
+//   cardData.element.remove();
+//   cardData.element = null;
+//   deleteCardPopup.close();
+//   console.log("Card deleted successfully");
+// }
 
 //confirmDeleteButton.addEventListener("click", handleConfirmDeleteSubmit);
 //deleteCardPopup.close(cardData);
@@ -395,3 +372,4 @@ confirmDeleteButton.addEventListener("click", (cardData) => {
   console.log("__________________________________________");
   handleConfirmDeleteSubmit(cardData);
 });
+

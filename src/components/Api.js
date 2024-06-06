@@ -2,36 +2,33 @@ export default class Api {
   constructor(options) {
     this.baseUrl = options.baseUrl;
     this.headers = options.headers;
+
   }
 
+checkResponse(result) {
+  if (result.ok) {
+    return result.json();
+  }
+  return Promise.reject(`Error: ${result.status}`);
+}
+
   //USER ROUTES
+
   getUserInfo() {
     return fetch(`${this.baseUrl}/users/me`, {
       headers: this.headers,
-    }).then((response) => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        throw new Error("Failed to get user info");
-      }
-    });
+    }).then(this.checkResponse);
   }
 
-  editProfile(name, about) {
+  editProfile(res) {
     return fetch(`${this.baseUrl}/users/me`, {
       method: "PATCH",
       headers: this.headers,
       body: JSON.stringify({
-        name: name,
-        about: about,
+        name: res.name,
+        about: res.about,
       }),
-    }).then((response) => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        throw new Error("Failed to edit profile");
-      }
-    });
+    }).then(this.checkResponse);
   }
 
   //CARDS
@@ -41,13 +38,7 @@ export default class Api {
     return fetch(`${this.baseUrl}/cards`, {
       method: "GET",
       headers: this.headers,
-    }).then((response) => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        throw new Error("Failed to get initial cards");
-      }
-    });
+    }).then(this.checkResponse);
   }
 
   addingNewCard(name, link) {
@@ -58,24 +49,22 @@ export default class Api {
         name: name,
         link: link,
       }),
-    }).then((response) => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        throw new Error("Failed to add new card");
-      }
-    });
+    }).then(this.checkResponse);
   }
 
   deleteCard(cardId) {
     return fetch(`${this.baseUrl}/cards/${cardId}`, {
       method: "DELETE",
       headers: this.headers,
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Error: ${res.status}`);
-    });
+    })
+    .then(this.checkResponse);
+    
+    
+    // .then((res) => {
+    //   if (res.ok) {
+    //     return res.json();
+    //   }
+    //   return Promise.reject(`Error: ${res.status}`);
+    // });
   }
 }
