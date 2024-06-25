@@ -5,12 +5,13 @@ export default class Api {
 
   }
 
-checkResponse(result) {
-  if (result.ok) {
-    return result.json();
+checkResponse(res) {
+  if (res.ok) {
+    return res.json();
   }
-  return Promise.reject(`Error: ${result.status}`);
+  return Promise.reject(`Error: ${res.status}`);
 }
+
 
   //USER ROUTES
 
@@ -20,13 +21,16 @@ checkResponse(result) {
     }).then(this.checkResponse);
   }
 
-  editProfile(res) {
+  //const userinfo = JSON.parse(JSON.stringify(user));
+
+ 
+  editProfile(name, about) {
     return fetch(`${this.baseUrl}/users/me`, {
       method: "PATCH",
-      headers: this.headers,
+      header: this.headers,
       body: JSON.stringify({
-        name: res.name,
-        about: res.about,
+        name: name,
+        about: about,
       }),
     }).then(this.checkResponse);
   }

@@ -126,51 +126,52 @@ let userInfo;
 
 api
   .getUserInfo()
-  .then((result) => {
-    console.log(result);
-    userInfo = result;
+  .then((res) => {
+    console.log(res);
+    userInfo = res;
   })
   .catch((err) => {
-    console.err(err);
+    console.error('Error:', err); 
   });
 
+ 
+
+  const updateName = document.querySelector("#profile-title-input");
+  const updateDescription = document.querySelector("#profile-description-input");
+
+
+// const updateName = "Marie Skłodowska Curie";
+// const updateAbout = "Physicist and Chemist";
+
+
+  // const promise = new Promise(function (resolve, reject) {
+  //   // resolve or reject promise
+  // });
+  // w:
+  // promise
+  //   .then(function (value) {
+  //     // will be called if promise resolves
+  //   })
+  //   .catch(function (value) {
+  //     // will be called if promise rejects
+  //   })
+  //   .finally(function (value) {
+  //     // will be called in both cases
+  //   });
   
-
-const updateName = "Marie Skłodowska Curie";
-const updateAbout = "Physicist and Chemist";
-
-api
-  .editProfile(updateName, updateAbout)
-  .then((result) => {
-    console.log(result);
-    userInfo = result;
-  })
-  .catch((err) => {
-    console.err(err);
-  });
 
 //CARDS
 api
   .getInitialCards()
   .then((result) => {
-    console.log(result);
+    return result;
     // process the result
   })
   .catch((error) => {
-    console.error(error); // log the error to the console
+    console.error('Error:', error); 
   });
 
-const newCardTitle = "New Card Title";
-const newCardLink = "https://example.com/image.jpg";
 
-api
-  .addingNewCard(newCardTitle, newCardLink)
-  .then((result) => {
-    console.log(result);
-  })
-  .catch((error) => {
-    console.error(error);
-  });
 
 
 // // Method to like a card
@@ -294,14 +295,21 @@ deleteCardPopup.open();
 
   api
   .deleteCard(cardData._id)
-  .then((result) => {
+  .then(() => {
     card.handleConfirmDeleteSubmit();
-    console.log(result);   
+    console.log("card deleted successfully");   
+    deleteCardPopup.close();
   })
   .catch((err) => {
     console.error(err);
   });
 }
+
+confirmDeleteButton.addEventListener("click", (event) => {
+  event.preventDefault();
+  console.log("__________________________________________");
+  handleDeleteSubmit(Card, cardData);
+});
 
 
 // api.deleteCard(card.id)
@@ -323,8 +331,15 @@ function createCard(cardData) {
     handleDeleteSubmit
   );
 
+
+  
   return card.getView();
 }
+
+
+// const newCardTitle = "New Card Title";
+// const newCardLink = "https://example.com/image.jpg";
+
 
 
 function handleAddCardFormSubmit(event) {
@@ -334,19 +349,39 @@ function handleAddCardFormSubmit(event) {
   // modalImage.src = link;
   //modalText.textContent = cardData.name;
 
-  const cardElement = createCard({ name, link }, modalImage);
-  cardSection.addItem(cardElement);
-  addNewCardPopup.close();
+  api
+  .addingNewCard({name, link})
+  .then((cardData) => {
+    const cardElement = createCard(cardData);
+    cardSection.addItem(cardElement);
+    console.log(cardData);
+    addNewCardPopup.close();
+  })
+  .catch((error) => {
+    console.error('Error:', error); 
+  });
+
 }
+
 
 function handleEditProfileFormSubmit() {
   const name = profileTitleInput.value;
   const description = profileDescriptionInput.value;
 
-  editUserInfo.setUserInfo({ name, description });
   // editUserInfo.setUserInfo({ name, description });
 
-  editProfilePopup.close();
+  api
+  .editProfile({name, description})
+  .then((result) => {
+    console.log(result);
+    userInfo.setUserInfo({name, description});
+  })
+  .catch((err) => {
+    console.error('Error: then refering isnt working! try again!', err); 
+  });
+
+
+  //editProfilePopup.close();
 }
 
 editProfileFormValidator.enableValidation();
@@ -366,10 +401,3 @@ editProfileFormValidator.enableValidation();
 
 //confirmDeleteButton.addEventListener("click", handleConfirmDeleteSubmit);
 //deleteCardPopup.close(cardData);
-
-confirmDeleteButton.addEventListener("click", (cardData) => {
-  //event.preventDefault;
-  console.log("__________________________________________");
-  handleConfirmDeleteSubmit(cardData);
-});
-
