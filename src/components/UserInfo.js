@@ -21,12 +21,9 @@ export default class UserInfo {
 
   setUserInfo({ name, description }) {
     // const { name, description } = this.getUserInfo(inputValues);
-    console.log("setUSER WORKING");
+
     this._profileTitleElement.textContent = name;
     this._profileDescriptionElement.textContent = description;
   }
 }
 
-// profileTitleInput.value = profileTitle.textContent;
-// profileDescriptionInput.value = profileDescription.textContent;
-// profileUserInfo.setUserInfo(data);

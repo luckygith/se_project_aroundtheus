@@ -24,14 +24,14 @@ checkResponse(res) {
   //const userinfo = JSON.parse(JSON.stringify(user));
 
  
-  editProfile(name, about) {
+  editProfile({name, about}) {
     return fetch(`${this.baseUrl}/users/me`, {
       method: "PATCH",
-      header: this.headers,
+      headers: this.headers,
       body: JSON.stringify({
         name: name,
-        about: about,
-      }),
+        about: about
+      })
     }).then(this.checkResponse);
   }
 
@@ -63,12 +63,6 @@ checkResponse(res) {
     })
     .then(this.checkResponse);
     
-    
-    // .then((res) => {
-    //   if (res.ok) {
-    //     return res.json();
-    //   }
-    //   return Promise.reject(`Error: ${res.status}`);
-    // });
+
   }
 }

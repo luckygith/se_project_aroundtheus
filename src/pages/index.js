@@ -39,6 +39,8 @@ const addNewCardModal = document.querySelector("#add-card-modal");
 const cardsListElement = document.querySelector(".cards__list");
 const addCardForm = document.querySelector("#add-card-form");
 
+
+
 //CREATE NEW INSTANCES OF ALL CLASSES // INITIALIZE
 
 const api = new Api({
@@ -54,50 +56,38 @@ const deleteCardPopup = new PopupWithDeleteConfirmation(
   handleDeleteSubmit
 );
 
+const cardPreviewPopup = new PopupWithImage("#preview-image-modal");
+//cardPreviewPopup.setEventListeners();
 
+const editProfileFormValidator = new FormValidator(config, editProfileForm);
 
-profileEditButton.addEventListener("click", () => {
-  console.log("PROFILE EDIT PRESSED");
-  addNewCardFormValidator.resetValidation();
-  const { name, description } = editUserInfo.getUserInfo();
+const cardSection = new Section(
+  {
+    items: initialCards,
+    renderer: createCard,
+  },
+  ".cards__list"
+);
+cardSection.renderItems();
 
-  profileTitleInput.value = name;
-  profileDescriptionInput.value = description;
+const editProfilePopup = new PopupWithForm(
+  selectors.editProfileModal,
+  handleEditProfileFormSubmit
+);
+//editProfilePopup.setEventListeners();
 
-  editProfilePopup.open();
+const editUserInfo = new UserInfo({
+  titleSelector: ".profile__title",
+  occupationSelector: ".profile__description",
 });
 
-addNewCardButton.addEventListener("click", () => {
-  console.log("addnewcardbuttoned clicked");
-  addNewCardPopup.open();
-  addNewCardFormValidator.resetValidation();
-});
+const addNewCardPopup = new PopupWithForm(
+  selectors.addNewCardModal,
+  handleAddCardFormSubmit
+);
 
-// fetch("https://jsonplaceholder.typicode.com/users/1")
-//   .then((response) => {
-//     return response.json();
-//   })
-
-//   .then((result) => {
-//     console.log(result);
-//   });
-
-// fetch("https://jsonplaceholder.typicode.com/todos/1", {
-//   headers: { authorization: "c56e30dc-2883-4270-a59e-b2f7bae969c6" },
-// })
-//   .then((res) => {
-//     if (!res.ok) {
-//       throw new Error("Network response was not ok");
-//     }
-//     return res.json();
-//   })
-//   .then((result) => {
-//     console.log(result);
-//   })
-//   .catch((error) => {
-//     console.error("Error fetching data:", error);
-//   });
-
+const addNewCardFormValidator = new FormValidator(config, addCardForm);
+addNewCardFormValidator.enableValidation();
 
 
 // api
@@ -120,21 +110,78 @@ addNewCardButton.addEventListener("click", () => {
 //   document.getElementById("userAbout").textContent = userInfo.about;
 // }
 
-let userInfo;
+
+
 
 //API instances
 
+//User routes
+
+// GET /users/me – Get the current user’s info
+// PATCH /users/me – Update your profile information
+// PATCH /users/me/avatar – Update avatar
+// Card routes
+
+// GET /cards – Get all cards
+// POST /cards – Create a card
+// DELETE /cards/:cardId – Delete a card
+// PUT /cards/:cardId/likes – Like a card
+// DELETE /cards/:cardId/likes – Dislike a card
+
+
+//User Profile 
+
+let userInfo;
+
+
 api
   .getUserInfo()
-  .then((res) => {
-    console.log(res);
-    userInfo = res;
+  .then((result) => {
+    console.log(result);
+    userInfo = result;
+  })
+  .then(() => {
+    console.log(userInfo._id);
   })
   .catch((err) => {
-    console.error('Error:', err); 
+    console.error(err); 
+  });
+//===========================================
+  api
+  .getUserInfo()
+  .then((userInfo) => {
+    console.log("User Info:", userInfo); // Log the user info
+    return api.getInitialCards(); // Return the promise for the next call
+  })
+  .then((initialCards) => {
+    console.log(initialCards); // Log the initial cards
+  })
+  .catch((err) => {
+    console.error(err); // Handle any errors
   });
 
- 
+  function handleEditProfileFormSubmit() {
+    const name = profileTitleInput.value;
+    const about = profileDescriptionInput.value;
+  
+    // editUserInfo.setUserInfo({ name, description });
+  
+    api
+    .editProfile({name, about})
+    .then((result) => {
+      console.log(result);
+      userInfo.setUserInfo({name, about});
+      //editProfilePopup.close();
+    })
+    .catch((err) => {
+      console.error(err); 
+    });
+  }
+  
+  editProfileFormValidator.enableValidation();
+  
+
+ //console.log(api.getUserInfo(userInfo));
 
   const updateName = document.querySelector("#profile-title-input");
   const updateDescription = document.querySelector("#profile-description-input");
@@ -142,6 +189,141 @@ api
 
 // const updateName = "Marie Skłodowska Curie";
 // const updateAbout = "Physicist and Chemist";
+
+//CARDS
+let cardsArray
+
+api
+  .getInitialCards()
+  .then((result) => {
+    console.log(result);
+    cardsArray = result;
+    return result;
+  })
+  .catch((err) => {
+    console.error(err); 
+  });
+
+// FUNCTIONS
+
+
+function handleImageClick(cardData) {
+  modalImage.alt = cardData.name;
+  modalImage.src = cardData.link;
+  modalText.textContent = cardData.name;
+  cardPreviewPopup.open(cardData);
+}
+
+
+function handleDeleteSubmit(card, cardData) {
+deleteCardPopup.open(cardData);
+  console.log(cardData);
+ 
+  api
+  .deleteCard(card_id)
+  .then(() => {
+    card.handleConfirmDeleteSubmit();
+    console.log("card deleted successfully");   
+    deleteCardPopup.close();
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+}
+
+// api.deleteCard(card.id)
+//     .then(() => {
+//       card.remove();
+//       deleteCardPopup.close();
+//     })
+//     .catch((err) => {
+//       console.error(err);
+//     });
+
+function createCard({name, link}) {
+
+  const card = new Card(
+    {name, link},
+    "#card-template",
+    handleImageClick,
+    handleDeleteSubmit
+  );
+  return card.getView();
+}
+
+
+// const newCardTitle = "New Card Title";
+// const newCardLink = "https://example.com/image.jpg";
+
+
+
+function handleAddCardFormSubmit() {
+  const name = cardTitleInput.value;
+  const link = cardUrlInput.value;
+  //modalImage.alt = name;
+  // modalImage.src = link;
+  //modalText.textContent = cardData.name;
+
+  api
+  .addingNewCard(name, link)
+  .then((name, link) => {
+    const cardElement = createCard(name, link);
+    cardSection.addItem(cardElement);
+    console.log(name, link);
+    addNewCardPopup.close();
+  })
+  .catch((err) => {
+    console.error(err); 
+  });
+}
+
+
+
+
+//console.log(cardElement.id);
+
+
+// function handleConfirmDeleteSubmit(event, card) {
+//   event.preventDefault();
+//   // Handle confirm delete logic here
+//   cardData.element.remove();
+//   cardData.element = null;
+//   deleteCardPopup.close();
+//   console.log("Card deleted successfully");
+// }
+
+//confirmDeleteButton.addEventListener("click", handleConfirmDeleteSubmit);
+//deleteCardPopup.close(cardData);
+
+
+
+
+//EVENTLISTENERS
+
+profileEditButton.addEventListener("click", () => {
+  console.log("PROFILE EDIT PRESSED");
+  addNewCardFormValidator.resetValidation();
+  const { name, description } = editUserInfo.getUserInfo();
+
+  profileTitleInput.value = name;
+  profileDescriptionInput.value = description;
+
+  editProfilePopup.open();
+});
+
+addNewCardButton.addEventListener("click", () => {
+  console.log("addnewcardbuttoned clicked");
+  addNewCardPopup.open();
+  addNewCardFormValidator.resetValidation();
+});
+
+confirmDeleteButton.addEventListener("click", (event) => {
+  event.preventDefault();
+  console.log("__________________________________________");
+  handleDeleteSubmit(card, cardData);
+});
+
+
 
 
   // const promise = new Promise(function (resolve, reject) {
@@ -160,34 +342,32 @@ api
   //   });
   
 
-//CARDS
-api
-  .getInitialCards()
-  .then((result) => {
-    return result;
-    // process the result
-  })
-  .catch((error) => {
-    console.error('Error:', error); 
-  });
 
+// fetch("https://jsonplaceholder.typicode.com/users/1")
+//   .then((response) => {
+//     return response.json();
+//   })
 
+//   .then((result) => {
+//     console.log(result);
+//   });
 
+// fetch("https://jsonplaceholder.typicode.com/todos/1", {
+//   headers: { authorization: "c56e30dc-2883-4270-a59e-b2f7bae969c6" },
+// })
+//   .then((res) => {
+//     if (!res.ok) {
+//       throw new Error("Network response was not ok");
+//     }
+//     return res.json();
+//   })
+//   .then((result) => {
+//     console.log(result);
+//   })
+//   .catch((err) => {
+//     console.error(err);
+//   });
 
-// // Method to like a card
-// likeCard(cardId) {
-//   // Implement the logic to like a card on the server
-// }
-
-// // Method to remove a like from a card
-// unlikeCard(cardId) {
-//   // Implement the logic to remove a like from a card on the server
-// }
-
-// // Method to update profile picture
-// updateProfilePicture(avatarUrl) {
-//   // Implement the logic to update profile picture on the server
-// }
 
 // fetch("https://jsonplaceholder.typicode.com/todos/1")
 //   .then((response) => response.json())
@@ -229,175 +409,10 @@ api
 //     })
 //     .catch((error) => {
 //       // Log any errors that occur during the fetch
-//       console.error("Error fetching data:", error);
+//       console.error(err);
 //     });
 // }
 
 // // Call the function
 // testingFunctionFetch();
 
-const cardPreviewPopup = new PopupWithImage("#preview-image-modal");
-//cardPreviewPopup.setEventListeners();
-
-const editProfileFormValidator = new FormValidator(config, editProfileForm);
-
-const cardSection = new Section(
-  {
-    items: initialCards,
-    renderer: createCard,
-  },
-  ".cards__list"
-);
-cardSection.renderItems();
-
-const editProfilePopup = new PopupWithForm(
-  selectors.editProfileModal,
-  handleEditProfileFormSubmit
-);
-//editProfilePopup.setEventListeners();
-
-const editUserInfo = new UserInfo({
-  titleSelector: ".profile__title",
-  occupationSelector: ".profile__description",
-});
-
-const addNewCardPopup = new PopupWithForm(
-  selectors.addNewCardModal,
-  handleAddCardFormSubmit
-);
-
-const addNewCardFormValidator = new FormValidator(config, addCardForm);
-addNewCardFormValidator.enableValidation();
-
-// FUNCTIONS
-
-
-function handleImageClick(cardData) {
-  modalImage.alt = cardData.name;
-  modalImage.src = cardData.link;
-  modalText.textContent = cardData.name;
-  cardPreviewPopup.open(cardData);
-}
-
-
-// if (!deleteCardPopup) {
-//   console.error('Delete Card Popup not initialized');
-// }
-
-
-
-
-function handleDeleteSubmit(card, cardData) {
-
-deleteCardPopup.open();
- 
-  console.log("JUMP JUMP");
-
-  api
-  .deleteCard(cardData._id)
-  .then(() => {
-    card.handleConfirmDeleteSubmit();
-    console.log("card deleted successfully");   
-    deleteCardPopup.close();
-  })
-  .catch((err) => {
-    console.error(err);
-  });
-}
-
-confirmDeleteButton.addEventListener("click", (event) => {
-  event.preventDefault();
-  console.log("__________________________________________");
-  handleDeleteSubmit(Card, cardData);
-});
-
-
-// api.deleteCard(card.id)
-//     .then(() => {
-//       card.remove();
-//       deleteCardPopup.close();
-//     })
-//     .catch((err) => {
-//       console.error(err);
-//     });
-
-function createCard(cardData) {
-  // currentCardData = cardData;
-
-  const card = new Card(
-    cardData,
-    "#card-template",
-    handleImageClick,
-    handleDeleteSubmit
-  );
-
-
-  
-  return card.getView();
-}
-
-
-// const newCardTitle = "New Card Title";
-// const newCardLink = "https://example.com/image.jpg";
-
-
-
-function handleAddCardFormSubmit(event) {
-  const name = cardTitleInput.value;
-  const link = cardUrlInput.value;
-  //modalImage.alt = name;
-  // modalImage.src = link;
-  //modalText.textContent = cardData.name;
-
-  api
-  .addingNewCard({name, link})
-  .then((cardData) => {
-    const cardElement = createCard(cardData);
-    cardSection.addItem(cardElement);
-    console.log(cardData);
-    addNewCardPopup.close();
-  })
-  .catch((error) => {
-    console.error('Error:', error); 
-  });
-
-}
-
-
-function handleEditProfileFormSubmit() {
-  const name = profileTitleInput.value;
-  const description = profileDescriptionInput.value;
-
-  // editUserInfo.setUserInfo({ name, description });
-
-  api
-  .editProfile({name, description})
-  .then((result) => {
-    console.log(result);
-    userInfo.setUserInfo({name, description});
-  })
-  .catch((err) => {
-    console.error('Error: then refering isnt working! try again!', err); 
-  });
-
-
-  //editProfilePopup.close();
-}
-
-editProfileFormValidator.enableValidation();
-
-
-//console.log(cardElement.id);
-
-
-// function handleConfirmDeleteSubmit(event, card) {
-//   event.preventDefault();
-//   // Handle confirm delete logic here
-//   cardData.element.remove();
-//   cardData.element = null;
-//   deleteCardPopup.close();
-//   console.log("Card deleted successfully");
-// }
-
-//confirmDeleteButton.addEventListener("click", handleConfirmDeleteSubmit);
-//deleteCardPopup.close(cardData);
