@@ -53,8 +53,10 @@ const api = new Api({
 
 const deleteCardPopup = new PopupWithDeleteConfirmation(
   "#delete-card-modal",
-  handleDeleteSubmit
+  handleConfirmDeleteSubmit
 );
+
+deleteCardPopup.setEventListeners();
 
 const cardPreviewPopup = new PopupWithImage("#preview-image-modal");
 //cardPreviewPopup.setEventListeners();
@@ -208,27 +210,39 @@ api
 
 
 function handleImageClick(cardData) {
+  console.log(cardData);
   modalImage.alt = cardData.name;
   modalImage.src = cardData.link;
   modalText.textContent = cardData.name;
   cardPreviewPopup.open(cardData);
 }
 
+function handleConfirmDeleteSubmit(cardId, cardelement) {
 
-function handleDeleteSubmit(card, cardData) {
-deleteCardPopup.open(cardData);
-  console.log(cardData);
- 
   api
-  .deleteCard(card_id)
+  .deleteCard(cardId)
   .then(() => {
-    card.handleConfirmDeleteSubmit();
+    cardElement.remove();
+    //card.handleConfirmDeleteSubmit();
     console.log("card deleted successfully");   
     deleteCardPopup.close();
   })
   .catch((err) => {
     console.error(err);
   });
+}
+  // Handle confirm delete logic here
+
+//   cardData.element.remove(cardId);
+//   cardData.element = null;
+//   deleteCardPopup.close();
+//   console.log("Card deleted successfully");
+// }
+
+function handleDeleteSubmit(cardId, cardElement) {
+deleteCardPopup.open(cardId, cardElement);
+  console.log(cardId);
+
 }
 
 // api.deleteCard(card.id)
@@ -283,14 +297,7 @@ function handleAddCardFormSubmit() {
 //console.log(cardElement.id);
 
 
-// function handleConfirmDeleteSubmit(event, card) {
-//   event.preventDefault();
-//   // Handle confirm delete logic here
-//   cardData.element.remove();
-//   cardData.element = null;
-//   deleteCardPopup.close();
-//   console.log("Card deleted successfully");
-// }
+
 
 //confirmDeleteButton.addEventListener("click", handleConfirmDeleteSubmit);
 //deleteCardPopup.close(cardData);
@@ -320,7 +327,7 @@ addNewCardButton.addEventListener("click", () => {
 confirmDeleteButton.addEventListener("click", (event) => {
   event.preventDefault();
   console.log("__________________________________________");
-  handleDeleteSubmit(card, cardData);
+  card.handleConfirmDeleteSubmit(cardId);
 });
 
 
