@@ -9,16 +9,20 @@ export default class PopupWithDeleteConfirmation extends Popup {
     this._submitButtonSelector = config.submitButtonSelector;
     this._handleFormSubmit = handleFormSubmit
 
+    console.log("Popup form element:", this._popupForm);
+
   }
   //   this._submitButtonSelector = this._element.querySelector(".modal__button");
   // }
 
   setEventListeners() {
-    super.setEventListeners();
- 
-    this._form.addEventListeners("submit", (evt) => {
+
+    this._popupForm.addEventListener("submit", (evt) => {
       evt.preventDefault();
-      this._handleFormSubmit(this._cardId, this._cardElement);
+      console.log("helllooooo");
+      this._handleFormSubmit(
+        this._cardId, this._cardElement
+      );
      // console.log(this._popupForm);
     }
 );
@@ -29,6 +33,7 @@ export default class PopupWithDeleteConfirmation extends Popup {
     super.open();
     this._cardId = cardId;
     this._cardElement = cardElement;
+    console.log(cardId);
     //  this._popupElement.addEventListener("click", this._handleDeleteSubmit);
   }
 

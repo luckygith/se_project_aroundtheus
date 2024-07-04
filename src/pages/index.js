@@ -76,7 +76,6 @@ const editProfilePopup = new PopupWithForm(
   selectors.editProfileModal,
   handleEditProfileFormSubmit
 );
-//editProfilePopup.setEventListeners();
 
 const editUserInfo = new UserInfo({
   titleSelector: ".profile__title",
@@ -102,18 +101,6 @@ addNewCardFormValidator.enableValidation();
 //   });
 
 //USERS
-// function renderUserInfo(userInfo) {
-//   // Function to render user information
-//   // Update header elements with user information
-//   document.getElementById(
-//     "userAvatar"
-//   ).innerHTML = `<img src="${userInfo.avatar}" alt="User Avatar" width="100">`;
-//   document.getElementById("userName").textContent = userInfo.name;
-//   document.getElementById("userAbout").textContent = userInfo.about;
-// }
-
-
-
 
 //API instances
 
@@ -141,39 +128,38 @@ api
   .then((result) => {
     console.log(result);
     userInfo = result;
+    return api.getInitialCards();
   })
-  .then(() => {
-    console.log(userInfo._id);
+  .then((initialCards) => {
+    console.log(initialCards);
   })
   .catch((err) => {
     console.error(err); 
   });
 //===========================================
-  api
-  .getUserInfo()
-  .then((userInfo) => {
-    console.log("User Info:", userInfo); // Log the user info
-    return api.getInitialCards(); // Return the promise for the next call
-  })
-  .then((initialCards) => {
-    console.log(initialCards); // Log the initial cards
-  })
-  .catch((err) => {
-    console.error(err); // Handle any errors
-  });
+  // api
+  // .getUserInfo()
+  // .then((userInfo) => {
+  //   console.log(userInfo); 
+  //   return api.getInitialCards(); // Returning promise for next call!
+  // })
+  // .then((initialCards) => {
+  //   console.log(initialCards); 
+  // })
+  // .catch((err) => {
+  //   console.error(err); 
+  // });
 
   function handleEditProfileFormSubmit() {
     const name = profileTitleInput.value;
     const about = profileDescriptionInput.value;
   
-    // editUserInfo.setUserInfo({ name, description });
-  
     api
     .editProfile({name, about})
     .then((result) => {
       console.log(result);
-      userInfo.setUserInfo({name, about});
-      //editProfilePopup.close();
+      editUserInfo.setUserInfo({name, about});
+      editProfilePopup.close();
     })
     .catch((err) => {
       console.error(err); 
@@ -185,8 +171,8 @@ api
 
  //console.log(api.getUserInfo(userInfo));
 
-  const updateName = document.querySelector("#profile-title-input");
-  const updateDescription = document.querySelector("#profile-description-input");
+  // const updateName = document.querySelector("#profile-title-input");
+  // const updateDescription = document.querySelector("#profile-description-input");
 
 
 // const updateName = "Marie Skłodowska Curie";
@@ -200,6 +186,7 @@ api
   .then((result) => {
     console.log(result);
     cardsArray = result;
+    console.log(cardsArray);
     return result;
   })
   .catch((err) => {
@@ -217,21 +204,20 @@ function handleImageClick(cardData) {
   cardPreviewPopup.open(cardData);
 }
 
-function handleConfirmDeleteSubmit(cardId, cardelement) {
+function handleConfirmDeleteSubmit(cardId, cardElement) {
 
   api
   .deleteCard(cardId)
   .then(() => {
-    cardElement.remove();
-    //card.handleConfirmDeleteSubmit();
-    console.log("card deleted successfully");   
+    //cardElement.remove();
+    card.handleConfirmDeleteSubmit(cardId);
+    console.log(cardElement); 
     deleteCardPopup.close();
   })
   .catch((err) => {
     console.error(err);
   });
 }
-  // Handle confirm delete logic here
 
 //   cardData.element.remove(cardId);
 //   cardData.element = null;
@@ -241,18 +227,12 @@ function handleConfirmDeleteSubmit(cardId, cardelement) {
 
 function handleDeleteSubmit(cardId, cardElement) {
 deleteCardPopup.open(cardId, cardElement);
-  console.log(cardId);
+console.log("Card ID passed to handleDeleteSubmit:", cardId); // Debugging line
+
+  //console.log(cardId);
 
 }
 
-// api.deleteCard(card.id)
-//     .then(() => {
-//       card.remove();
-//       deleteCardPopup.close();
-//     })
-//     .catch((err) => {
-//       console.error(err);
-//     });
 
 function createCard({name, link}) {
 
@@ -294,17 +274,6 @@ function handleAddCardFormSubmit() {
 
 
 
-//console.log(cardElement.id);
-
-
-
-
-//confirmDeleteButton.addEventListener("click", handleConfirmDeleteSubmit);
-//deleteCardPopup.close(cardData);
-
-
-
-
 //EVENTLISTENERS
 
 profileEditButton.addEventListener("click", () => {
@@ -326,8 +295,13 @@ addNewCardButton.addEventListener("click", () => {
 
 confirmDeleteButton.addEventListener("click", (event) => {
   event.preventDefault();
-  console.log("__________________________________________");
-  card.handleConfirmDeleteSubmit(cardId);
+  
+  const cardId = deleteCardPopup._cardId;
+  const cardElement = deleteCardPopup._cardElement;
+  console.log("ConfirmDelete Button");
+  console.log(cardElement);
+  console.log(cardId);
+  handleConfirmDeleteSubmit(cardElement);
 });
 
 

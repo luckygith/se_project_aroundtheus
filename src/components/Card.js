@@ -23,7 +23,6 @@ export default class Card {
   }
 
   getId() {
-    console.log()
     return this._id;
   }
   
@@ -91,6 +90,7 @@ export default class Card {
     this._deleteButton.addEventListener("click", () => {
       this._handleDeleteSubmit(this.getId(), this._element);
       console.log("delete button on card class was clicked");
+      console.log(this._cardData);
     });
   
     this._likeButton.addEventListener("click", this._handleLikeIcon);

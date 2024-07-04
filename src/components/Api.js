@@ -30,10 +30,21 @@ checkResponse(res) {
       headers: this.headers,
       body: JSON.stringify({
         name: name,
-        about: about
+        about: about,
       })
     }).then(this.checkResponse);
   }
+
+  // editProfileAvatar({name, about}) {
+  //   return fetch(`${this.baseUrl}/users/me`, {
+  //     method: "PATCH",
+  //     headers: this.headers,
+  //     body: JSON.stringify({
+  //       name: name,
+  //       about: about
+  //     })
+  //   }).then(this.checkResponse);
+  // }
 
   //CARDS
 
@@ -62,7 +73,6 @@ checkResponse(res) {
       headers: this.headers,
     })
     .then(this.checkResponse);
-    
 
   }
 }
