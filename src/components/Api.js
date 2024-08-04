@@ -2,6 +2,7 @@ export default class Api {
   constructor(options) {
     this.baseUrl = options.baseUrl;
     this.headers = options.headers;
+    //this.cardId = cardElement.cardId;
 
   }
 
@@ -11,7 +12,6 @@ checkResponse(res) {
   }
   return Promise.reject(`Error: ${res.status}`);
 }
-
 
   //USER ROUTES
 
@@ -69,8 +69,8 @@ checkResponse(res) {
 
   deleteCard(cardId) {
     return fetch(`${this.baseUrl}/cards/${cardId}`, {
-      method: "DELETE",
-      headers: this.headers,
+      // method: "DELETE",
+      // headers: this.headers,
     })
     .then(this.checkResponse);
 

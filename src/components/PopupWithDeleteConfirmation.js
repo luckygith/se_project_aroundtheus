@@ -7,41 +7,47 @@ export default class PopupWithDeleteConfirmation extends Popup {
     
     this._popupForm = this._popupElement.querySelector(".modal__form");
     this._submitButtonSelector = config.submitButtonSelector;
-    this._handleFormSubmit = handleFormSubmit
-
-    console.log("Popup form element:", this._popupForm);
+    this._handleFormSubmit = handleFormSubmit;
 
   }
-  //   this._submitButtonSelector = this._element.querySelector(".modal__button");
-  // }
+
 
   setEventListeners() {
+  
+  //   this._popupForm.addEventListener("submit", (evt) => {
+  //     evt.preventDefault();
+  //     this._handleFormSubmit(
+  //       this._cardId, this._cardElement 
+  //     );
+  //   }
+  // );
+  
 
-    this._popupForm.addEventListener("submit", (evt) => {
-      evt.preventDefault();
-      console.log("helllooooo");
-      this._handleFormSubmit(
-        this._cardId, this._cardElement
-      );
-     // console.log(this._popupForm);
-    }
-);
+  this._popupForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
 
+    console.log("POPUPWITHCLASS IS THIS EVENTLISTENER");
+    this._handleFormSubmit(cardId, cardElement);
+    console.log(this._handleFormSubmit);
+  });
+  
   }
-
+  
   open(cardId, cardElement) {
     super.open();
-    this._cardId = cardId;
-    this._cardElement = cardElement;
+    // this._cardId = cardId;
+    // this._cardElement = cardElement;
+    console.log("popupWithDeleteConfirmation accessed!");
     console.log(cardId);
-    //  this._popupElement.addEventListener("click", this._handleDeleteSubmit);
   }
-
+  
   close() {
     super.close();
     this._cardId = null;
     this._cardElement = null;
+    console.log("popupclosedviapopupWithDeleteConfirm");
+    console.log(cardElement);
     // this._popupElement.removeEventListener("submit", this._handleDeleteSubmit);
   }
-
+  
 }

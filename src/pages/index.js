@@ -63,14 +63,7 @@ const cardPreviewPopup = new PopupWithImage("#preview-image-modal");
 
 const editProfileFormValidator = new FormValidator(config, editProfileForm);
 
-const cardSection = new Section(
-  {
-    items: initialCards,
-    renderer: createCard,
-  },
-  ".cards__list"
-);
-cardSection.renderItems();
+
 
 const editProfilePopup = new PopupWithForm(
   selectors.editProfileModal,
@@ -90,15 +83,6 @@ const addNewCardPopup = new PopupWithForm(
 const addNewCardFormValidator = new FormValidator(config, addCardForm);
 addNewCardFormValidator.enableValidation();
 
-
-// api
-//   .getInitialCards()
-//   .then((result) => {
-//     console.log(result);
-//   })
-//   .catch((err) => {
-//     console.error(err);
-//   });
 
 //USERS
 
@@ -123,19 +107,29 @@ addNewCardFormValidator.enableValidation();
 let userInfo;
 
 
+// TODO delete
+
 api
-  .getUserInfo()
+  .getUserInfo() //fetch info using api.getUserInfo()
   .then((result) => {
-    console.log(result);
-    userInfo = result;
+    userInfo = result; //store info in const
+    console.log(userInfo);
     return api.getInitialCards();
   })
   .then((initialCards) => {
     console.log(initialCards);
+    // //console.log(cardData);
+    // return userInfo._id;
   })
+  // .then((card) => {
+  //   console.log(card);
+  //   console.log()
+  // })
   .catch((err) => {
     console.error(err); 
   });
+
+  
 //===========================================
   // api
   // .getUserInfo()
@@ -168,30 +162,30 @@ api
   
   editProfileFormValidator.enableValidation();
   
-
- //console.log(api.getUserInfo(userInfo));
-
-  // const updateName = document.querySelector("#profile-title-input");
-  // const updateDescription = document.querySelector("#profile-description-input");
-
-
-// const updateName = "Marie Skłodowska Curie";
-// const updateAbout = "Physicist and Chemist";
-
 //CARDS
-let cardsArray
+let cardSection;
 
 api
   .getInitialCards()
   .then((result) => {
     console.log(result);
-    cardsArray = result;
-    console.log(cardsArray);
+    cardSection = new Section(
+      {
+        items: result,
+        renderer: createCard,
+      },
+      ".cards__list"
+    );
+    cardSection.renderItems();
     return result;
   })
   .catch((err) => {
     console.error(err); 
   });
+
+
+// TODO call api.getUserInfo
+// in the .then(), set the user info
 
 // FUNCTIONS
 
@@ -204,51 +198,37 @@ function handleImageClick(cardData) {
   cardPreviewPopup.open(cardData);
 }
 
-function handleConfirmDeleteSubmit(cardId, cardElement) {
+function handleConfirmDeleteSubmit(_id, cardElement) {
 
   api
-  .deleteCard(cardId)
+  .deleteCard(_id)
   .then(() => {
-    //cardElement.remove();
-    card.handleConfirmDeleteSubmit(cardId);
-    console.log(cardElement); 
-    deleteCardPopup.close();
+    // cardElement.remove();
+    console.log(_id); 
+
+    // deleteCardPopup.close();
   })
   .catch((err) => {
     console.error(err);
   });
 }
 
-//   cardData.element.remove(cardId);
-//   cardData.element = null;
-//   deleteCardPopup.close();
-//   console.log("Card deleted successfully");
-// }
-
-function handleDeleteSubmit(cardId, cardElement) {
+function handleDeleteSubmit(cardId, cardElement) { 
 deleteCardPopup.open(cardId, cardElement);
-console.log("Card ID passed to handleDeleteSubmit:", cardId); // Debugging line
-
-  //console.log(cardId);
-
+console.log(cardId); // <<<<<<<<<<<<<<<ASK
+console.log(cardElement);
 }
 
-
-function createCard({name, link}) {
+function createCard(cardData) {
 
   const card = new Card(
-    {name, link},
+    cardData,
     "#card-template",
     handleImageClick,
     handleDeleteSubmit
   );
   return card.getView();
 }
-
-
-// const newCardTitle = "New Card Title";
-// const newCardLink = "https://example.com/image.jpg";
-
 
 
 function handleAddCardFormSubmit() {
@@ -263,7 +243,7 @@ function handleAddCardFormSubmit() {
   .then((name, link) => {
     const cardElement = createCard(name, link);
     cardSection.addItem(cardElement);
-    console.log(name, link);
+
     addNewCardPopup.close();
   })
   .catch((err) => {
@@ -293,16 +273,13 @@ addNewCardButton.addEventListener("click", () => {
   addNewCardFormValidator.resetValidation();
 });
 
-confirmDeleteButton.addEventListener("click", (event) => {
-  event.preventDefault();
+// confirmDeleteButton.addEventListener("click", (event) => {
+//   event.preventDefault();
   
-  const cardId = deleteCardPopup._cardId;
-  const cardElement = deleteCardPopup._cardElement;
-  console.log("ConfirmDelete Button");
-  console.log(cardElement);
-  console.log(cardId);
-  handleConfirmDeleteSubmit(cardElement);
-});
+//   // console.log(cardElement);
+//   // console.log(cardId);
+//   handleConfirmDeleteSubmit(cardId, cardElement);
+// });
 
 
 

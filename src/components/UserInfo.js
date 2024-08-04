@@ -19,11 +19,11 @@ export default class UserInfo {
     // return inputValues;
   }
 
-  setUserInfo({ name, description }) {
+  setUserInfo({ name, about }) {
     // const { name, description } = this.getUserInfo(inputValues);
 
     this._profileTitleElement.textContent = name;
-    this._profileDescriptionElement.textContent = description;
+    this._profileDescriptionElement.textContent = about;
   }
 }
 

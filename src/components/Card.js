@@ -12,11 +12,11 @@ export default class Card {
     
     this._name = cardData.name;
     this._link = cardData.link;
-    this._id = cardData._id;
+    this._cardId = cardData._id;
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
     this._handleDeleteSubmit = handleDeleteSubmit;
-
+    
     // this._confirmDeleteButton = this._popupElement.querySelector(
     //   "#confirm-delete-button"
     // );
@@ -31,7 +31,7 @@ export default class Card {
     this._element.remove();
     this._element = null;
     console.log("handleConfirmDelete accessed");
-    console.log(cardData);
+    console.log(this._cardElement);
     //deleteCardPopup.close();
   }
   // _handleDeleteCard() {
@@ -43,19 +43,17 @@ export default class Card {
     this._likeButton.classList.toggle("cards__like-button_active");
   };
 
-
-
   // _handleDeleteCardConfirm(event) {
   //   event.preventDefault();
   //   this._handleDeleteCard(confirmDeleteButton);
   //   this.close();
   // }
 
-  // _handleDeleteCard = () => {
-  //   this._element.remove();
-  //   this._element = null;
-  //   console.log("handleDeleteCard clicked");
-  // };
+  _handleDeleteCard = () => {
+    this._element.remove();
+    this._element = null;
+    console.log("handleDeleteCard clicked");
+  };
 
   // _handleDeleteSubmit() {
   //   console.log("HI THERE HELLO");
@@ -88,11 +86,13 @@ export default class Card {
 
   _setEventListeners() {
     this._deleteButton.addEventListener("click", () => {
-      this._handleDeleteSubmit(this.getId(), this._element);
-      console.log("delete button on card class was clicked");
-      console.log(this._cardData);
+     this._handleDeleteSubmit(this._cardId, this._element);
+      console.log("delete button called HandleDeleteSubmit");
+
     });
   
+//this.getId(), this._element
+
     this._likeButton.addEventListener("click", this._handleLikeIcon);
 
     this._cardImageElement.addEventListener("click", () =>
