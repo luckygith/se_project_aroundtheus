@@ -197,7 +197,7 @@ function handleImageClick(cardData) {
   cardPreviewPopup.open(cardData);
 }
 
-function handleConfirmDeleteSubmit(card) {
+function handleConfirmDeleteSubmit(cardId, cardElement) {
 
 
 // console.log("handleConfirmDeletesubmit called through popupwth confirm");
@@ -205,11 +205,10 @@ function handleConfirmDeleteSubmit(card) {
 // console.log(cardElement);
 ;
   api
-  .deleteCard(card.getId())
+  .deleteCard(cardId, cardElement)
   .then(() => {
-    card.deleteCard();
-    // cardElement.remove();
-    // cardElement = null;
+    cardElement.remove(cardId);
+    cardElement = null;
     deleteCardPopup.close();
   })
   .catch((err) => {

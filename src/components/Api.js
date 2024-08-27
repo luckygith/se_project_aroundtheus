@@ -67,7 +67,7 @@ checkResponse(res) {
     }).then(this.checkResponse);
   }
 
-  deleteCard(cardId, cardData) {
+  deleteCard(cardId, cardElement) {
     return fetch(`${this.baseUrl}/cards/${cardId}`, {
       method: "DELETE",
       headers: this.headers,
