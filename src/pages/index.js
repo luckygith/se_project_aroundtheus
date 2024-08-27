@@ -46,7 +46,7 @@ const addCardForm = document.querySelector("#add-card-form");
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
   headers: {
-    authorization: "872104b8-5f7e-4344-99c5-6089723feaef",
+    authorization: "c0eb4715-8994-4e97-ad61-2a5bbb84d547",
     "Content-Type": "application/json",
   },
 });
