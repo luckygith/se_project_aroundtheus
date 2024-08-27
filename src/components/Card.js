@@ -23,7 +23,7 @@ export default class Card {
   }
 
   getId() {
-    return this._id;
+    return this._cardId;
   }
   
   handleConfirmDeleteSubmit() {

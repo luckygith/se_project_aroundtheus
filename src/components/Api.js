@@ -16,7 +16,7 @@ checkResponse(res) {
   //USER ROUTES
 
   getUserInfo() {
-    return fetch(`${this.baseUrl}/users/me`, {
+    return fetch(`${this.baseUrl}/users/me`, {  
       headers: this.headers,
     }).then(this.checkResponse);
   }
@@ -67,10 +67,11 @@ checkResponse(res) {
     }).then(this.checkResponse);
   }
 
-  deleteCard(cardId) {
+  deleteCard(cardId, cardData) {
     return fetch(`${this.baseUrl}/cards/${cardId}`, {
-      // method: "DELETE",
-      // headers: this.headers,
+      method: "DELETE",
+      headers: this.headers,
+      //body: JSON.stringify()
     })
     .then(this.checkResponse);
 

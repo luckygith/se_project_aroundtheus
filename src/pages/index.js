@@ -53,7 +53,7 @@ const api = new Api({
 
 const deleteCardPopup = new PopupWithDeleteConfirmation(
   "#delete-card-modal",
-  handleConfirmDeleteSubmit
+  handleConfirmDeleteSubmit,
 );
 
 deleteCardPopup.setEventListeners();
@@ -191,41 +191,44 @@ api
 
 
 function handleImageClick(cardData) {
-  console.log(cardData);
   modalImage.alt = cardData.name;
   modalImage.src = cardData.link;
   modalText.textContent = cardData.name;
   cardPreviewPopup.open(cardData);
 }
 
-function handleConfirmDeleteSubmit(_id, cardElement) {
+function handleConfirmDeleteSubmit(card) {
 
+
+// console.log("handleConfirmDeletesubmit called through popupwth confirm");
+// console.log(cardId)
+// console.log(cardElement);
+;
   api
-  .deleteCard(_id)
+  .deleteCard(card.getId())
   .then(() => {
+    card.deleteCard();
     // cardElement.remove();
-    console.log(_id); 
-
-    // deleteCardPopup.close();
+    // cardElement = null;
+    deleteCardPopup.close();
   })
   .catch((err) => {
     console.error(err);
+    
   });
 }
 
-function handleDeleteSubmit(cardId, cardElement) { 
+function handleDeletePopup(cardId, cardElement) { 
 deleteCardPopup.open(cardId, cardElement);
-console.log(cardId); // <<<<<<<<<<<<<<<ASK
-console.log(cardElement);
 }
 
-function createCard(cardData) {
 
+function createCard(cardData) {
   const card = new Card(
     cardData,
     "#card-template",
     handleImageClick,
-    handleDeleteSubmit
+    handleDeletePopup
   );
   return card.getView();
 }
@@ -250,9 +253,6 @@ function handleAddCardFormSubmit() {
     console.error(err); 
   });
 }
-
-
-
 
 //EVENTLISTENERS
 
