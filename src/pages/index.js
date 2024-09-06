@@ -181,6 +181,7 @@ api
   })
   .catch((err) => {
     console.error(err); 
+    console.log("NOT GOING THROUGH");
   });
 
 
@@ -209,6 +210,7 @@ function handleConfirmDeleteSubmit(cardId, cardElement) {
   .then(() => {
     cardElement.remove(cardId);
     cardElement = null;
+ {message: "This post has been deleted"};
     deleteCardPopup.close();
   })
   .catch((err) => {
@@ -222,13 +224,35 @@ deleteCardPopup.open(cardId, cardElement);
 }
 
 
+function handleCardLike(cardId, cardElement) {
+
+console.log("handlecardlike function called");
+
+//const likeButton = document.querySelector(".cards__like-button");
+
+
+api.isLikeCard(cardId, cardElement) 
+.then(() => {
+
+  console.log("api for islikedcard is called correctly");
+
+})
+.catch((err) => {
+  console.error(err);
+  console.log("api for isCardLiked error")
+});
+}
+
+//handleDeletePopup = handleDeleteSubmitPopup
 function createCard(cardData) {
   const card = new Card(
     cardData,
     "#card-template",
     handleImageClick,
-    handleDeletePopup
+    handleDeletePopup,
+    handleCardLike,
   );
+  console.log("handledeletesubmitpopup via function createcard");
   return card.getView();
 }
 
@@ -272,13 +296,6 @@ addNewCardButton.addEventListener("click", () => {
   addNewCardFormValidator.resetValidation();
 });
 
-// confirmDeleteButton.addEventListener("click", (event) => {
-//   event.preventDefault();
-  
-//   // console.log(cardElement);
-//   // console.log(cardId);
-//   handleConfirmDeleteSubmit(cardId, cardElement);
-// });
 
 
 

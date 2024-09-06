@@ -22,6 +22,7 @@ export default class PopupWithDeleteConfirmation extends Popup {
     evt.preventDefault();
 
     this._handleFormSubmit(this._cardId, this._cardElement);
+    console.log("handleformsubmite in popupwith delete called");
 
   });
   

@@ -6,7 +6,8 @@ export default class Card {
   constructor(cardData,
     cardSelector,
     handleImageClick,
-    handleDeleteSubmit,
+    handleDeleteSubmitPopup,
+    handleCardLike,
   ) {
     this._cardData = cardData;
     
@@ -15,8 +16,9 @@ export default class Card {
     this._cardId = cardData._id;
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
-    this._handleDeleteSubmit = handleDeleteSubmit;
-    
+    this._handleDeleteSubmitPopup = handleDeleteSubmitPopup;
+    this._handleCardLike = handleCardLike;
+
     // this._confirmDeleteButton = this._popupElement.querySelector(
     //   "#confirm-delete-button"
     // );
@@ -26,22 +28,33 @@ export default class Card {
     return this._cardId;
   }
   
-  handleConfirmDeleteSubmit() {
-    //cardSection.removeItem(cardElement);
-    this._element.remove();
-    this._element = null;
-    console.log("handleConfirmDelete accessed");
-    console.log(this._cardElement);
-    //deleteCardPopup.close();
-  }
+  // handleConfirmDeleteSubmit() {
+  //   //cardSection.removeItem(cardElement);
+  //   this._element.remove();
+  //   this._element = null;
+  //   console.log("handleConfirmDelete accessed");
+  //   console.log(this._cardElement);
+    
+  //   //deleteCardPopup.close();
+  // }
   // _handleDeleteCard() {
   //   this._element.remove();
   //   this._element = null;
   // }
 
-  _handleLikeIcon = () => {
-    this._likeButton.classList.toggle("cards__like-button_active");
-  };
+  // toggleLikeIcon() {
+  //   this._likeButton.classList.toggle("cards__like-button_active");
+  // };
+
+  toggleLikeIcon(cardId) {
+  if (this._likeButton.classList.contains("cards__like-button_active")) {
+    this._likeButton.classList.remove("cards__like-button_active");
+    console.log(this._cardId, "card is not LIKED");
+  } else {
+    this._likeButton.classList.add("cards__like-button_active");
+    console.log(cardId, "card is LIKED");
+  }
+}
 
   // _handleDeleteCardConfirm(event) {
   //   event.preventDefault();
@@ -49,15 +62,15 @@ export default class Card {
   //   this.close();
   // }
 
-  _handleDeleteCard = () => {
-    this._element.remove();
-    this._element = null;
-    console.log("handleDeleteCard clicked");
-  };
+  // _handleDeleteCard = () => {
+  //   this._element.remove();
+  //   this._element = null;
+  //   console.log("handleDeleteCard clicked");
+  // };
 
   // _handleDeleteSubmit() {
   //   console.log("HI THERE HELLO");
-  //   this.delete;
+
   // }
 
   getView() {
@@ -84,16 +97,28 @@ export default class Card {
     return this._element;
   }
 
+//handleDeleteSubmitPopup = handleDeletePopup
+
   _setEventListeners() {
     this._deleteButton.addEventListener("click", () => {
-     this._handleDeleteSubmit(this._cardId, this._element);
-      console.log("delete button called HandleDeleteSubmit");
+    this._handleDeleteSubmitPopup(this._cardId, this._element);
+      console.log("delete button called HandleDeleteSubmitPopup on Card via dleetebutton eventlisteners");
+
+    
 
     });
   
 //this.getId(), this._element
 
-    this._likeButton.addEventListener("click", this._handleLikeIcon);
+    this._likeButton.addEventListener("click", () => {
+    
+      this._handleCardLike(this._cardId, this._element); 
+      this.toggleLikeIcon(this._cardId, this._element);
+  
+      return this._element;
+    });
+
+  
 
     this._cardImageElement.addEventListener("click", () =>
    

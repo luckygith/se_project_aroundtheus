@@ -67,13 +67,22 @@ checkResponse(res) {
     }).then(this.checkResponse);
   }
 
-  deleteCard(cardId, cardElement) {
+  deleteCard(cardId) {
     return fetch(`${this.baseUrl}/cards/${cardId}`, {
       method: "DELETE",
       headers: this.headers,
-      //body: JSON.stringify()
     })
     .then(this.checkResponse);
 
   }
+
+isLikeCard(cardId) {
+  return fetch(`${this.baseUrl}/cards/${cardId}/likes`, {
+    method: "PUT",
+    headers: this.headers,
+  })
+  .then(this.checkResponse);
+
+}
+
 }
