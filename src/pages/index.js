@@ -16,6 +16,7 @@ import PopupWithDeleteConfirmation from "../components/PopupWithDeleteConfirmati
 const deleteCardButton = document.querySelector(".cards__delete-button");
 const confirmDeleteButton = document.querySelector("#confirm-delete-button");
 const addNewCardButton = document.querySelector("#profile-add-button");
+const profileAvatarButton = document.querySelector(".profile__image");
 
 const profileEditButton = document.querySelector("#profile-edit-button"); //storing edit button inside this variable
 const profileTitle = document.querySelector(".profile__title "); //target id on HTML and create variable on JS
@@ -38,7 +39,10 @@ const editProfileForm = editProfileModal.querySelector(".modal__form_profile");
 const addNewCardModal = document.querySelector("#add-card-modal");
 
 const cardsListElement = document.querySelector(".cards__list");
+
 const addCardForm = document.querySelector("#add-card-form");
+const updateAvatarForm = document.querySelector("#update-avatar-form");
+
 
 
 
@@ -86,8 +90,12 @@ const updateAvatarPopup = new PopupWithForm(
   handleProfileUpdateAvatarFormSubmit
 );
 
+
 const addNewCardFormValidator = new FormValidator(config, addCardForm);
 addNewCardFormValidator.enableValidation();
+
+const updateAvatarFormValidator = new FormValidator(config, updateAvatarForm);
+updateAvatarFormValidator.enableValidation();
 
 
 //USERS
@@ -297,8 +305,6 @@ function handleProfileUpdateAvatarFormSubmit() {
 
   console.log("handleProfileUpdateAvaterFormSubmit activated")
 
-  
-  
 }
 
 //EVENTLISTENERS
@@ -320,7 +326,13 @@ addNewCardButton.addEventListener("click", () => {
   addNewCardFormValidator.resetValidation();
 });
 
+profileAvatarButton.addEventListener("click", () => {
+  console.log("avatar button working");
+  updateAvatarPopup.open();
+  updateAvatarFormValidator.resetValidation();
 
+
+}); 
 
 
 

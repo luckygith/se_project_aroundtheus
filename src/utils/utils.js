@@ -50,4 +50,5 @@ export const config = {
   inactiveButtonClass: "modal__button_disabled",
   inputErrorClass: "modal__input_type_error",
   errorClass: "modal__error",
+  imageSelector: ".modal__image",
 };

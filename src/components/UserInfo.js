@@ -5,7 +5,12 @@ export default class UserInfo {
     this._profileTitleElement = document.querySelector(titleSelector);
     this._profileDescriptionElement =
       document.querySelector(occupationSelector);
+    this._profileAvatarElement = document.querySelector("#update-avatar-modal").src;
   }
+
+  //const imageUrl = document.getElementById("update-avatar-modal").src;
+
+  
 
   getUserInfo() {
     // Returns an object containing information about the user
@@ -25,5 +30,17 @@ export default class UserInfo {
     this._profileTitleElement.textContent = name;
     this._profileDescriptionElement.textContent = about;
   }
+
+getUserAvatarInfo() {
+  return {
+    link: this._profileAvatarElement.src,
+  }
+}
+
+setUserAvatarInfo({link}) {
+  this._profileAvatarElement.src = link;
+
+}
+
 }
 

@@ -63,6 +63,10 @@
   background-position: center;
 }
 
+.profile__image:hover {
+  cursor: pointer;
+}
+
 .profile__edit-button {
   background: transparent url(../images/edit.svg) center no-repeat;
   height: 24px;
