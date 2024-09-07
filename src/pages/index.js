@@ -30,6 +30,7 @@ const cardsListItem = document.querySelector(".cards__list-item");
 const modalImage = document.querySelector(".modal__image");
 const cardTitleInput = document.querySelector("#card-title-input");
 const cardUrlInput = document.querySelector("#card-url-input");
+const avatarUrlInput = document.querySelector("#avatar-url-input");
 
 const editProfileModal = document.querySelector("#profile-edit-modal");
 const editProfileForm = editProfileModal.querySelector(".modal__form_profile");
@@ -80,7 +81,10 @@ const addNewCardPopup = new PopupWithForm(
   handleAddCardFormSubmit
 );
 
-const updateAvatarPopup = new popup
+const updateAvatarPopup = new PopupWithForm(
+  selectors.updateProfileAvatar, 
+  handleProfileUpdateAvatarFormSubmit
+);
 
 const addNewCardFormValidator = new FormValidator(config, addCardForm);
 addNewCardFormValidator.enableValidation();
@@ -288,6 +292,15 @@ function handleAddCardFormSubmit() {
   });
 }
 
+function handleProfileUpdateAvatarFormSubmit() {
+  const link = avatarUrlInput.value
+
+  console.log("handleProfileUpdateAvaterFormSubmit activated")
+
+  
+  
+}
+
 //EVENTLISTENERS
 
 profileEditButton.addEventListener("click", () => {
@@ -306,6 +319,8 @@ addNewCardButton.addEventListener("click", () => {
   addNewCardPopup.open();
   addNewCardFormValidator.resetValidation();
 });
+
+
 
 
 

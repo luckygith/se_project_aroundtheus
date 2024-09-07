@@ -40,6 +40,7 @@ export const selectors = {
   profileDescriptionInput: "#profile-description-input",
   addNewCardForm: "#add-card-form",
   editProfileForm: "#edit-profile-form",
+  updateProfileAvatar: "#update-avatar-modal",
 };
 
 export const config = {
