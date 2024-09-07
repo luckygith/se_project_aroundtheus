@@ -162,6 +162,15 @@ api
   
   editProfileFormValidator.enableValidation();
   
+
+  api.editProfileAvatar({link})
+    .then((result) => {
+    console.log("profile avatar api");    
+  })
+
+  
+
+
 //CARDS
 let cardSection;
 
@@ -210,7 +219,7 @@ function handleConfirmDeleteSubmit(cardId, cardElement) {
   .then(() => {
     cardElement.remove(cardId);
     cardElement = null;
- {message: "This post has been deleted"};
+    console.log("This post has been deleted");
     deleteCardPopup.close();
   })
   .catch((err) => {

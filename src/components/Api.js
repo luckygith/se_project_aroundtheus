@@ -35,16 +35,19 @@ checkResponse(res) {
     }).then(this.checkResponse);
   }
 
-  // editProfileAvatar({name, about}) {
-  //   return fetch(`${this.baseUrl}/users/me`, {
-  //     method: "PATCH",
-  //     headers: this.headers,
-  //     body: JSON.stringify({
-  //       name: name,
-  //       about: about
-  //     })
-  //   }).then(this.checkResponse);
-  // }
+  editProfileAvatar({name, about}) {
+    return fetch(`${this.baseUrl}/users/me/avatar`, {
+      method: "PATCH",
+      headers: this.headers,
+      body: JSON.stringify({
+        name: name,
+        about: about
+      })
+    }).then(this.checkResponse);
+  }
+
+
+
 
   //CARDS
 
@@ -82,7 +85,8 @@ isLikeCard(cardId) {
     headers: this.headers,
   })
   .then(this.checkResponse);
-
 }
+
+
 
 }
