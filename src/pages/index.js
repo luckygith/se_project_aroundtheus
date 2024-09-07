@@ -80,6 +80,8 @@ const addNewCardPopup = new PopupWithForm(
   handleAddCardFormSubmit
 );
 
+const updateAvatarPopup = new popup
+
 const addNewCardFormValidator = new FormValidator(config, addCardForm);
 addNewCardFormValidator.enableValidation();
 
@@ -163,10 +165,10 @@ api
   editProfileFormValidator.enableValidation();
   
 
-  api.editProfileAvatar({link})
-    .then((result) => {
-    console.log("profile avatar api");    
-  })
+  // api.editProfileAvatar()
+  //   .then((result) => {
+  //   console.log("profile avatar api");    
+  // })
 
   
 
