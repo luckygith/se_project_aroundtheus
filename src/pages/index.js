@@ -141,6 +141,7 @@ api
   // })
   .catch((err) => {
     console.error(err); 
+    console.error("")
   });
 
   
@@ -170,7 +171,8 @@ api
       editProfilePopup.close();
     })
     .catch((err) => {
-      console.error(err); 
+      console.error(err);
+      console.error("Changes to profile submission unsuccessful. Error."); 
     });
   }
   
@@ -204,7 +206,7 @@ api
   })
   .catch((err) => {
     console.error(err); 
-    console.log("NOT GOING THROUGH");
+    console.error("Card retrieval unsuccessful");
   });
 
 
@@ -222,11 +224,6 @@ function handleImageClick(cardData) {
 }
 
 function handleConfirmDeleteSubmit(cardId, cardElement) {
-
-
-// console.log("handleConfirmDeletesubmit called through popupwth confirm");
-// console.log(cardId)
-// console.log(cardElement);
 ;
   api
   .deleteCard(cardId, cardElement)
@@ -238,7 +235,7 @@ function handleConfirmDeleteSubmit(cardId, cardElement) {
   })
   .catch((err) => {
     console.error(err);
-    
+    console.error("Card deletion error")
   });
 }
 
