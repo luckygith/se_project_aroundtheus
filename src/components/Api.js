@@ -35,13 +35,14 @@ checkResponse(res) {
     }).then(this.checkResponse);
   }
 
-  editProfileAvatar({name, about}) {
+  editProfileAvatar({avatar, name, about}) {
     return fetch(`${this.baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: this.headers,
       body: JSON.stringify({
-        name: name,
-        about: about
+      avatar: avatar,
+      name: name,
+      about: about,
       })
     }).then(this.checkResponse);
   }
@@ -86,7 +87,6 @@ isLikeCard(cardId) {
   })
   .then(this.checkResponse);
 }
-
 
 
 }

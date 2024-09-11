@@ -16,12 +16,14 @@
       </header>
       <main class="content">
         <section class="profile page__section">
+          <div class="profile__image-container">
           <img
-            class="profile__image"
+            class="profile__image profile__avatar" 
             id="profile-image"
             src="<%=require('./images/jacques-cousteau.png')%>"
             alt="avatar"
           />
+        </div>
           <div class="profile__info">
             <h1 class="profile__title">Jacques Costeau</h1>
             <button
@@ -86,7 +88,7 @@
       </div>
     </div>
 
-    <!--Add modal-->
+    <!--Add card modal-->
     <div class="modal" id="add-card-modal">
       <div class="modal__container">
         <button

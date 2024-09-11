@@ -65,6 +65,10 @@
 
 .profile__image:hover {
   cursor: pointer;
+
+  background: url(../images/editicon.png) center no-repeat;
+  mask-image: url(../images/editicon.png) center no-repeat;
+
 }
 
 .profile__edit-button {

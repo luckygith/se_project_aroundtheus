@@ -16,7 +16,11 @@ import PopupWithDeleteConfirmation from "../components/PopupWithDeleteConfirmati
 const deleteCardButton = document.querySelector(".cards__delete-button");
 const confirmDeleteButton = document.querySelector("#confirm-delete-button");
 const addNewCardButton = document.querySelector("#profile-add-button");
+
 const profileAvatarButton = document.querySelector(".profile__image");
+const profileAvatarElement = document.querySelector(".profile__avatar");
+const profileAvatarUrlInput = document.querySelector("#avatar-url-input");
+
 
 const profileEditButton = document.querySelector("#profile-edit-button"); //storing edit button inside this variable
 const profileTitle = document.querySelector(".profile__title "); //target id on HTML and create variable on JS
@@ -31,7 +35,7 @@ const cardsListItem = document.querySelector(".cards__list-item");
 const modalImage = document.querySelector(".modal__image");
 const cardTitleInput = document.querySelector("#card-title-input");
 const cardUrlInput = document.querySelector("#card-url-input");
-const avatarUrlInput = document.querySelector("#avatar-url-input");
+
 
 const editProfileModal = document.querySelector("#profile-edit-modal");
 const editProfileForm = editProfileModal.querySelector(".modal__form_profile");
@@ -51,7 +55,7 @@ const updateAvatarForm = document.querySelector("#update-avatar-form");
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
   headers: {
-    authorization: "c0eb4715-8994-4e97-ad61-2a5bbb84d547",
+    authorization: "7bed9883-2658-4b5e-974b-2c2e17824760",
     "Content-Type": "application/json",
   },
 });
@@ -66,9 +70,9 @@ deleteCardPopup.setEventListeners();
 const cardPreviewPopup = new PopupWithImage("#preview-image-modal");
 //cardPreviewPopup.setEventListeners();
 
+
+
 const editProfileFormValidator = new FormValidator(config, editProfileForm);
-
-
 
 const editProfilePopup = new PopupWithForm(
   selectors.editProfileModal,
@@ -78,6 +82,7 @@ const editProfilePopup = new PopupWithForm(
 const editUserInfo = new UserInfo({
   titleSelector: ".profile__title",
   occupationSelector: ".profile__description",
+  avatarSelector: ".profile__image",
 });
 
 const addNewCardPopup = new PopupWithForm(
@@ -89,7 +94,6 @@ const updateAvatarPopup = new PopupWithForm(
   selectors.updateProfileAvatar, 
   handleProfileUpdateAvatarFormSubmit
 );
-
 
 const addNewCardFormValidator = new FormValidator(config, addCardForm);
 addNewCardFormValidator.enableValidation();
@@ -179,12 +183,29 @@ api
   editProfileFormValidator.enableValidation();
   
 
-  // api.editProfileAvatar()
-  //   .then((result) => {
-  //   console.log("profile avatar api");    
-  // })
 
+  function handleProfileUpdateAvatarFormSubmit() {
+
+    const avatar = profileAvatarUrlInput.value;
+    const name = profileTitleInput.value;
+    const about = profileDescriptionInput.value;
   
+    console.log("handleProfileUpdateAvaterFormSubmit activated");
+    console.log(profileAvatarUrlInput.value);
+  
+    api.editProfileAvatar({avatar, name, about})
+    .then((result) => {
+      editUserInfo.setUserAvatarInfo({avatar, name, about});
+      updateAvatarPopup.close();
+  console.log("Profile Avatar edit api success!")
+  console.log(result);
+    })
+    .catch((err) => {
+      console.error(err);
+      console.error("Profile Avatar edit api error")
+    });
+  
+  }
 
 
 //CARDS
@@ -221,7 +242,9 @@ function handleImageClick(cardData) {
   modalImage.src = cardData.link;
   modalText.textContent = cardData.name;
   cardPreviewPopup.open(cardData);
+  console.log(cardData);
 }
+
 
 function handleConfirmDeleteSubmit(cardId, cardElement) {
 ;
@@ -289,7 +312,6 @@ function handleAddCardFormSubmit() {
   .then((name, link) => {
     const cardElement = createCard(name, link);
     cardSection.addItem(cardElement);
-
     addNewCardPopup.close();
   })
   .catch((err) => {
@@ -297,12 +319,6 @@ function handleAddCardFormSubmit() {
   });
 }
 
-function handleProfileUpdateAvatarFormSubmit() {
-  const link = avatarUrlInput.value
-
-  console.log("handleProfileUpdateAvaterFormSubmit activated")
-
-}
 
 //EVENTLISTENERS
 
@@ -325,11 +341,16 @@ addNewCardButton.addEventListener("click", () => {
 
 profileAvatarButton.addEventListener("click", () => {
   console.log("avatar button working");
-  updateAvatarPopup.open();
   updateAvatarFormValidator.resetValidation();
+  const { avatar, name, description} = editUserInfo.getUserAvatarInfo();
 
+  profileAvatarUrlInput.value = avatar;
+  profileTitleInput.value = name;
+  profileDescriptionInput.value = description;
 
+  updateAvatarPopup.open();
 }); 
+
 
 
 

@@ -1,11 +1,12 @@
 import Popup from "./Popup";
 
 export default class UserInfo {
-  constructor({ titleSelector, occupationSelector }) {
+  constructor({ titleSelector, occupationSelector, avatarSelector }) {
     this._profileTitleElement = document.querySelector(titleSelector);
     this._profileDescriptionElement =
       document.querySelector(occupationSelector);
-    this._profileAvatarElement = document.querySelector("#update-avatar-modal").src;
+    this._profileAvatarElement = document.querySelector(avatarSelector);
+
   }
 
   //const imageUrl = document.getElementById("update-avatar-modal").src;
@@ -32,13 +33,23 @@ export default class UserInfo {
   }
 
 getUserAvatarInfo() {
-  return {
-    link: this._profileAvatarElement.src,
-  }
+
+return {
+  avatar: this._profileAvatarElement.src,
+  name: this._profileTitleElement.textContent,
+  description: this._profileDescriptionElement.textContent,
+
+}   
+
+
 }
 
-setUserAvatarInfo({link}) {
-  this._profileAvatarElement.src = link;
+setUserAvatarInfo({avatar, name, description}) {
+  
+  this._profileAvatarElement.src = avatar;
+  this._profileTitleElement.textContent = name,
+  this._profileDescriptionElement.textContent = description,
+
 
 }
 
