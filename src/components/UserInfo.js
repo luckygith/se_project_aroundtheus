@@ -47,11 +47,8 @@ return {
 setUserAvatarInfo({avatar, name, description}) {
   
   this._profileAvatarElement.src = avatar;
-  this._profileTitleElement.textContent = name,
-  this._profileDescriptionElement.textContent = description,
-
-
+  this._profileTitleElement.textContent = name;
+  this._profileDescriptionElement.textContent = description;
 }
-
 }
 
