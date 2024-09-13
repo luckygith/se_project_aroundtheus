@@ -1,1 +1,1 @@
-https://yourUsername.github.io/luckygith
+https://luckygith.github.io/se_project_aroundtheus
