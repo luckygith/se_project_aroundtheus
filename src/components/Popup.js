@@ -2,7 +2,7 @@ export default class Popup {
   //exportdefault is the parent of Popupwith form and with image
   constructor(popupSelector) {
     this._popupElement = document.querySelector(popupSelector);
-    this._handleEscapeClose = this._handleEscapeClose.bind(this); //ASK
+    this._handleEscapeClose = this._handleEscapeClose.bind(this);
     this._closeButton = this._popupElement.querySelector(".modal__close");
     this._closeModalOnClick = this._closeModalOnClick.bind(this);
     this._handleModalBackgroundClick =

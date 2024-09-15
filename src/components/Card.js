@@ -49,10 +49,12 @@ export default class Card {
   toggleLikeIcon(cardId) {
   if (this._likeButton.classList.contains("cards__like-button_active")) {
     this._likeButton.classList.remove("cards__like-button_active");
-    console.log(this._cardId, "card is not LIKED");
+    console.log(cardId, "is unliked");
+  
   } else {
     this._likeButton.classList.add("cards__like-button_active");
-    console.log(cardId, "card is LIKED");
+    console.log(cardId, "is liked");
+
   }
 }
 
@@ -102,7 +104,7 @@ export default class Card {
   _setEventListeners() {
     this._deleteButton.addEventListener("click", () => {
     this._handleDeleteSubmitPopup(this._cardId, this._element);
-      console.log("delete button called HandleDeleteSubmitPopup on Card via dleetebutton eventlisteners");
+      console.log(this._cardId, "to delete?");
 
     
 

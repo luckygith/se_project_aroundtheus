@@ -33,6 +33,7 @@ export const selectors = {
   previewImage: "#preview-image-modal",
   addNewCardModal: "#add-card-modal",
   editProfileModal: "#profile-edit-modal",
+  updateAvatarModal: "#update-avatar-modal",
   deleteCardModal: "#delete-card-modal",
   profileTitle: ".profile__title",
   profileTitleInput: "#profile-title-input",
@@ -40,14 +41,14 @@ export const selectors = {
   profileDescriptionInput: "#profile-description-input",
   addNewCardForm: "#add-card-form",
   editProfileForm: "#edit-profile-form",
-  updateProfileAvatar: "#update-avatar-modal",
+  updateAvatarForm: "#update-avatar-form",
 };
 
 export const config = {
   formSelector: ".modal__form",
   inputSelector: ".modal__input",
-  submitButtonSelector: "modal__button",
-  inactiveButtonClass: "modal__button_disabled",
+  submitButtonSelector: ".modal__button",
+  inactiveButtonClass: ".modal__button_disabled",
   inputErrorClass: "modal__input_type_error",
   errorClass: "modal__error",
   imageSelector: ".modal__image",

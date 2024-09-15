@@ -142,6 +142,7 @@
   cursor: default;
 }
 
+
 .modal__image-container {
   position: relative; /*for modal__close x to be contained within  */
   margin: auto;

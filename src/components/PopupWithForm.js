@@ -7,8 +7,13 @@ export default class PopupWithForm extends Popup {
     this._popupForm = this._popupElement.querySelector(".modal__form");
     this._handleFormSubmit = handleFormSubmit;
     this._inputSelector = config.inputSelector;
-    this._submitButtonSelector = config.submitButtonSelector;
-    //this._submitButton = this._element.querySelector(".modal__button");
+
+    this._submitButton = this._popupElement.querySelector(".modal__button");
+
+    this._defaultButtonText = this._submitButton.textContent = "Saveee"
+    
+    //this._submitButtonSelector = config.submitButtonSelector;
+    //this._submitButtonSelector.textContent = savingProcess;
   }
 
   // this._modalImage.src = link;
@@ -16,6 +21,7 @@ export default class PopupWithForm extends Popup {
   open() {
     super.open();
     this._popupForm.addEventListener("submit", this._handleFormSubmit);
+     
 
   }
 
@@ -34,11 +40,17 @@ export default class PopupWithForm extends Popup {
     return inputValues;
   }
 
-  // _updateInputValues() {
-  //   const inputValues = {};
+  submitButtonLoadingState(isLoading) {
+    
+      if (this._submitButton) {
+        this._submitButton.textContent = isLoading
+          ? this._defaultButtonText
+          : "Saving...";
+      }
 
-  //   this._popupForm.querySelector(this._inputSelector).
-  // }
+  }
+
+
 
   _handleFormSubmit(event) {
     event.preventDefault();
@@ -48,13 +60,3 @@ export default class PopupWithForm extends Popup {
   }
 }
 
-//REMOVED and utilized using the validator class
-// _disableButton() {
-//   this._submitButton.classList.add(this._inactiveButtonClass);
-//   this._submitButton.disabled = true;
-// }
-
-// _enableButton() {
-//   this._submitButton.classList.remove(this._inactiveButtonClass);
-//   this._submitButton.disabled = false;
-// }

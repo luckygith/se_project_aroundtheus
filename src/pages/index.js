@@ -17,9 +17,9 @@ const deleteCardButton = document.querySelector(".cards__delete-button");
 const confirmDeleteButton = document.querySelector("#confirm-delete-button");
 const addNewCardButton = document.querySelector("#profile-add-button");
 
-const profileAvatarButton = document.querySelector(".profile__image");
-const profileAvatarElement = document.querySelector(".profile__avatar");
-const profileAvatarUrlInput = document.querySelector("#avatar-url-input");
+
+
+
 
 
 const profileEditButton = document.querySelector("#profile-edit-button"); //storing edit button inside this variable
@@ -36,16 +36,25 @@ const modalImage = document.querySelector(".modal__image");
 const cardTitleInput = document.querySelector("#card-title-input");
 const cardUrlInput = document.querySelector("#card-url-input");
 
+const profileAvatarElement = document.querySelector(".profile__avatar");
+const profileAvatarUrlInput = document.querySelector("#avatar-url-input");
+const profileAvatarButton = document.querySelector(".profile__container-edit-icon");
 
 const editProfileModal = document.querySelector("#profile-edit-modal");
-const editProfileForm = editProfileModal.querySelector(".modal__form_profile");
+const editProfileForm = editProfileModal.querySelector("#edit-profile-form");
+const editProfileSubmitButton = editProfileModal.querySelector(".modal__button");
 
-const addNewCardModal = document.querySelector("#add-card-modal");
+//const updateAvatarModal = document.querySelector("#update-avatar-modal");
+const updateAvatarForm = document.querySelector("#update-avatar-form");
+// const updateProfileAvatarSubmitButton = updateAvatarModal.querySelector(".modal__button");
+
+//const addNewCardModal = document.querySelector("#add-card-modal");
+const addCardForm = document.querySelector("#add-card-form");
+// const addNewCardSubmitButton = addNewCardModal.querySelector(".modal__button");
+
+
 
 const cardsListElement = document.querySelector(".cards__list");
-
-const addCardForm = document.querySelector("#add-card-form");
-const updateAvatarForm = document.querySelector("#update-avatar-form");
 
 
 
@@ -91,7 +100,7 @@ const addNewCardPopup = new PopupWithForm(
 );
 
 const updateAvatarPopup = new PopupWithForm(
-  selectors.updateProfileAvatar, 
+  selectors.updateAvatarModal, 
   handleProfileUpdateAvatarFormSubmit
 );
 
@@ -163,23 +172,36 @@ api
   //   console.error(err); 
   // });
 
+
+// function handleSavingButton() {
+
+//   saveButton = document.querySelector(".modal__button").value
+// }
+
+
   function handleEditProfileFormSubmit() {
     const name = profileTitleInput.value;
     const about = profileDescriptionInput.value;
-  
+
+    editProfilePopup.submitButtonLoadingState(false); 
     api
     .editProfile({name, about})
     .then((result) => {
       console.log(result);
+          editProfileSubmitButton.textContent = "Saving..."
       editUserInfo.setUserInfo({name, about});
       editProfilePopup.close();
     })
     .catch((err) => {
       console.error(err);
       console.error("Changes to profile submission unsuccessful. Error."); 
+    })
+    .finally(() => {
+      updateAvatarPopup.submitButtonLoadingState(true); 
     });
   }
   
+
   editProfileFormValidator.enableValidation();
   
 
@@ -190,19 +212,23 @@ api
     const name = profileTitleInput.value;
     const about = profileDescriptionInput.value;
   
-    console.log("handleProfileUpdateAvaterFormSubmit activated");
     console.log(profileAvatarUrlInput.value);
+
+    updateAvatarPopup.submitButtonLoadingState(false);
   
     api.editProfileAvatar({avatar, name, about})
     .then((result) => {
       editUserInfo.setUserAvatarInfo({avatar, name, about});
       updateAvatarPopup.close();
-  console.log("Profile Avatar edit api success!")
+  console.log("Avatar has been changed to the following avatar", avatar)
   console.log(result);
     })
     .catch((err) => {
       console.error(err);
-      console.error("Profile Avatar edit api error")
+      console.error("Profile Avatar edit api unsuccessful. Error")
+    }) 
+    .finally(() => {
+      updateAvatarPopup.submitButtonLoadingState(true); 
     });
   
   }
@@ -227,7 +253,7 @@ api
   })
   .catch((err) => {
     console.error(err); 
-    console.error("Card retrieval unsuccessful");
+    console.error("Card retrieval unsuccessful. Error");
   });
 
 
@@ -252,13 +278,13 @@ function handleConfirmDeleteSubmit(cardId, cardElement) {
   .deleteCard(cardId, cardElement)
   .then(() => {
     cardElement.remove(cardId);
+    console.log(cardId, "post has been deleted");
     cardElement = null;
-    console.log("This post has been deleted");
     deleteCardPopup.close();
   })
   .catch((err) => {
     console.error(err);
-    console.error("Card deletion error")
+    console.error("Card deletion unsuccessful. Error")
   });
 }
 
@@ -269,20 +295,17 @@ deleteCardPopup.open(cardId, cardElement);
 
 function handleCardLike(cardId, cardElement) {
 
-console.log("handlecardlike function called");
-
 //const likeButton = document.querySelector(".cards__like-button");
 
 
 api.isLikeCard(cardId, cardElement) 
 .then(() => {
-
-  console.log("api for islikedcard is called correctly");
+  console.log(cardElement, "is interacted with")
 
 })
 .catch((err) => {
   console.error(err);
-  console.log("api for isCardLiked error")
+  console.log("api for isCardLiked unsuccessful. Error")
 });
 }
 
@@ -295,7 +318,7 @@ function createCard(cardData) {
     handleDeletePopup,
     handleCardLike,
   );
-  console.log("handledeletesubmitpopup via function createcard");
+  console.log("The following new card has been created", cardData);
   return card.getView();
 }
 
@@ -306,6 +329,7 @@ function handleAddCardFormSubmit() {
   //modalImage.alt = name;
   // modalImage.src = link;
   //modalText.textContent = cardData.name;
+  addNewCardPopup.submitButtonLoadingState(false); 
 
   api
   .addingNewCard(name, link)
@@ -316,6 +340,9 @@ function handleAddCardFormSubmit() {
   })
   .catch((err) => {
     console.error(err); 
+  })
+  .finally(() => {
+    addNewCardPopup.submitButtonLoadingState(true); 
   });
 }
 
@@ -340,7 +367,7 @@ addNewCardButton.addEventListener("click", () => {
 });
 
 profileAvatarButton.addEventListener("click", () => {
-  console.log("avatar button working");
+ 
   updateAvatarFormValidator.resetValidation();
   const { avatar, name, description} = editUserInfo.getUserAvatarInfo();
 
@@ -353,7 +380,7 @@ profileAvatarButton.addEventListener("click", () => {
 
 
 
-
+//PRACTISE API
 
 
   // const promise = new Promise(function (resolve, reject) {

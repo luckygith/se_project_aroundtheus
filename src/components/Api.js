@@ -20,10 +20,9 @@ checkResponse(res) {
       headers: this.headers,
     }).then(this.checkResponse);
   }
-
-  //const userinfo = JSON.parse(JSON.stringify(user));
-
  
+//PROFILE
+
   editProfile({name, about}) {
     return fetch(`${this.baseUrl}/users/me`, {
       method: "PATCH",
@@ -47,12 +46,9 @@ checkResponse(res) {
     }).then(this.checkResponse);
   }
 
-
-
-
   //CARDS
 
-  // https://around-api.en.tripleten-services.com/v1/users/me
+
   getInitialCards() {
     return fetch(`${this.baseUrl}/cards`, {
       method: "GET",
