@@ -180,10 +180,11 @@ api
 
 
   function handleEditProfileFormSubmit() {
+    editProfilePopup.submitButtonLoadingState(false); 
+    
     const name = profileTitleInput.value;
     const about = profileDescriptionInput.value;
 
-    editProfilePopup.submitButtonLoadingState(false); 
     api
     .editProfile({name, about})
     .then((result) => {
@@ -197,7 +198,7 @@ api
       console.error("Changes to profile submission unsuccessful. Error."); 
     })
     .finally(() => {
-      updateAvatarPopup.submitButtonLoadingState(true); 
+      editProfilePopup.submitButtonLoadingState(true); 
     });
   }
   
@@ -207,6 +208,7 @@ api
 
 
   function handleProfileUpdateAvatarFormSubmit() {
+    updateAvatarPopup.submitButtonLoadingState(false);
 
     const avatar = profileAvatarUrlInput.value;
     const name = profileTitleInput.value;
@@ -214,7 +216,6 @@ api
   
     console.log(profileAvatarUrlInput.value);
 
-    updateAvatarPopup.submitButtonLoadingState(false);
   
     api.editProfileAvatar({avatar, name, about})
     .then((result) => {
