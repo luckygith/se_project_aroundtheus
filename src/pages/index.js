@@ -208,21 +208,22 @@ api
 
 
   function handleProfileUpdateAvatarFormSubmit() {
+
     updateAvatarPopup.submitButtonLoadingState(false);
 
     const avatar = profileAvatarUrlInput.value;
-    const name = profileTitleInput.value;
-    const about = profileDescriptionInput.value;
-  
-    console.log(profileAvatarUrlInput.value);
+    // const name = profileTitleInput.value;
+    // const about = profileDescriptionInput.value;
 
+    console.log(profileAvatarUrlInput.value);
   
-    api.editProfileAvatar({avatar, name, about})
-    .then((result) => {
-      editUserInfo.setUserAvatarInfo({avatar, name, about});
+
+    api.editProfileAvatar({avatar})
+    .then((res) => {
+      console.log(res);
+      editUserInfo.setUserAvatarInfo({avatar});
       updateAvatarPopup.close();
   console.log("Avatar has been changed to the following avatar", avatar)
-  console.log(result);
     })
     .catch((err) => {
       console.error(err);
@@ -231,8 +232,9 @@ api
     .finally(() => {
       updateAvatarPopup.submitButtonLoadingState(true); 
     });
-  
+
   }
+
 
 
 //CARDS
@@ -294,21 +296,88 @@ deleteCardPopup.open(cardId, cardElement);
 }
 
 
-function handleCardLike(cardId, cardElement) {
+function checkLikeStatus(isLiked, cardData) {
+  
+    if (!isLiked) {
+      this._likeButton.classList.remove("cards__like-button_active");
+    } else {
+      (this._likeButton.classList.add("cards__like-button_active")); 
+      console.log("ANOTHER TOGGLE VIA CHECKSTATUS");
+    }
+    }
 
-//const likeButton = document.querySelector(".cards__like-button");
 
 
-api.isLikeCard(cardId, cardElement) 
-.then(() => {
-  console.log(cardElement, "is interacted with")
+  
 
-})
-.catch((err) => {
-  console.error(err);
-  console.log("api for isCardLiked unsuccessful. Error")
-});
+
+// function handleCardLike(cardData) {
+
+// api.isLikeCard(cardData) 
+// .then((res) => {
+//   console.log(cardData, "is interacted with");
+//   console.log(res.isLiked)
+//   //toggleLikeIcon(cardId, _isLiked);
+
+  
+// })
+// .catch((err) => {
+//   console.error(err);
+//   console.log("api for isCardLiked unsuccessful. Error")
+// })
+// .finally(() => {
+//   console.log(cardData);
+
+// })
+// }
+
+
+
+function handleCardLike(isLiked, cardData, cardId) {
+
+  // console.log(isLiked);
+  // console.log(cardData);
+  // console.log(cardId);
+  if (!isLiked) {
+    api.addLikeState(cardId)
+      .then((res) => {
+        console.log(res);
+        console.log(cardId, "card is Liked");
+        })
+        .catch((err) => {
+          console.error(err);
+          console.log("Failed to add like. Error with API call.");
+        })
+      } else {
+          api.removeLikeState(cardId)
+          .then((res) => {
+            console.log(cardId, "card is Liked");
+            console.log(res);
+          })
+          .catch((err) => {
+            console.error(err);
+            console.log("Failed to remove like. Error with API call.");
+          })
 }
+
+
+}
+
+
+
+// api.removeLikeState(cardId)
+//       .then((res) => {
+//         console.log(res);
+//         console.log(cardId, "card is Unliked");
+//       })
+//       .catch((err) => {
+//         console.error(err);
+//         console.log("Failed to remove like. Error with API call.");
+//       });
+//   }
+// }
+
+
 
 //handleDeletePopup = handleDeleteSubmitPopup
 function createCard(cardData) {
@@ -318,6 +387,7 @@ function createCard(cardData) {
     handleImageClick,
     handleDeletePopup,
     handleCardLike,
+    checkLikeStatus,
   );
   console.log("The following new card has been created", cardData);
   return card.getView();

@@ -34,14 +34,12 @@ checkResponse(res) {
     }).then(this.checkResponse);
   }
 
-  editProfileAvatar({avatar, name, about}) {
+  editProfileAvatar({avatar}) {
     return fetch(`${this.baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: this.headers,
       body: JSON.stringify({
       avatar: avatar,
-      name: name,
-      about: about,
       })
     }).then(this.checkResponse);
   }
@@ -82,6 +80,27 @@ isLikeCard(cardId) {
     headers: this.headers,
   })
   .then(this.checkResponse);
+}
+
+
+addLikeState(cardId) {
+  
+  return fetch(`${this.baseUrl}/cards/${cardId}/likes`, {
+    method: "PUT",
+    headers: this.headers,
+  })
+  .then(this.checkResponse);
+
+}
+
+removeLikeState(cardId) {
+  
+  return fetch(`${this.baseUrl}/cards/${cardId}/likes`, {
+    method: "DELETE",
+    headers: this.headers,
+  })
+  .then(this.checkResponse);
+
 }
 
 

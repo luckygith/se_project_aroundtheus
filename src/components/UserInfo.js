@@ -11,7 +11,7 @@ export default class UserInfo {
     //this._handleSavingButton = handleSavingButton;
   }
 
-  //const imageUrl = document.getElementById("update-avatar-modal").src;
+  // const imageUrl = document.getElementById("update-avatar-modal").src;
 
   
 
@@ -41,19 +41,33 @@ getUserAvatarInfo() {
 
 return {
   avatar: this._profileAvatarElement.src,
-  name: this._profileTitleElement.textContent,
-  description: this._profileDescriptionElement.textContent,
+  // name: this._profileTitleElement.textContent,
+  // description: this._profileDescriptionElement.textContent,
 
 }   
 
+modalImage.src = cardData.link;
+
 
 }
 
-setUserAvatarInfo({avatar, name, description}) {
+setUserAvatarInfo({avatar}) {
   
   this._profileAvatarElement.src = avatar;
-  this._profileTitleElement.textContent = name;
-  this._profileDescriptionElement.textContent = description;
-}
+  // this._profileTitleElement.textContent = name;
+  // this._profileDescriptionElement.textContent = description;
 }
 
+getView() {
+
+
+  return {
+    avatar: this._profileAvatarElement.src,
+    name: this._profileTitleElement.textContent,
+    description: this._profileDescriptionElement.textContent,
+  
+  }  
+
+}
+
+}
