@@ -22,25 +22,27 @@ export default class UserInfo {
     return {
       name: this._profileTitleElement.textContent,
       description: this._profileDescriptionElement.textContent,
+      avatar: this._profileAvatarElement.value,
     };
 
     // return inputValues;
   }
 
-  setUserInfo({ name, about }) {
+  setUserInfo({ name, description, avatar }) {
     // const { name, description } = this.getUserInfo(inputValues);
 
      // const submitButton = document.querySelector(".modal__button");
     // submitButton.innerHTML = "Saving...";
 
     this._profileTitleElement.textContent = name;
-    this._profileDescriptionElement.textContent = about;
+    this._profileDescriptionElement.textContent = description;
+    this._profileAvatarElement.value = avatar;
   }
 
 getUserAvatarInfo() {
 
 return {
-  avatar: this._profileAvatarElement.src,
+  avatar: this._profileAvatarElement.value,
   // name: this._profileTitleElement.textContent,
   // description: this._profileDescriptionElement.textContent,
 
@@ -58,16 +60,24 @@ setUserAvatarInfo({avatar}) {
   // this._profileDescriptionElement.textContent = description;
 }
 
-getView() {
+getViewUserInfo(userInfo) {
 
+  console.log("getViewUserInfo accessed");
+  console.log(userInfo);
 
-  return {
-    avatar: this._profileAvatarElement.src,
-    name: this._profileTitleElement.textContent,
-    description: this._profileDescriptionElement.textContent,
-  
-  }  
-
+this.setUserInfo({
+  name: userInfo.name,
+  description: userInfo.about,
+  avatar: userInfo.avatar,
+})
+return this._profileTitleElement
 }
 
+// return {
+//   avatar: this._profileAvatarElement.src,
+//   name: this._profileTitleElement.value,
+//   description: this._profileDescriptionElement.value,
+// ({
+
+// }  
 }

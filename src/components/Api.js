@@ -29,7 +29,7 @@ checkResponse(res) {
       headers: this.headers,
       body: JSON.stringify({
         name: name,
-        about: about,
+        about: about
       })
     }).then(this.checkResponse);
   }

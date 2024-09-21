@@ -158,29 +158,25 @@ api
   });
 
   
-//===========================================
-  // api
-  // .getUserInfo()
-  // .then((userInfo) => {
-  //   console.log(userInfo); 
-  //   return api.getInitialCards(); // Returning promise for next call!
-  // })
-  // .then((initialCards) => {
-  //   console.log(initialCards); 
-  // })
-  // .catch((err) => {
-  //   console.error(err); 
-  // });
+  api.getUserInfo()
+    .then((cardData) => {
+    editUserInfo.setUserAvatarInfo({ avatar: cardData.avatar });
+  });
+
+  
+
+api.getUserInfo()
+  .then((cardData) => {
+    editUserInfo.setUserInfo({name: cardData.name, description: cardData.about, avatar: cardData.avatar});
+  });
 
 
-// function handleSavingButton() {
-
-//   saveButton = document.querySelector(".modal__button").value
-// }
 
 
-  function handleEditProfileFormSubmit() {
+  function handleEditProfileFormSubmit(cardData) {
     editProfilePopup.submitButtonLoadingState(false); 
+  //   profileTitleInput.value = userInfo.name;   // Pre-fill with current name
+  // profileDescriptionInput.value = userInfo.about; 
     
     const name = profileTitleInput.value;
     const about = profileDescriptionInput.value;
@@ -189,8 +185,8 @@ api
     .editProfile({name, about})
     .then((result) => {
       console.log(result);
-          editProfileSubmitButton.textContent = "Saving..."
-      editUserInfo.setUserInfo({name, about});
+      editUserInfo.setUserInfo({name: result.name, about: result.about});
+      editProfileSubmitButton.textContent = "Saving..."
       editProfilePopup.close();
     })
     .catch((err) => {
@@ -199,11 +195,13 @@ api
     })
     .finally(() => {
       editProfilePopup.submitButtonLoadingState(true); 
+      
     });
   }
   
 
   editProfileFormValidator.enableValidation();
+  
   
 
 
@@ -212,16 +210,11 @@ api
     updateAvatarPopup.submitButtonLoadingState(false);
 
     const avatar = profileAvatarUrlInput.value;
-    // const name = profileTitleInput.value;
-    // const about = profileDescriptionInput.value;
-
-    console.log(profileAvatarUrlInput.value);
-  
 
     api.editProfileAvatar({avatar})
-    .then((res) => {
-      console.log(res);
-      editUserInfo.setUserAvatarInfo({avatar});
+    .then((result) => {
+      console.log(result);
+      editUserInfo.setUserAvatarInfo({avatar: result.avatar});
       updateAvatarPopup.close();
   console.log("Avatar has been changed to the following avatar", avatar)
     })
@@ -232,8 +225,8 @@ api
     .finally(() => {
       updateAvatarPopup.submitButtonLoadingState(true); 
     });
-
   }
+
 
 
 
