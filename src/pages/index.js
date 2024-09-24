@@ -154,21 +154,6 @@ api
     console.error("")
   });
 
-  
-//   api.getUserInfo()
-//     .then((cardData) => {
-//     editUserInfo.setUserAvatarInfo({ avatar: cardData.avatar });
-//   });
-
-  
-
-// api.getUserInfo()
-//   .then((cardData) => {
-//     editUserInfo.setUserInfo({name: cardData.name, description: cardData.about, avatar: cardData.avatar});
-//   });
-
-
-
 
   function handleEditProfileFormSubmit(cardData) {
     editProfilePopup.submitButtonLoadingState(false); 
@@ -181,9 +166,9 @@ api
     api
     .editProfile({name, about})
     .then((result) => {
+      //editProfileSubmitButton.textContent = "Saving..."
       console.log(result);
       editUserInfo.setUserInfo({name: result.name, description: result.about});
-      editProfileSubmitButton.textContent = "Saving..."
       editProfilePopup.close();
     })
     .catch((err) => {
@@ -283,22 +268,6 @@ function handleConfirmDeleteSubmit(cardId, cardElement) {
 
 
 
-function checkLikeStatus(isLiked, cardData, card) {
-
-  // const likeButton = document.querySelector("cards__like-button");
-  // console.log(this.likeButton);
-
-  if (!isLiked) {
-    this.likeButton.classList.remove("cards__like-button_active");
-  } 
-  else {
-    this.likeButton.classList.add("cards__like-button_active"); 
-    console.log("ANOTHER TOGGLE VIA CHECKSTATUS");
-    console.log(cardData);
-  }
-  }
-
-
 
 function handleDeletePopup(cardId, cardElement) { 
 deleteCardPopup.open(cardId, cardElement);
@@ -306,51 +275,6 @@ deleteCardPopup.open(cardId, cardElement);
 
 
 
-
-
-
-
-// function handleCardLike(cardData) {
-
-// api.isLikeCard(cardData) 
-// .then((res) => {
-//   console.log(cardData, "is interacted with");
-//   console.log(res.isLiked)
-//   //toggleLikeIcon(cardId, _isLiked);
-
-  
-// })
-// .catch((err) => {
-//   console.error(err);
-//   console.log("api for isCardLiked unsuccessful. Error")
-// })
-// .finally(() => {
-//   console.log(cardData);
-
-// })
-// }
-
- 
-      // this._likeButton = this._element.querySelector(".cards__like-button");
-
-
-
-
-// api.removeLikeState(cardId)
-//       .then((res) => {
-//         console.log(res);
-//         console.log(cardId, "card is Unliked");
-//       })
-//       .catch((err) => {
-//         console.error(err);
-//         console.log("Failed to remove like. Error with API call.");
-//       });
-//   }
-// }
-
-
-
-//handleDeletePopup = handleDeleteSubmitPopup
 function createCard(cardData) {
   const card = new Card(
     cardData,
@@ -358,7 +282,7 @@ function createCard(cardData) {
     handleImageClick,
     handleDeletePopup,
     handleCardLike,
-    checkLikeStatus,
+    // checkLikeStatus,
    // toggleLikeIcon,
   );
   console.log("The following new card has been created", cardData);
@@ -391,21 +315,6 @@ function handleAddCardFormSubmit() {
   });
 }
 
-
-// function changeLikeState(isLiked, cardElement) {
-
-//   const likeButton = cardElement.querySelector(".cards__like-button");
-
-//   if (isLiked === false) {
-//      console.log("HI HELO THERE");
-//     likeButton.classList.remove("cards__like-button_active");
-//   }
-  // else {
-  //       this._likeButton.classList.add("cards__like-button_active");
-  //       console.log(cardData, "is TOGGLED TO liked");  
-  //     }
-    // }
- 
     
 function handleCardLike(isLiked, cardData, cardId, cardElement, card) {
 
@@ -415,7 +324,7 @@ function handleCardLike(isLiked, cardData, cardId, cardElement, card) {
         console.log(res);
         console.log(cardId, cardData, "card is Liked");
      card.toggleLikeIcon(res.isLiked);
-  
+   
       })
         .catch((err) => {
           console.error(err);
@@ -423,8 +332,7 @@ function handleCardLike(isLiked, cardData, cardId, cardElement, card) {
 
         })
         .finally((res) => {
-          console.log(res);
-  
+          card.checkLikeStatus(res.isLiked, res.cardData);
         })
 
       } else {
@@ -434,6 +342,7 @@ function handleCardLike(isLiked, cardData, cardId, cardElement, card) {
             console.log(res.isLiked);
             console.log(cardId, "card is disliked?");
             card.toggleLikeIcon(res.isLiked);
+     
       
             console.log(res);
           })
@@ -442,35 +351,12 @@ function handleCardLike(isLiked, cardData, cardId, cardElement, card) {
             console.log("Failed to remove like. Error with API call.");
           })
           .finally(() => {
-    
+      //card.checkLikeStatus(res.isLiked, res.cardData);
+            card.checkLikeStatus(res.isLiked, res.cardData);
             //cardElement.toggleLikeIcon(isLiked);
           })
 }
   }
-
-
-  // function toggleLikeIcon(isLiked, cardData, cardId, cardElement) {
-    
-  //   if (this._likeButton.classList.contains("cards__like-button_active")) {
-  //       this._likeButton.classList.remove("cards__like-button_active");
-  //     (isLiked === false);
-  //       console.log(cardData, "is TOGGLED TO unliked");
-  //     } else {
-  //         this._likeButton.classList.add("cards__like-button_active");
-  //         console.log(cardData, "is TOGGLED TO liked");  
-  //         (isLiked === true);
-  //       }}
-      
-
-      
-      //   if (this._likeButton.classList.contains("cards__like-button_active")) {
-      //     this._likeButton.classList.remove("cards__like-button_active");
-      //     console.log(cardData, "is TOGGLED TO unliked");
-      //   } else {
-      //     this._likeButton.classList.add("cards__like-button_active");
-      //     console.log(cardData, "is TOGGLED TO liked");  
-      //   }}
-    
 
 
 //EVENTLISTENERS
