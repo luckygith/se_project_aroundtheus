@@ -54,7 +54,6 @@ const addCardForm = document.querySelector("#add-card-form");
 
 
 
-const cardsListElement = document.querySelector(".cards__list");
 
 
 
@@ -145,30 +144,28 @@ api
   })
   .then((initialCards) => {
     console.log(initialCards);
+        editUserInfo.setUserAvatarInfo({ avatar: userInfo.avatar });
+        editUserInfo.setUserInfo({ name: userInfo.name, description: userInfo.about, avatar: userInfo.avatar });
     // //console.log(cardData);
     // return userInfo._id;
   })
-  // .then((card) => {
-  //   console.log(card);
-  //   console.log()
-  // })
   .catch((err) => {
-    console.error(err); 
+    console.error(err);
     console.error("")
   });
 
   
-  api.getUserInfo()
-    .then((cardData) => {
-    editUserInfo.setUserAvatarInfo({ avatar: cardData.avatar });
-  });
+//   api.getUserInfo()
+//     .then((cardData) => {
+//     editUserInfo.setUserAvatarInfo({ avatar: cardData.avatar });
+//   });
 
   
 
-api.getUserInfo()
-  .then((cardData) => {
-    editUserInfo.setUserInfo({name: cardData.name, description: cardData.about, avatar: cardData.avatar});
-  });
+// api.getUserInfo()
+//   .then((cardData) => {
+//     editUserInfo.setUserInfo({name: cardData.name, description: cardData.about, avatar: cardData.avatar});
+//   });
 
 
 
@@ -185,7 +182,7 @@ api.getUserInfo()
     .editProfile({name, about})
     .then((result) => {
       console.log(result);
-      editUserInfo.setUserInfo({name: result.name, about: result.about});
+      editUserInfo.setUserInfo({name: result.name, description: result.about});
       editProfileSubmitButton.textContent = "Saving..."
       editProfilePopup.close();
     })
@@ -284,24 +281,33 @@ function handleConfirmDeleteSubmit(cardId, cardElement) {
   });
 }
 
+
+
+function checkLikeStatus(isLiked, cardData) {
+
+  // const likeButton = document.querySelector("cards__like-button");
+  // console.log(this.likeButton);
+
+  if (!isLiked) {
+    this.likeButton.classList.remove("cards__like-button_active");
+  } 
+  else {
+    this.likeButton.classList.add("cards__like-button_active"); 
+    console.log("ANOTHER TOGGLE VIA CHECKSTATUS");
+    console.log(cardData);
+  }
+  }
+
+
+
 function handleDeletePopup(cardId, cardElement) { 
 deleteCardPopup.open(cardId, cardElement);
 }
 
 
-function checkLikeStatus(isLiked, cardData) {
-  
-    if (!isLiked) {
-      this._likeButton.classList.remove("cards__like-button_active");
-    } else {
-      (this._likeButton.classList.add("cards__like-button_active")); 
-      console.log("ANOTHER TOGGLE VIA CHECKSTATUS");
-    }
-    }
 
 
 
-  
 
 
 // function handleCardLike(cardData) {
@@ -324,37 +330,9 @@ function checkLikeStatus(isLiked, cardData) {
 // })
 // }
 
+ 
+      // this._likeButton = this._element.querySelector(".cards__like-button");
 
-
-function handleCardLike(isLiked, cardData, cardId) {
-
-  // console.log(isLiked);
-  // console.log(cardData);
-  // console.log(cardId);
-  if (!isLiked) {
-    api.addLikeState(cardId)
-      .then((res) => {
-        console.log(res);
-        console.log(cardId, "card is Liked");
-        })
-        .catch((err) => {
-          console.error(err);
-          console.log("Failed to add like. Error with API call.");
-        })
-      } else {
-          api.removeLikeState(cardId)
-          .then((res) => {
-            console.log(cardId, "card is Liked");
-            console.log(res);
-          })
-          .catch((err) => {
-            console.error(err);
-            console.log("Failed to remove like. Error with API call.");
-          })
-}
-
-
-}
 
 
 
@@ -381,11 +359,13 @@ function createCard(cardData) {
     handleDeletePopup,
     handleCardLike,
     checkLikeStatus,
+    toggleLikeIcon,
   );
   console.log("The following new card has been created", cardData);
   return card.getView();
 }
 
+let cardELement
 
 function handleAddCardFormSubmit() {
   const name = cardTitleInput.value;
@@ -398,8 +378,9 @@ function handleAddCardFormSubmit() {
   api
   .addingNewCard(name, link)
   .then((name, link) => {
-    const cardElement = createCard(name, link);
+    const cardElement = createCard(name, link, isLiked);
     cardSection.addItem(cardElement);
+    console.log(cardElement);
     addNewCardPopup.close();
   })
   .catch((err) => {
@@ -409,6 +390,88 @@ function handleAddCardFormSubmit() {
     addNewCardPopup.submitButtonLoadingState(true); 
   });
 }
+
+
+// function changeLikeState(isLiked, cardElement) {
+
+//   const likeButton = cardElement.querySelector(".cards__like-button");
+
+//   if (isLiked === false) {
+//      console.log("HI HELO THERE");
+//     likeButton.classList.remove("cards__like-button_active");
+//   }
+  // else {
+  //       this._likeButton.classList.add("cards__like-button_active");
+  //       console.log(cardData, "is TOGGLED TO liked");  
+  //     }
+    // }
+ 
+    
+function handleCardLike(isLiked, cardData, cardId, cardElement) {
+
+  
+
+
+  if (!isLiked) {
+    api.addLikeState(cardId)
+      .then((res) => {
+        console.log(res);
+        console.log(cardId, "card is Liked");
+   //     changeLikeState(true, cardElement);
+  
+      })
+        .catch((err) => {
+          console.error(err);
+          console.log("Failed to add like. Error with API call.");
+
+        })
+        .finally((res) => {
+          console.log(res);
+  
+        })
+
+      } else {
+          api.removeLikeState(cardId)
+          .then((res) => {
+            card.toggleLikeIcon(isLiked);
+            console.log(res.isLiked);
+            console.log(cardId, "card is ____disliked?");
+            // toggleLikeIcon(false);
+      
+            console.log(res);
+          })
+          .catch((err) => {
+            console.error(err);
+            console.log("Failed to remove like. Error with API call.");
+          })
+          .finally(() => {
+    
+            //cardElement.toggleLikeIcon(isLiked);
+          })
+}
+  }
+
+
+  function toggleLikeIcon(cardData) {
+    
+    if (this._likeButton.classList.contains("cards__like-button_active")) {
+        this._likeButton.classList.remove("cards__like-button_active");
+        console.log(cardData, "is TOGGLED TO unliked");
+      } else {
+          this._likeButton.classList.add("cards__like-button_active");
+          console.log(cardData, "is TOGGLED TO liked");  
+        }}
+      
+
+      
+      //   if (this._likeButton.classList.contains("cards__like-button_active")) {
+      //     this._likeButton.classList.remove("cards__like-button_active");
+      //     console.log(cardData, "is TOGGLED TO unliked");
+      //   } else {
+      //     this._likeButton.classList.add("cards__like-button_active");
+      //     console.log(cardData, "is TOGGLED TO liked");  
+      //   }}
+    
 
 
 //EVENTLISTENERS

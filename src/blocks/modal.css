@@ -109,7 +109,7 @@
 #profile-title-input-error,
 #profile-description-input-error,
 #card-title-input-error,
-#card-url-input-error {
+#card-url-input-error, #avatar-url-input-error {
   color: #ff0000;
   min-height: 30px;
   display: block;
