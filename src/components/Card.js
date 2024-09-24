@@ -10,7 +10,7 @@ export default class Card {
     handleCardLike,
     checkLikeStatus,
     toggleLikeIcon,
-    toggleLikeIconDislke,
+   
   ) {
     this._cardData = cardData;
     
@@ -24,7 +24,7 @@ export default class Card {
     this.handleCardLike = handleCardLike;
     this._checkLikeStatus = checkLikeStatus;
     this._toggleLikeIcon = toggleLikeIcon;
-    this._toggleLikeIconDislke = toggleLikeIconDislke;
+    // this._toggleLikeIconDislke = toggleLikeIconDislke;
 
     
   }
@@ -113,7 +113,7 @@ export default class Card {
           this._cardImageElement.src = this._link;
           this._cardImageElement.alt = this._name;
       
-           this.checkLikeStatus(this._isLiked, this._cardData);
+         this.checkLikeStatus(this._isLiked, this._cardData);
          // this.changeLikeState(this._isLiked, this._cardData, this._cardId, this._element);
           this._setEventListeners();
           
@@ -129,9 +129,11 @@ export default class Card {
       });
     
       this._likeButton.addEventListener("click", () => { 
-        this.handleCardLike(this._isLiked, this._cardData, this._cardId, this._element);    
+        this.handleCardLike(this._isLiked, this._cardData, this._cardId, this._element, this);    
       
-       this.toggleLikeIcon(this._isLiked);
+      //  this.toggleLikeIcon(this._isLiked, this._cardData, this._cardId, this._element);
+
+       this.checkLikeStatus(this._isLiked, this._cardData, this);
         return this._element;
    
   

@@ -283,7 +283,7 @@ function handleConfirmDeleteSubmit(cardId, cardElement) {
 
 
 
-function checkLikeStatus(isLiked, cardData) {
+function checkLikeStatus(isLiked, cardData, card) {
 
   // const likeButton = document.querySelector("cards__like-button");
   // console.log(this.likeButton);
@@ -359,7 +359,7 @@ function createCard(cardData) {
     handleDeletePopup,
     handleCardLike,
     checkLikeStatus,
-    toggleLikeIcon,
+   // toggleLikeIcon,
   );
   console.log("The following new card has been created", cardData);
   return card.getView();
@@ -407,17 +407,14 @@ function handleAddCardFormSubmit() {
     // }
  
     
-function handleCardLike(isLiked, cardData, cardId, cardElement) {
-
-  
-
+function handleCardLike(isLiked, cardData, cardId, cardElement, card) {
 
   if (!isLiked) {
-    api.addLikeState(cardId)
+    api.addLikeState(cardId, cardData)
       .then((res) => {
         console.log(res);
-        console.log(cardId, "card is Liked");
-   //     changeLikeState(true, cardElement);
+        console.log(cardId, cardData, "card is Liked");
+     card.toggleLikeIcon(res.isLiked);
   
       })
         .catch((err) => {
@@ -433,10 +430,10 @@ function handleCardLike(isLiked, cardData, cardId, cardElement) {
       } else {
           api.removeLikeState(cardId)
           .then((res) => {
-            card.toggleLikeIcon(isLiked);
+      
             console.log(res.isLiked);
-            console.log(cardId, "card is ____disliked?");
-            // toggleLikeIcon(false);
+            console.log(cardId, "card is disliked?");
+            card.toggleLikeIcon(res.isLiked);
       
             console.log(res);
           })
@@ -452,15 +449,17 @@ function handleCardLike(isLiked, cardData, cardId, cardElement) {
   }
 
 
-  function toggleLikeIcon(cardData) {
+  // function toggleLikeIcon(isLiked, cardData, cardId, cardElement) {
     
-    if (this._likeButton.classList.contains("cards__like-button_active")) {
-        this._likeButton.classList.remove("cards__like-button_active");
-        console.log(cardData, "is TOGGLED TO unliked");
-      } else {
-          this._likeButton.classList.add("cards__like-button_active");
-          console.log(cardData, "is TOGGLED TO liked");  
-        }}
+  //   if (this._likeButton.classList.contains("cards__like-button_active")) {
+  //       this._likeButton.classList.remove("cards__like-button_active");
+  //     (isLiked === false);
+  //       console.log(cardData, "is TOGGLED TO unliked");
+  //     } else {
+  //         this._likeButton.classList.add("cards__like-button_active");
+  //         console.log(cardData, "is TOGGLED TO liked");  
+  //         (isLiked === true);
+  //       }}
       
 
       
