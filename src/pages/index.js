@@ -85,7 +85,6 @@ const editUserInfo = new UserInfo({
 const addNewCardPopup = new PopupWithForm(
   selectors.addNewCardModal,
   handleAddCardFormSubmit
-  // getInputValues,
 );
 
 const updateAvatarPopup = new PopupWithForm(
@@ -139,8 +138,8 @@ function handleEditProfileFormSubmit(inputValues) {
     .then((result) => {
       console.log(result);
       editUserInfo.setUserInfo({
-        name: result.title,
-        about: result.description,
+        name: result.name,
+        description: result.about,
       });
       editProfilePopup.close();
     })
@@ -156,9 +155,6 @@ function handleEditProfileFormSubmit(inputValues) {
 editProfileFormValidator.enableValidation();
 
 function handleProfileUpdateAvatarFormSubmit(inputValues) {
-  // const inputValues = updateAvatarPopup.getInputValues();
-  // // const avatar = inputValues.avatar;
-
   updateAvatarPopup.submitButtonLoadingState(false);
 
   const avatar = inputValues.URL;
@@ -207,9 +203,6 @@ api
 // FUNCTIONS & APIs
 
 function handleImageClick(cardData) {
-  modalImage.alt = cardData.name;
-  modalImage.src = cardData.link;
-  modalText.textContent = cardData.name;
   cardPreviewPopup.open(cardData);
   console.log(cardData);
 }
@@ -328,100 +321,11 @@ addNewCardButton.addEventListener("click", () => {
 
 profileAvatarButton.addEventListener("click", () => {
   updateAvatarFormValidator.resetValidation();
-  const { avatar, name, description } = editUserInfo.getUserAvatarInfo();
+  //const { avatar, name, description } = editUserInfo.getUserAvatarInfo();
 
-  profileAvatarUrlInput.value = avatar;
-  profileTitleInput.value = name;
-  profileDescriptionInput.value = description;
+  profileAvatarUrlInput.value = "";
+  profileTitleInput.value = "";
+  profileDescriptionInput.value = "";
 
   updateAvatarPopup.open();
 });
-
-//PRACTISE API
-
-// const promise = new Promise(function (resolve, reject) {
-//   // resolve or reject promise
-// });
-// w:
-// promise
-//   .then(function (value) {
-//     // will be called if promise resolves
-//   })
-//   .catch(function (value) {
-//     // will be called if promise rejects
-//   })
-//   .finally(function (value) {
-//     // will be called in both cases
-//   });
-
-// fetch("https://jsonplaceholder.typicode.com/users/1")
-//   .then((response) => {
-//     return response.json();
-//   })
-
-//   .then((result) => {
-//     console.log(result);
-//   });
-
-// fetch("https://jsonplaceholder.typicode.com/todos/1", {
-//   headers: { authorization: "c56e30dc-2883-4270-a59e-b2f7bae969c6" },
-// })
-//   .then((res) => {
-//     if (!res.ok) {
-//       throw new Error("Network response was not ok");
-//     }
-//     return res.json();
-//   })
-//   .then((result) => {
-//     console.log(result);
-//   })
-//   .catch((err) => {
-//     console.error(err);
-//   });
-
-// fetch("https://jsonplaceholder.typicode.com/todos/1")
-//   .then((response) => response.json())
-//   .then((json) => console.log(json));
-// //const baseUrl = "https://around-api.en.tripleten-services.com/v1";
-
-// function testingFunctionFetch() {
-//   fetch("https://around-api.en.tripleten-services.com/v1").then((response) => {
-//     .then((response) => {
-//       if (response.ok) {
-//         return response.json()
-//     .then((data => {
-//       console.log(response);
-//     console.log("fetching");
-//     });
-//   } else {
-//     console.log("Error:", response.status);
-//   });
-// }
-
-// testingFunctionFetch();
-
-// const baseUrl = "https://around-api.en.tripleten-services.com/v1";
-
-// function testingFunctionFetch() {
-//   fetch(baseUrl)
-//     .then((response) => {
-//       // Check if the response is successful
-//       if (response.ok) {
-//         // Parse the response body as JSON and log it
-//         return response.json().then((data) => {
-//           console.log(data);
-//           console.log("fetching successful");
-//         });
-//       } else {
-//         // If response is not successful, log the status code
-//         console.log("Error:", response.status);
-//       }
-//     })
-//     .catch((error) => {
-//       // Log any errors that occur during the fetch
-//       console.error(err);
-//     });
-// }
-
-// // Call the function
-// testingFunctionFetch();

@@ -11,10 +11,6 @@ export default class PopupWithForm extends Popup {
     this._submitButton = this._popupElement.querySelector(".modal__button");
 
     this._defaultButtonText = this._submitButton.textContent = "Save";
-    //this._getInputValues = this._getInputValues;
-
-    //this._submitButtonSelector = config.submitButtonSelector;
-    //this._submitButtonSelector.textContent = savingProcess;
   }
 
   open() {
