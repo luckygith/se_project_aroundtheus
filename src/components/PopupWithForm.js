@@ -10,22 +10,21 @@ export default class PopupWithForm extends Popup {
 
     this._submitButton = this._popupElement.querySelector(".modal__button");
 
-    this._defaultButtonText = this._submitButton.textContent = "Save"
-    
+    this._defaultButtonText = this._submitButton.textContent = "Save";
+    //this._getInputValues = this._getInputValues;
+
     //this._submitButtonSelector = config.submitButtonSelector;
     //this._submitButtonSelector.textContent = savingProcess;
   }
 
-  // this._modalImage.src = link;
-
   open() {
     super.open();
-    this._popupForm.addEventListener("submit", this._handleFormSubmit);
+    this._popupForm.addEventListener("submit", this._handleFormSubmitMethod);
   }
 
   close() {
     super.close();
-    this._popupForm.removeEventListener("submit", this._handleFormSubmit);
+    this._popupForm.removeEventListener("submit", this._handleFormSubmitMethod);
     this._popupForm.reset();
   }
   _getInputValues() {
@@ -34,27 +33,21 @@ export default class PopupWithForm extends Popup {
     this._popupForm.querySelectorAll(this._inputSelector).forEach((input) => {
       inputValues[input.name] = input.value;
     });
-
     return inputValues;
   }
 
   submitButtonLoadingState(isLoading) {
-    
-      if (this._submitButton) {
-        this._submitButton.textContent = isLoading
-          ? this._defaultButtonText
-          : "Saving...";
-      }
-
+    if (this._submitButton) {
+      this._submitButton.textContent = isLoading
+        ? this._defaultButtonText
+        : "Saving...";
+    }
   }
 
-
-
-  _handleFormSubmit(event) {
+  _handleFormSubmitMethod = (event) => {
     event.preventDefault();
     const inputValues = this._getInputValues();
     this._handleFormSubmit(inputValues);
     this.close();
-  }
+  };
 }
-

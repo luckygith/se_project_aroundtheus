@@ -24,7 +24,6 @@ export default class Card {
     this.handleCardLike = handleCardLike;
     this._checkLikeStatus = checkLikeStatus;
     this._toggleLikeIcon = toggleLikeIcon;
-    // this._toggleLikeIconDislke = toggleLikeIconDislke;
 
     
   }
@@ -50,7 +49,6 @@ export default class Card {
             console.log("ANOTHER TOGGLE VIA CHECKSTATUS");
             console.log(cardData);
           }
-          
         }
 
   
@@ -103,17 +101,6 @@ export default class Card {
     }
   }
 
-
-
-    // handleConfirmDeleteSubmit() {
-    //   //cardSection.removeItem(cardElement);
-    //   this._element.remove();
-    //   this._element = null;
-    //   console.log("handleConfirmDelete accessed");
-    //   console.log(this._cardElement);
-      
-    //   //deleteCardPopup.close();
-    // }
     // _handleDeleteCard() {
     //   this._element.remove();
     //   this._element = null;
@@ -125,14 +112,4 @@ export default class Card {
   //   this.close();
   // }
 
-  // _handleDeleteCard = () => {
-  //   this._element.remove();
-  //   this._element = null;
-  //   console.log("handleDeleteCard clicked");
-  // };
-
-  // _handleDeleteSubmit() {
-  //   console.log("HI THERE HELLO");
-
-  // }
 
