@@ -271,7 +271,6 @@ function handleCardLike(isLiked, cardData, cardId, cardElement, card) {
       .addLikeState(cardId, cardData)
       .then((res) => {
         console.log(res);
-        console.log(cardId, cardData, "card is Liked");
         card.toggleLikeIcon(res.isLiked);
       })
       .catch((err) => {
@@ -279,14 +278,13 @@ function handleCardLike(isLiked, cardData, cardId, cardElement, card) {
         console.log("Failed to add like. Error with API call.");
       })
       .finally((res) => {
-        card.checkLikeStatus(res.isLiked, res.cardData);
+        console.log(cardId, cardData, "card is Liked");
       });
   } else {
     api
       .removeLikeState(cardId)
       .then((res) => {
         console.log(res.isLiked);
-        console.log(cardId, "card is disliked?");
         card.toggleLikeIcon(res.isLiked);
         console.log(res);
       })
@@ -295,7 +293,7 @@ function handleCardLike(isLiked, cardData, cardId, cardElement, card) {
         console.log("Failed to remove like. Error with API call.");
       })
       .finally(() => {
-        card.checkLikeStatus(res.isLiked, res.cardData);
+        console.log(cardId, "card is disliked");
       });
   }
 }
