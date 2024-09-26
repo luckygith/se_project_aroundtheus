@@ -249,10 +249,29 @@ function handleAddCardFormSubmit(inputValues) {
   api
     .addingNewCard({ name: inputValues.title, link: inputValues.URL })
     .then((res) => {
-      const cardElement = createCard({
-        name: inputValues.title,
-        link: inputValues.URL,
-      });
+      const cardElement = createCard(res);
+      cardSection.addItem(cardElement);
+      console.log(res);
+      addNewCardPopup.close();
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+    .finally(() => {
+      addNewCardPopup.submitButtonLoadingState(true);
+    });
+}
+
+function handleAddCardFormSubmit(inputValues) {
+  const name = inputValues.title;
+  const link = inputValues.URL;
+
+  addNewCardPopup.submitButtonLoadingState(false);
+
+  api
+    .addingNewCard({ name: inputValues.title, link: inputValues.URL })
+    .then((res) => {
+      const cardElement = createCard(res); //using all the card data now
       cardSection.addItem(cardElement);
       console.log(res);
       addNewCardPopup.close();
