@@ -8,9 +8,7 @@ export default class Card {
     cardSelector,
     handleImageClick,
     handleDeleteSubmitPopup,
-    handleCardLike,
-    checkLikeStatus,
-    toggleLikeIcon
+    handleCardLike
   ) {
     this._cardData = cardData;
 
@@ -22,29 +20,34 @@ export default class Card {
     this._handleImageClick = handleImageClick;
     this._handleDeleteSubmitPopup = handleDeleteSubmitPopup;
     this.handleCardLike = handleCardLike;
-    this._checkLikeStatus = checkLikeStatus;
-    this._toggleLikeIcon = toggleLikeIcon;
   }
 
-  toggleLikeIcon(cardData) {
+  toggleLikeIcon() {
     if (this._likeButton.classList.contains("cards__like-button_active")) {
       this._likeButton.classList.remove("cards__like-button_active");
-      console.log(cardData, "is TOGGLED TO unliked and false");
+      console.log(this._isLiked, "is TOGGLED TO unliked and false");
     } else {
       this._likeButton.classList.add("cards__like-button_active");
-      console.log(cardData, "is TOGGLED TO liked and true");
+      console.log(this._isLiked, "is TOGGLED TO liked and true");
+    }
+    return this.isLiked;
+  }
+
+  checkLikeStatus() {
+    if (this._isLiked) {
+      this._likeButton.classList.add("cards__like-button_active");
+    } else {
+      this._likeButton.classList.remove("cards__like-button_active");
     }
   }
 
-  checkLikeStatus(isLiked, cardData) {
-    if (!isLiked) {
-      this._likeButton.classList.remove("cards__like-button_active");
-    } else {
-      this._likeButton.classList.add("cards__like-button_active");
-      console.log("ANOTHER TOGGLE VIA CHECKSTATUS");
-      console.log(cardData);
-    }
-  }
+  // if (!isLiked) {
+  //   this._likeButton.classList.add("cards__like-button_active");
+  //   console.log("THIS IS CAUSING LIKED");
+  // } else {
+  //   this._likeButton.classList.remove("cards__like-button_active");
+  // }
+  // return this._element;
 
   getId() {
     return this._cardId;
@@ -66,10 +69,16 @@ export default class Card {
     this._cardTitleElement.textContent = this._name;
     this._cardImageElement.src = this._link;
     this._cardImageElement.alt = this._name;
-    this.checkLikeStatus(this._isLiked, this._cardData);
+
     this._setEventListeners();
+    this.checkLikeStatus();
 
     return this._element;
+  }
+
+  handleIsLiked(_isLiked) {
+    // this._isLiked = _isLiked;
+    this.toggleLikeIcon();
   }
 
   _setEventListeners() {
@@ -79,15 +88,7 @@ export default class Card {
     });
 
     this._likeButton.addEventListener("click", () => {
-      this.handleCardLike(
-        this._isLiked,
-        this._cardData,
-        this._cardId,
-        this._element,
-        this
-      );
-
-      return this._element;
+      this.handleCardLike(this._isLiked, this._cardData, this._cardId, this);
     });
 
     this._cardImageElement.addEventListener("click", () =>
@@ -95,7 +96,6 @@ export default class Card {
     );
   }
 }
-
 // _handleDeleteCard() {
 //   this._element.remove();
 //   this._element = null;

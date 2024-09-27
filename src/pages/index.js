@@ -255,6 +255,7 @@ function handleAddCardFormSubmit(inputValues) {
       addNewCardPopup.close();
     })
     .catch((err) => {
+      addNewCardFormValidator.resetValidation();
       console.error(err);
     })
     .finally(() => {
@@ -262,35 +263,37 @@ function handleAddCardFormSubmit(inputValues) {
     });
 }
 
-function handleCardLike(isLiked, cardData, cardId, cardElement, card) {
+function handleCardLike(isLiked, cardData, cardId, card) {
   if (!isLiked) {
     api
       .addLikeState(cardId, cardData)
       .then((res) => {
-        console.log(res);
-        card.toggleLikeIcon(res.isLiked);
+        card.handleIsLiked(res.isLiked);
+
+        console.log(res.isLiked);
       })
       .catch((err) => {
         console.error(err);
         console.log("Failed to add like. Error with API call.");
       })
-      .finally((res) => {
-        console.log(cardId, cardData, "card is Liked");
+      .finally(() => {
+        console.log(cardId, cardData, "card is updated");
       });
   } else {
     api
       .removeLikeState(cardId)
       .then((res) => {
+        card.handleIsLiked(res.isLiked);
+
         console.log(res.isLiked);
-        card.toggleLikeIcon(res.isLiked);
         console.log(res);
       })
       .catch((err) => {
         console.error(err);
         console.log("Failed to remove like. Error with API call.");
       })
-      .finally(() => {
-        console.log(cardId, "card is disliked");
+      .finally((res) => {
+        console.log(cardId, "card is updated");
       });
   }
 }
