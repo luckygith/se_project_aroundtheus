@@ -16,16 +16,10 @@ export default class Api {
   // }
 
   _request(url, options) {
-    return this._request(url, options);
+    return fetch(url, options).then(this.checkResponse);
   }
 
   //USER ROUTES
-
-  // getUserInfo() {
-  //   return this._request(`${this.baseUrl}/users/me`, {
-  //     headers: this.headers,
-  //   });
-  // }
 
   getUserInfo() {
     return this._request(`${this.baseUrl}/users/me`, { headers: this.headers });
