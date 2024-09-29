@@ -101,8 +101,8 @@ api
     userInfo = result; //store info in const
     console.log(userInfo);
   })
-  .then((initialCards) => {
-    console.log(initialCards);
+  .then(() => {
+    console.log();
     editUserInfo.setUserAvatarInfo({ avatar: userInfo.avatar });
     editUserInfo.setUserInfo({
       name: userInfo.name,
@@ -257,7 +257,6 @@ function handleCardLike(isLiked, cardData, cardId, card) {
       .addLikeState(cardId, cardData)
       .then((res) => {
         card.handleIsLiked(res.isLiked);
-
         console.log(res.isLiked);
       })
       .catch((err) => {
