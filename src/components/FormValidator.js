@@ -1,22 +1,22 @@
 export default class FormValidator {
   constructor(config, formElement) {
     this._inputSelector = config.inputSelector;
-    // this._submitButtonSelector = config.submitButtonSelector;
+
     this._inactiveButtonClass = config.inactiveButtonClass;
     this._inputErrorClass = config.inputErrorClass;
     this._errorClass = config.errorClass;
 
     this._element = formElement;
 
-    this._submitButtonSelector = this._element.querySelector(".modal__button");
-  } //excluding formselector since it will be a second argument
+    this._submitButtonSelector = this._element.querySelector(
+      config.submitButtonSelector
+    );
+  }
 
   _setEventListeners() {
     this._inputElements = Array.from(
       this._element.querySelectorAll(this._inputSelector)
     );
-
-    // this._disableButton();
 
     this._inputElements.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {

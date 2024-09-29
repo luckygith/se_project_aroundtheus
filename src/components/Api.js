@@ -16,6 +16,10 @@ export default class Api {
   //   return fetch(url, options).then(this.checkResponse);
   // }
 
+  _request(url, options) {
+    return fetch(url, options).then(this.checkResponse);
+  }
+
   //USER ROUTES
 
   getUserInfo() {

@@ -5,7 +5,7 @@ export default class PopupWithDeleteConfirmation extends Popup {
   constructor(popupSelector, handleFormSubmit) {
     super(popupSelector);
 
-    this._popupForm = this._popupElement.querySelector(".modal__form");
+    this._popupForm = this._popupElement.querySelector(config.formSelector);
     this._submitButtonSelector = config.submitButtonSelector;
     this._handleFormSubmit = handleFormSubmit;
   }

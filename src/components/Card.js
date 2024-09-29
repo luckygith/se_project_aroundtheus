@@ -1,7 +1,3 @@
-// const cardTemplate =
-//   document.querySelector("#card-template").content.firstElementChild;
-// const cardElement = cardTemplate.cloneNode(true);
-
 export default class Card {
   constructor(
     cardData,
@@ -41,14 +37,6 @@ export default class Card {
     }
   }
 
-  // if (!isLiked) {
-  //   this._likeButton.classList.add("cards__like-button_active");
-  //   console.log("THIS IS CAUSING LIKED");
-  // } else {
-  //   this._likeButton.classList.remove("cards__like-button_active");
-  // }
-  // return this._element;
-
   getId() {
     return this._cardId;
   }
@@ -77,7 +65,6 @@ export default class Card {
   }
 
   handleIsLiked(_isLiked) {
-    // this._isLiked = _isLiked;
     this.toggleLikeIcon();
   }
 
@@ -96,13 +83,3 @@ export default class Card {
     );
   }
 }
-// _handleDeleteCard() {
-//   this._element.remove();
-//   this._element = null;
-// }
-
-// _handleDeleteCardConfirm(event) {
-//   event.preventDefault();
-//   this._handleDeleteCard(confirmDeleteButton);
-//   this.close();
-// }

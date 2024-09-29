@@ -35,19 +35,7 @@ export default class Popup {
     }
   }
 
-  // _handleLikeIcon = () => {
-  //   this._likeButton.classList.toggle("cards__like-button_active");
-  // };
-
-  // _handleDeleteCard = () => {
-  //   this._element.remove();
-  //   this._element = null;
-  // };
-
   _closeModalOnClick() {
     this.close();
   }
 }
-// console.log("Background listener on");
-// console.log("Event target:", event.target);
-// console.log("this._popupElement:", this._popupElement);

@@ -38,16 +38,8 @@ const profileAvatarButton = document.querySelector(
 
 const editProfileModal = document.querySelector("#profile-edit-modal");
 const editProfileForm = editProfileModal.querySelector("#edit-profile-form");
-const editProfileSubmitButton =
-  editProfileModal.querySelector(".modal__button");
-
-//const updateAvatarModal = document.querySelector("#update-avatar-modal");
 const updateAvatarForm = document.querySelector("#update-avatar-form");
-// const updateProfileAvatarSubmitButton = updateAvatarModal.querySelector(".modal__button");
-
-//const addNewCardModal = document.querySelector("#add-card-modal");
 const addCardForm = document.querySelector("#add-card-form");
-// const addNewCardSubmitButton = addNewCardModal.querySelector(".modal__button");
 
 //CREATE NEW INSTANCES OF ALL CLASSES // INITIALIZE
 
@@ -67,7 +59,6 @@ const deleteCardPopup = new PopupWithDeleteConfirmation(
 deleteCardPopup.setEventListeners();
 
 const cardPreviewPopup = new PopupWithImage("#preview-image-modal");
-//cardPreviewPopup.setEventListeners();
 
 const editProfileFormValidator = new FormValidator(config, editProfileForm);
 
@@ -109,7 +100,6 @@ api
   .then((result) => {
     userInfo = result; //store info in const
     console.log(userInfo);
-    return api.getInitialCards();
   })
   .then((initialCards) => {
     console.log(initialCards);
@@ -119,8 +109,6 @@ api
       description: userInfo.about,
       avatar: userInfo.avatar,
     });
-    // //console.log(cardData);
-    // return userInfo._id;
   })
   .catch((err) => {
     console.error(err);
@@ -284,7 +272,6 @@ function handleCardLike(isLiked, cardData, cardId, card) {
       .removeLikeState(cardId)
       .then((res) => {
         card.handleIsLiked(res.isLiked);
-
         console.log(res.isLiked);
         console.log(res);
       })
@@ -319,7 +306,6 @@ addNewCardButton.addEventListener("click", () => {
 
 profileAvatarButton.addEventListener("click", () => {
   updateAvatarFormValidator.resetValidation();
-  //const { avatar, name, description } = editUserInfo.getUserAvatarInfo();
 
   profileAvatarUrlInput.value = "";
   profileTitleInput.value = "";
