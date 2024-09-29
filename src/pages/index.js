@@ -111,8 +111,7 @@ api
     });
   })
   .catch((err) => {
-    console.error(err);
-    console.error("");
+    console.error("User Info retrieval unsuccessful", err);
   });
 
 function handleEditProfileFormSubmit(inputValues) {
@@ -132,8 +131,7 @@ function handleEditProfileFormSubmit(inputValues) {
       editProfilePopup.close();
     })
     .catch((err) => {
-      console.error(err);
-      console.error("Changes to profile submission unsuccessful. Error.");
+      console.error("Changes to profile submission unsuccessful. Error.", err);
     })
     .finally(() => {
       editProfilePopup.submitButtonLoadingState(true);
@@ -156,8 +154,7 @@ function handleProfileUpdateAvatarFormSubmit(inputValues) {
       console.log("Avatar has been changed to the following avatar", avatar);
     })
     .catch((err) => {
-      console.error(err);
-      console.error("Profile Avatar edit api unsuccessful. Error");
+      console.error("Profile Avatar edit api unsuccessful. Error", err);
     })
     .finally(() => {
       updateAvatarPopup.submitButtonLoadingState(true);
@@ -184,8 +181,7 @@ api
     return result;
   })
   .catch((err) => {
-    console.error(err);
-    console.error("Card retrieval unsuccessful. Error");
+    console.error("Card retrieval unsuccessful. Error", err);
   });
 
 // FUNCTIONS & APIs
@@ -205,8 +201,7 @@ function handleConfirmDeleteSubmit(cardId, cardElement) {
       deleteCardPopup.close();
     })
     .catch((err) => {
-      console.error(err);
-      console.error("Card deletion unsuccessful. Error");
+      console.error("Card deletion unsuccessful. Error", err);
     });
 }
 
@@ -244,7 +239,7 @@ function handleAddCardFormSubmit(inputValues) {
     })
     .catch((err) => {
       addNewCardFormValidator.resetValidation();
-      console.error(err);
+      console.error("Failed to add new card.", err);
     })
     .finally(() => {
       addNewCardPopup.submitButtonLoadingState(true);
@@ -260,8 +255,7 @@ function handleCardLike(isLiked, cardData, cardId, card) {
         console.log(res.isLiked);
       })
       .catch((err) => {
-        console.error(err);
-        console.log("Failed to add like. Error with API call.");
+        console.log("Failed to add like. Error with API call.", err);
       })
       .finally(() => {
         console.log(cardId, cardData, "card is updated");
@@ -275,8 +269,7 @@ function handleCardLike(isLiked, cardData, cardId, card) {
         console.log(res);
       })
       .catch((err) => {
-        console.error(err);
-        console.log("Failed to remove like. Error with API call.");
+        console.log("Failed to remove like. Error with API call.", err);
       })
       .finally((res) => {
         console.log(cardId, "card is updated");
