@@ -119,7 +119,7 @@ function handleEditProfileFormSubmit(inputValues) {
 
   const name = inputValues.title;
   const about = inputValues.description;
-
+  debugger;
   api
     .editProfile({ name, about })
     .then((result) => {
@@ -127,6 +127,7 @@ function handleEditProfileFormSubmit(inputValues) {
       editUserInfo.setUserInfo({
         name: result.name,
         description: result.about,
+        avatar: result.avatar,
       });
       editProfilePopup.close();
     })
