@@ -119,7 +119,7 @@ function handleEditProfileFormSubmit(inputValues) {
 
   const name = inputValues.title;
   const about = inputValues.description;
-  debugger;
+
   api
     .editProfile({ name, about })
     .then((result) => {
