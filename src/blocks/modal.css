@@ -77,37 +77,44 @@
 }
 
 .modal__input {
+  font-family: "Inter";
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
   max-width: 100%;
   height: 27px;
   border: none;
   border-bottom: 1px rgba(0, 0, 0, 0.2) solid;
-  margin-bottom: 5px;
+
 }
 
 .modal__input:last-of-type {
-  margin-bottom: 5px;
-  margin-top: 13px;
+
 }
 .modal__error {
-  color: #ff0000;
+  min-height: 30px;
+  display: block;
+  font-size: 10px;
 }
 
 .modal__input_type_error {
+  
   font-family: "Inter", sans-serif;
   font-size: 12px;
   font-weight: 400;
   line-height: 14.5px;
   color: #ff0000;
-  border-bottom: 1px #ff0000 solid;
-  margin-top: 10px;
 }
 
 #profile-title-input-error,
 #profile-description-input-error,
 #card-title-input-error,
-#card-url-input-error {
+#card-url-input-error, #avatar-url-input-error {
   color: #ff0000;
+  min-height: 30px;
+  display: block;
 }
+
 
 .modal__button {
   background-color: #000000;
@@ -117,11 +124,11 @@
   font-size: 18px;
   line-height: 22px;
   color: #ffffff;
+  width: 358px;
   max-width: 100%;
   height: 50px;
   border-radius: 2px;
   padding: 0;
-  margin-top: 30px;
 }
 
 .modal__button:hover {
@@ -140,6 +147,7 @@
   opacity: 1;
   cursor: default;
 }
+
 
 .modal__image-container {
   position: relative; /*for modal__close x to be contained within  */

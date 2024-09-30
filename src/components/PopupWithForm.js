@@ -7,46 +7,45 @@ export default class PopupWithForm extends Popup {
     this._popupForm = this._popupElement.querySelector(".modal__form");
     this._handleFormSubmit = handleFormSubmit;
     this._inputSelector = config.inputSelector;
-    this._submitButtonSelector = config.submitButtonSelector;
-    //this._submitButton = this._element.querySelector(".modal__button");
+
+    this._submitButtonSelector = this._popupElement.querySelector(
+      config.submitButtonSelector
+    );
+
+    this._defaultButtonText = this._submitButtonSelector.textContent = "Save";
   }
 
   open() {
     super.open();
-    this._popupForm.addEventListener("submit", this._handleFormSubmit);
+    this._popupForm.addEventListener("submit", this._handleFormSubmitMethod);
   }
 
   close() {
-    console.log("FOCUSED CLOSE ON");
     super.close();
-    this._popupForm.removeEventListener("submit", this._handleFormSubmit);
+    this._popupForm.removeEventListener("submit", this._handleFormSubmitMethod);
     this._popupForm.reset();
   }
+
   _getInputValues() {
     const inputValues = {};
 
     this._popupForm.querySelectorAll(this._inputSelector).forEach((input) => {
       inputValues[input.name] = input.value;
     });
-
     return inputValues;
   }
 
-  _handleFormSubmit(event) {
+  submitButtonLoadingState(isLoading) {
+    if (this._submitButtonSelector) {
+      this._submitButtonSelector.textContent = isLoading
+        ? this._defaultButtonText
+        : "Saving...";
+    }
+  }
+
+  _handleFormSubmitMethod = (event) => {
     event.preventDefault();
     const inputValues = this._getInputValues();
     this._handleFormSubmit(inputValues);
-    this.close();
-  }
+  };
 }
-
-//REMOVED and utilized using the validator class
-// _disableButton() {
-//   this._submitButton.classList.add(this._inactiveButtonClass);
-//   this._submitButton.disabled = true;
-// }
-
-// _enableButton() {
-//   this._submitButton.classList.remove(this._inactiveButtonClass);
-//   this._submitButton.disabled = false;
-// }

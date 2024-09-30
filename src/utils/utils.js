@@ -10,7 +10,7 @@ export const initialCards = [
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
   },
   {
-    name: "Bald Mountians",
+    name: "Bald Mountains",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg",
   },
   {
@@ -23,7 +23,7 @@ export const initialCards = [
   },
   {
     name: "Lago di Braies",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg ",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
   },
 ];
 
@@ -33,19 +33,23 @@ export const selectors = {
   previewImage: "#preview-image-modal",
   addNewCardModal: "#add-card-modal",
   editProfileModal: "#profile-edit-modal",
+  updateAvatarModal: "#update-avatar-modal",
+  deleteCardModal: "#delete-card-modal",
   profileTitle: ".profile__title",
   profileTitleInput: "#profile-title-input",
   profileDescription: ".profile__description",
   profileDescriptionInput: "#profile-description-input",
   addNewCardForm: "#add-card-form",
   editProfileForm: "#edit-profile-form",
+  updateAvatarForm: "#update-avatar-form",
 };
 
 export const config = {
   formSelector: ".modal__form",
   inputSelector: ".modal__input",
-  submitButtonSelector: "modal__button",
+  submitButtonSelector: ".modal__button",
   inactiveButtonClass: "modal__button_disabled",
   inputErrorClass: "modal__input_type_error",
   errorClass: "modal__error",
+  imageSelector: ".modal__image",
 };

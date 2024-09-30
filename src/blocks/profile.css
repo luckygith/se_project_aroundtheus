@@ -59,9 +59,52 @@
   height: 120px;
   width: 120px;
   border-radius: 50%;
-  object-fit: cover;
+  /* object-fit: cover; */
   background-position: center;
+  position: relative;
+  z-index: 1;
 }
+
+.profile__container {
+  height: 120px;
+  width: 120px;
+  color: #000000;
+  z-index: 999;
+  position: relative;
+  display: flex;
+  border-radius: 50%;
+}
+
+.profile__container:hover {
+  /* background: transparent url(../images/editicon.png) center no-repeat; */
+  opacity: 80%;
+  cursor: pointer;
+}
+
+.profile__container-edit-icon {
+  z-index: 99999999;
+  position: absolute;
+  height: 120px;
+  width: 120px;
+  border-radius: 50%;
+  visibility: hidden;
+  display: flex;
+}
+
+.profile__container:hover .profile__container-edit-icon{
+  visibility: visible;
+}
+
+.profile__avatar-edit-icon {
+  position: absolute;
+  z-index: 999999;
+  top: 47px;
+  left: 47px;
+}
+
+
+
+ 
 
 .profile__edit-button {
   background: transparent url(../images/edit.svg) center no-repeat;
